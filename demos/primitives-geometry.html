@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Примитивы, влияющие на форму</title>
+  <link rel="stylesheet" href="../assets/demos.css">
+  <link rel="stylesheet" href="../assets/primitives-demos.css">
+</head>
+<body>
+  <svg>
+    <defs>
+      <!-- Blur -->
+      <g id="feGaussianBlur" class="filters-group">
+        <filter id="blur--vertical" data-name="вертикальное" x="-20%" y="-20%" width="140%" height="140%" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+          <feGaussianBlur stdDeviation="0 20" x="0%" y="0%" width="100%" height="100%" in="SourceGraphic" edgeMode="none" result="blur"/>
+        </filter>
+        <filter id="blur--horizontal" data-name="горизонтальное" x="-20%" y="-20%" width="140%" height="140%" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+          <feGaussianBlur stdDeviation="20 0" x="0%" y="0%" width="100%" height="100%" in="SourceGraphic" edgeMode="none" result="blur"/>
+        </filter>
+      </g>
+
+      <!-- Shadow -->
+      <g id="feDropShadow" class="filters-group">
+        <filter id="drop-shadow--base" x="-20%" y="-20%" width="140%" height="140%" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+          <feDropShadow stdDeviation="10 10" in="SourceGraphic" dx="10" dy="10" flood-opacity=".85" x="0%" y="0%" width="100%" height="100%" result="dropShadow"/>
+        </filter>
+        <filter id="drop-shadow--sea" x="-20%" y="-20%" width="140%" height="140%" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+          <feDropShadow stdDeviation="0 10" in="SourceGraphic" dx="0" dy="-20" flood-color="orange" flood-opacity="1" x="0%" y="0%" width="100%" height="100%" result="dropShadow"/>
+        </filter>
+      </g>
+
+      <g id="feMorphology" class="filters-group">
+        <!-- Morphology -->
+        <filter id="feMorphology" x="-20%" y="-20%" width="140%" height="140%" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+          <feMorphology operator="erode" radius="3 3" x="0%" y="0%" width="100%" height="100%" in="SourceGraphic" result="morphology"/>
+        </filter>
+      </g>
+    </defs>
+
+    <image
+      x="10%" y="10%"
+      width="80%" height="50%"
+      preserveAspectRatio="xMidYMid slice" xlink:href="https://placekitten.com/800/400"
+      class="filter-target"
+    ></image>
+
+    <g
+      class="filter-target">
+      <text x="50%" y="79%" dy=".35em"
+      text-anchor="middle"
+    >Text</text>
+    </g>
+  </svg>
+
+  <script type="text/javascript" src="../assets/demos.js"></script>
+  <script type="text/javascript">
+    handleFiltersList();
+  </script>
+</body>
+</html>

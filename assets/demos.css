@@ -1,0 +1,145 @@
+HTML {
+  font-size: 18px;
+}
+
+BODY {
+  margin: 0;
+  font: 1rem/1 Arial, sans-serif;
+}
+
+.controls-panel {
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 1rem;
+  display: flex;
+  background: rgba(0, 0, 0, .8);
+  font-size: 1.1rem;
+  letter-spacing: 1px;
+}
+
+.controls-panel--vertical {
+  position: relative;
+  display: flex;
+  flex-basis: 20%;
+  flex-direction: column;
+  background: black;
+}
+
+.controls-panel__group {
+  margin-bottom: 1.5rem;
+  color: #FFF;
+}
+
+.controls-panel__group-name {
+  margin: 0;
+  margin-bottom: .5rem;
+  font-size: 1.4rem;
+  font-weight: normal;
+  color: lightseagreen;
+}
+
+.controls__button {
+  position: relative;
+  padding: 1rem;
+  background: transparent;
+  border: none;
+  border-radius: 5px;
+  font: inherit;
+  color: white;
+  cursor: pointer;
+}
+
+.controls-panel--vertical .controls__button {
+  padding: .75rem;
+  }
+
+.controls__button::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: .3rem;
+  right: .3rem;
+  bottom: .3rem;
+  left: .3rem;
+  border-radius: 5px;
+  border: 2px dashed rgba(255, 255, 255, .3);
+  color: inherit;
+}
+
+.controls__button:focus {
+  outline: none;
+}
+.controls__button:focus::after {
+  border-color: yellowgreen;
+}
+
+.controls__button:disabled {
+  cursor: not-allowed;
+  border-color: transparent;
+}
+.controls__button:disabled::after {
+  content: none;
+}
+.controls__button:not(.controls__button--selected):disabled {
+  opacity: .05;
+}
+
+.controls__button--selected:not(.controls__button--last-selected) {
+  color: rgba(255, 255, 255, .3);
+}
+
+.controls__button--selected::after {
+  content: none;
+}
+
+.controls__button--selected::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  border: 2px solid white;
+}
+.controls__button--selected:first-child::before {
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+
+.controls__button--selected:not(.controls__button--last-selected)::before {
+  border-right: none;
+}
+.controls__button--selected:not(:first-child)::before {
+  border-left: none;
+}
+
+.controls__button--last-selected {
+  color: #000;
+}
+.controls__button--last-selected::before {
+  border-bottom-right-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.controls__button--last-selected::after {
+  content: "";
+  background: yellowgreen;
+  border: none;
+}
+
+.controls__button--current-filter {
+  color: gold;
+}
+.controls__button--current-filter::after {
+  content: "";
+  border-color: rgba(255, 255, 255, .3);
+  border-style: solid;
+}
+.controls__button--current-filter:focus::after {
+  border-color: rgba(255, 255, 255, .3);
+  border-style: solid;
+}

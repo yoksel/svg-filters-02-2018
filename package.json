@@ -1,0 +1,54 @@
+{
+  "name": "shower",
+  "description": "Shower HTML presentation engine",
+  "version": "2.6.6",
+  "author": {
+    "name": "Vadim Makeev",
+    "url": "https://pepelsbey.net/"
+  },
+  "homepage": "https://github.com/shower/shower",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/shower/shower.git"
+  },
+  "bugs": {
+    "url": "http://github.com/shower/shower/issues"
+  },
+  "license": "MIT",
+  "keywords": [
+    "shower",
+    "presentation",
+    "template"
+  ],
+  "files": [
+    "pictures/**",
+    "index.html",
+    "LICENSE.md",
+    "README.md"
+  ],
+  "dependencies": {
+    "@shower/material": "^2.1.5",
+    "@shower/ribbon": "^3.2.0",
+    "shower-core": "^2.1.0"
+  },
+  "devDependencies": {
+    "browser-sync": "^2.26.3",
+    "del": "^3.0.0",
+    "gh-pages": "^2.0.0",
+    "gulp": "^4.0.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-replace": "^1.0.0",
+    "gulp-zip": "^4.0.0",
+    "merge-stream": "^1.0.0",
+    "path-exists-cli": "^1.0.0",
+    "shower-cli": "^0.2.3"
+  },
+  "scripts": {
+    "pdf": "shower pdf",
+    "start": "gulp serve",
+    "prepare": "gulp prepare",
+    "archive": "gulp archive",
+    "publish": "gulp publish",
+    "test": "npm run prepare && ls prepared && npm run archive && path-exists archive.zip"
+  }
+}

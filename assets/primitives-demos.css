@@ -1,0 +1,16 @@
+HTML, BODY {
+  height: 100%;
+}
+BODY {
+  display: flex;
+  padding: 0;
+  justify-content: space-between;
+}
+svg {
+  flex-grow: 1;
+  margin-left: auto;
+  font-size: 8rem;
+  font-weight: bold;
+  font-family: Arial Black, Arial Bold, Arial, sans-serif;
+  fill: deepskyblue;
+}
