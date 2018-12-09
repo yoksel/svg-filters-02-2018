@@ -1,0 +1,38 @@
+<div class="primitives-switcher primitives-switcher--broken">
+  <svg class="primitives-switcher__svg">
+    <filter id="filter-broken" class="filter-source">
+      <feTurbulence
+        type="turbulence" baseFrequency="0.0003 0.006"
+        numOctaves="2" seed="7" stitchTiles="noStitch"
+        result="turbulence"/>
+
+      <feColorMatrix
+        type="saturate" values="30"
+        in="turbulence" result="colormatrix"/>
+
+      <feColorMatrix type="matrix"
+        values="1 0 0 0 0
+          0 1 0 0 0
+          0 0 1 0 0
+          0 0 0 150 -30"
+        in="colormatrix" result="colormatrix1"/>
+
+      <feComposite
+        operator="in"
+        in="SourceGraphic" in2="colormatrix1"
+        result="composite"/>
+
+      <feDisplacementMap
+        scale="20" xChannelSelector="R" yChannelSelector="A"
+        in="SourceGraphic" in2="colormatrix1"
+        result="displacementMap"/>
+    </filter>
+  </svg>
+
+  <div
+    class="primitives-switcher__text"
+    style="filter: url(#filter-broken)"
+    contenteditable spellcheck="false">
+    TEXT
+  </div>
+</div>

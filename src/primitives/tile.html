@@ -1,0 +1,42 @@
+<figure class="demo">
+  <figcaption class="demo__caption">Повторение: <b>feTile</b></figcaption>
+
+  <svg class="demo__svg">
+    <filter
+      id="filter-tile"
+      x="-10%" y="-10%" width="140%" height="140%"
+      filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse"
+      color-interpolation-filters="linearRGB">
+      <feImage
+        xlink:href="../assets/img/berries.jpeg"
+        x="50%" y="50%" width="220" height="220" preserveAspectRatio="xMidYMid slice"
+        crossOrigin="anonymous"
+        result="image"/>
+
+      <feTile
+        x="0" y="0"
+        width="1000" height="1000"
+        in="image"
+        result="tile"/>
+
+      <!-- Fix for transparent lines on the edges -->
+      <feMorphology
+        operator="dilate" radius="2"
+        in="tile"
+        result="morphology"/>
+
+      <feMerge result="merge">
+        <feMergeNode in="morphology"/>
+        <feMergeNode in="tile"/>
+      </feMerge>
+    </filter>
+
+    <use
+      xlink:href="#symb-example-img"
+      filter="url(#filter-tile)"/>
+    <use
+      xlink:href="#symb-example-text"
+      filter="url(#filter-tile)"/>
+  </svg>
+</figure>
+

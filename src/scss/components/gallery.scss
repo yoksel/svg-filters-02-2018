@@ -1,0 +1,28 @@
+.gallery {
+  display: flex;
+  margin: 0 !important;
+  padding: 0;
+  list-style-type: none;
+}
+
+.gallery__item {
+  height: 400px;
+
+  &::before {
+    content: none !important;
+  }
+}
+
+.gallery__img {
+  display: block;
+  max-height: 100%;
+  margin: auto;
+}
+
+.gallery--moving {
+  transition: all .3s;
+
+  .gallery__img {
+    filter: url("#filter-motion-blur");
+  }
+}

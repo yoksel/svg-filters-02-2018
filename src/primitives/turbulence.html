@@ -1,0 +1,26 @@
+<figure class="demo">
+  <figcaption class="demo__caption">Облака: <b>feTurbulence</b> </figcaption>
+
+  <svg class="demo__svg">
+    <filter
+      id="filter-turbulence"
+      x="-20%" y="-20%" width="140%" height="140%" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="linearRGB">
+      <feTurbulence
+        type="turbulence" baseFrequency="0.015 0.015" numOctaves="5" seed="2" stitchTiles="stitch" result="turbulence"/>
+
+      <feMerge>
+        <feMergeNode in="turbulence"/>
+        <feMergeNode in="turbulence"/>
+        <feMergeNode in="turbulence"/>
+        <feMergeNode in="turbulence"/>
+      </feMerge>
+    </filter>
+
+    <use
+      xlink:href="#symb-example-img"
+      filter="url(#filter-turbulence)"/>
+    <use
+      xlink:href="#symb-example-text"
+      filter="url(#filter-turbulence)"/>
+  </svg>
+</figure>

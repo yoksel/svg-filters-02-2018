@@ -1,0 +1,26 @@
+<figure class="demo">
+  <figcaption class="demo__caption">Управление цветом: <b>feColorMatrix</b> hueRotate</figcaption>
+
+  <svg class="demo__svg">
+    <filter
+      id="filter-colormatrix-hueRotate"
+      x="-20%" y="-20%" width="140%" height="140%" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feColorMatrix
+        type="hueRotate" values="180" x="50%" y="0%" width="50%" height="100%"
+        in="SourceGraphic"
+        result="colormatrix"/>
+
+      <feMerge result="merge">
+        <feMergeNode in="SourceGraphic"/>
+        <feMergeNode in="colormatrix"/>
+      </feMerge>
+    </filter>
+
+    <use
+      xlink:href="#symb-example-img"
+      filter="url(#filter-colormatrix-hueRotate)"/>
+    <use
+      xlink:href="#symb-example-text"
+      filter="url(#filter-colormatrix-hueRotate)"/>
+  </svg>
+</figure>

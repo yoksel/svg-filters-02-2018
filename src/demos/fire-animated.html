@@ -1,0 +1,84 @@
+<svg class="svg-fulscreen fire-ainmated">
+  <filter id="filter-fire-animated">
+    <feTurbulence
+      type="fractalNoise" baseFrequency="0.035 0.008" numOctaves="1" seed="2" stitchTiles="stitch"
+      result="turbulence"
+      class="fire-ainmated__turbulence"/>
+
+    <feTurbulence
+      type="fractalNoise" baseFrequency="0.035 0.007" numOctaves="1" seed="1" stitchTiles="stitch"
+      result="turbulence1"/>
+
+    <feMerge result="merge">
+      <feMergeNode in="turbulence1"/>
+      <feMergeNode in="turbulence"/>
+    </feMerge>
+
+    <feColorMatrix
+      type="saturate" values="9"
+      in="merge"
+      result="colormatrix"/>
+
+    <feColorMatrix
+      type="matrix"
+      values="1 0 0 0 0
+              0 1 0 0 0
+              0 0 1 0 0
+              0 0 0 10 0"
+      in="colormatrix"
+      result="colormatrix1"/>
+
+    <feDisplacementMap
+      scale="40" xChannelSelector="R" yChannelSelector="G"
+       in="colormatrix1" in2="colormatrix"
+       result="displacementMap"/>
+
+    <feComposite
+      operator="in"
+      in="displacementMap" in2="SourceAlpha"
+      result="composite1"/>
+  </filter>
+
+  <use
+    xlink:href="#symb-big-example-text"
+    filter="url(#filter-fire-animated)"/>
+</svg>
+
+<script type="text/javascript">
+  (function() {
+    var requestAnimationFrame = window.requestAnimationFrame
+      || window.mozRequestAnimationFrame
+      || window.webkitRequestAnimationFrame
+      || window.msRequestAnimationFrame;
+
+    const primitiveToAnimate = document.querySelector('.fire-ainmated__turbulence');
+    let isRunning = false;
+
+    function changeProp() {
+      if(!isRunning) {
+        return;
+      }
+
+      const newValue = primitiveToAnimate.seed.baseVal + 2;
+      primitiveToAnimate.setAttribute('seed', newValue);
+
+      setTimeout(() => {
+        requestAnimationFrame(changeProp);
+      }, 75);
+    }
+
+    // ------------------------------
+
+    window['fire-animated'] = {
+      play: () => {
+        if(!isRunning) {
+          isRunning = true;
+          requestAnimationFrame(changeProp);
+        }
+      },
+      pause: () => {
+        isRunning = false;
+      }
+    };
+  })(window);
+</script>

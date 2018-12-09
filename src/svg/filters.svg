@@ -1,0 +1,285 @@
+<svg class="svg-defs">
+  <filter
+    id="filter-blur"
+    color-interpolation-filters="sRGB">
+    <feGaussianBlur
+      stdDeviation="5"/>
+  </filter>
+
+  <filter
+    id="filter-blur-grayscale"
+    color-interpolation-filters="sRGB">
+    <feGaussianBlur
+      stdDeviation="5"/>
+    <feColorMatrix
+      type="saturate" values=".5"/>
+  </filter>
+
+  <filter
+    id="filter-grayscale-no-blur"
+    color-interpolation-filters="sRGB">
+    <feGaussianBlur
+      stdDeviation="5"/>
+    <feColorMatrix
+      type="saturate" values=".5"
+      in="SourceGraphic"/>
+  </filter>
+
+  <filter
+    id="wind--no-source"
+    x="-20%" y="-20%" width="140%" height="140%" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+    <feGaussianBlur
+      stdDeviation="30 0"
+      in="SourceGraphic" edgeMode="none"
+      result="blur"/>
+    <feOffset dx="-30" dy="0"
+      result="offset"/>
+  </filter>
+
+  <filter
+    id="wind"
+    x="-20%" y="-20%" width="140%" height="140%" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+    <feGaussianBlur
+      stdDeviation="30 0"
+      in="SourceGraphic" edgeMode="none"
+      result="blur"/>
+    <feOffset dx="-30" dy="0"
+      result="offset"/>
+
+    <feMerge result="merge">
+      <feMergeNode in="offset"/>
+      <feMergeNode in="SourceGraphic"/>
+    </feMerge>
+  </filter>
+
+  <filter
+    id="filter-sepia-G-color"
+    x="-10%" y="-10%" width="120%" height="120%" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+    <feColorMatrix
+      type="matrix"
+      values="0 1 0 0 0
+              0 1 0 0 0
+              0 1 0 0 0
+              0 0 0 1 0"
+      in="SourceGraphic"
+      result="colormatrix"/>
+    <feComponentTransfer
+      in="colormatrix"
+      result="componentTransfer">
+      <feFuncR type="table" tableValues="0.26 0.95"/>
+      <feFuncG type="table" tableValues="0.19 0.78"/>
+      <feFuncB type="table" tableValues="0.11 0.59"/>
+      <feFuncA type="table" tableValues="0 1"/>
+      </feComponentTransfer>
+    <feBlend
+      mode="color"
+      in="componentTransfer" in2="SourceGraphic"
+      result="blend"/>
+  </filter>
+
+  <filter
+    id="filter-sea"
+    x="-10%" y="-10%" width="120%" height="120%" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+    <feColorMatrix
+      type="matrix"
+      values="1 0 0 0 0
+              1 0 0 0 0
+              1 0 0 0 0
+              0 0 0 1 0"
+      in="SourceGraphic"
+      result="colormatrix"/>
+    <feComponentTransfer
+      in="colormatrix"
+      result="componentTransfer">
+      <feFuncR type="table" tableValues="0.02 0.13 0.8"/>
+      <feFuncG type="table" tableValues="0.02 0.47 0.97"/>
+      <feFuncB type="table" tableValues="0.26 0.52 0.48"/>
+      <feFuncA type="table" tableValues="0 1"/>
+      </feComponentTransfer>
+    <feBlend
+      mode="normal"
+      in="componentTransfer" in2="SourceGraphic"
+      result="blend"/>
+  </filter>
+
+  <filter
+    id="filter-yellow-blue-acid-B-overlay"
+    x="-10%" y="-10%" width="120%" height="120%" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+    <feColorMatrix
+      type="matrix"
+      values="0 0 1 0 0
+              0 0 1 0 0
+              0 0 1 0 0
+              0 0 0 1 0"
+      in="SourceGraphic"
+      result="colormatrix"/>
+    <feComponentTransfer
+      in="colormatrix"
+      result="componentTransfer">
+      <feFuncR type="table" tableValues="0.01 0.97 0.89"/>
+      <feFuncG type="table" tableValues="0.38 1 1"/>
+      <feFuncB type="table" tableValues="1 0.89 0.01"/>
+      <feFuncA type="table" tableValues="0 1"/>
+      </feComponentTransfer>
+    <feBlend
+      mode="overlay"
+      in="componentTransfer" in2="SourceGraphic"
+      result="blend"/>
+  </filter>
+
+  <filter
+    id="golden-x-rays-difference"
+    x="-10%" y="-10%" width="120%" height="120%" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+    <feColorMatrix
+      type="matrix"
+      values="0 0 1 0 0
+              0 0 1 0 0
+              0 0 1 0 0
+              0 0 0 1 0"
+      in="SourceGraphic"
+      result="colormatrix"/>
+    <feComponentTransfer
+      in="colormatrix"
+      result="componentTransfer">
+      <feFuncR type="table" tableValues="0.98 1 0.94"/>
+      <feFuncG type="table" tableValues="1 0.98 0.44"/>
+      <feFuncB type="table" tableValues="0.91 0.43 0.02"/>
+      <feFuncA type="table" tableValues="0 1"/>
+      </feComponentTransfer>
+    <feBlend
+      mode="difference"
+      in="componentTransfer" in2="SourceGraphic"
+      result="blend"/>
+  </filter>
+
+  <filter
+    id="x-rays-normal"
+    x="-10%" y="-10%" width="120%" height="120%" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+    <feColorMatrix
+      type="matrix"
+      values="0 0 1 0 0
+              0 0 1 0 0
+              0 0 1 0 0
+              0 0 0 1 0"
+      in="SourceGraphic"
+      result="colormatrix"/>
+    <feComponentTransfer
+      in="colormatrix"
+      result="componentTransfer">
+      <feFuncR type="table" tableValues="0.98 0.3 0.25"/>
+      <feFuncG type="table" tableValues="1 0.44 0.24"/>
+      <feFuncB type="table" tableValues="0.91 0.62 0.39"/>
+      <feFuncA type="table" tableValues="0 1"/>
+      </feComponentTransfer>
+    <feBlend
+      mode="normal"
+      in="componentTransfer" in2="SourceGraphic"
+      result="blend"/>
+  </filter>
+
+  <filter
+    id="spring-grass-lighten" x="-10%" y="-10%" width="120%" height="120%" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+    <feColorMatrix
+      type="matrix"
+      values="0 0 1 0 0
+              0 0 1 0 0
+              0 0 1 0 0
+              0 0 0 1 0"
+      in="SourceGraphic"
+      result="colormatrix"/>
+    <feComponentTransfer
+      in="colormatrix"
+      result="componentTransfer">
+      <feFuncR type="table" tableValues="0 0.38 0.92"/>
+      <feFuncG type="table" tableValues="0.5 0.8 1"/>
+      <feFuncB type="table" tableValues="0.5 0.56 0.74"/>
+      <feFuncA type="table" tableValues="0 1"/>
+      </feComponentTransfer>
+    <feBlend
+      mode="lighten"
+      in="componentTransfer" in2="SourceGraphic"
+      result="blend"/>
+  </filter>
+
+  <filter
+    id="blackCurrant-and-mint" x="-10%" y="-10%" width="120%" height="120%" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+    <feColorMatrix
+      type="matrix"
+      values="1 0 0 0 0
+              1 0 0 0 0
+              1 0 0 0 0
+              0 0 0 1 0"
+      in="SourceGraphic"
+      result="colormatrix"/>
+    <feComponentTransfer
+      in="colormatrix"
+      result="componentTransfer">
+      <feFuncR type="table" tableValues="0.75 0.53"/>
+      <feFuncG type="table" tableValues="0.25 0.97"/>
+      <feFuncB type="table" tableValues="0.64 0.77"/>
+      <feFuncA type="table" tableValues="0 1"/>
+      </feComponentTransfer>
+    <feBlend
+      mode="normal"
+      in="componentTransfer" in2="SourceGraphic"
+      result="blend"/>
+  </filter>
+
+  <filter
+    id="filter-glass-lighthouse"
+    x="-20%" y="-20%" width="140%" height="140%" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+    <feImage
+      xlink:href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600' viewBox='0 0 800 600'%3E%3Ccircle r='600' cx='400' cy='300' fill='white'/%3E%3Ccircle r='550' cx='400' cy='300'/%3E%3Ccircle r='500' cx='400' cy='300' fill='white'/%3E%3Ccircle r='450' cx='400' cy='300'/%3E%3Ccircle r='400' cx='400' cy='300' fill='white'/%3E%3Ccircle r='350' cx='400' cy='300'/%3E%3Ccircle r='300' cx='400' cy='300' fill='white'/%3E%3Ccircle r='250' cx='400' cy='300'/%3E%3Ccircle r='200' cx='400' cy='300' fill='white'/%3E%3Ccircle r='150' cx='400' cy='300'/%3E%3Ccircle r='100' cx='400' cy='300' fill='white'/%3E%3Ccircle r='50' cx='400' cy='300'/%3E%3C/svg%3E"
+      result='circles'/>
+    <feDisplacementMap
+      in="SourceGraphic" in2="circles"
+      scale="30"
+      xChannelSelector="R" yChannelSelector="A"
+      result="displacementMap"
+      />
+    <feMerge result="merge">
+      <feMergeNode in="SourceGraphic"/>
+      <feMergeNode in="displacementMap"/>
+    </feMerge>
+  </filter>
+
+  <filter
+    id="filter-blob-text"
+    x="-20%" y="-20%" width="140%" height="140%" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+    <feGaussianBlur
+      stdDeviation="4 3"
+      in="SourceGraphic" edgeMode="none"
+      result="blur"/>
+    <feColorMatrix
+        type="matrix"
+        values="1 0 0 0 0
+                0 1 0 0 0
+                0 0 1 0 0
+                0 0 0 40 -15"
+        in="blur"
+        result="colormatrix"/>
+    <feFlood flood-color="teal" flood-opacity="1"
+      result="flood"/>
+    <feComposite
+      in="flood" in2="colormatrix" operator="in"
+      result="composite"/>
+    <feOffset dx="0" dy="9"
+      in="composite"
+      result="offset"/>
+    <feMorphology operator="dilate" radius="0 7"
+      in="offset"
+      result="morphology"/>
+    <feSpecularLighting surfaceScale="3" specularConstant="2" specularExponent="59" lighting-color="white"
+      in="blur"
+      result="specularLighting">
+      <fePointLight x="500" y="100" z="300"/>
+      </feSpecularLighting>
+    <feComposite
+      in="specularLighting" in2="colormatrix" operator="atop"
+      result="composite1"/>
+    <feMerge result="merge">
+      <feMergeNode in="morphology"/>
+      <feMergeNode in="composite1"/>
+      </feMerge>
+  </filter>
+</svg>

@@ -1,0 +1,60 @@
+<svg class="svg-fulscreen brain">
+  <filter
+    id="filter-brain"
+    x="-20%" y="-20%" width="140%" height="140%" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse">
+    <feGaussianBlur
+      stdDeviation="5 5" edgeMode="none"
+      in="SourceGraphic"
+      result="blur"/>
+
+    <feTurbulence
+      type="turbulence" baseFrequency="0.03 0.03" numOctaves="2" seed="2" stitchTiles="stitch"
+      result="turbulence"/>
+
+    <feComposite
+      operator="in"
+      in="turbulence" in2="blur"
+      result="composite"/>
+
+    <feColorMatrix
+      type="matrix"
+      values="1 0 0 0 0
+              0 1 0 0 0
+              0 0 1 0 0
+              0 0 0 40 -5"
+      in="composite"
+      result="colormatrix"/>
+
+    <feSpecularLighting
+      surfaceScale="60" specularConstant="2" specularExponent="35" kernelUnitLength="10 10" lighting-color="#fff"
+      in="turbulence"
+      result="specularLighting">
+      <feDistantLight
+        azimuth="68" elevation="240"/>
+    </feSpecularLighting>
+
+    <feFlood
+      flood-color="hsl(350,100%,73%)" flood-opacity="1"
+      result="flood"/>
+
+    <feComposite
+      operator="in"
+      in="flood" in2="colormatrix"
+      result="composite2"/>
+
+    <feComposite
+      operator="in"
+      in="specularLighting" in2="colormatrix"
+      result="composite1"/>
+
+    <feMerge result="merge1">
+      <feMergeNode in="composite2"/>
+      <feMergeNode in="composite1"/>
+    </feMerge>
+  </filter>
+
+  <use
+    class="brain__text"
+    xlink:href="#symb-big-example-text"
+    filter="url(#filter-brain)"/>
+</svg>

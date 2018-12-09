@@ -1,0 +1,35 @@
+<svg class="svg-defs">
+  <defs>
+    <symbol id="symb-example-text">
+      <title>Example text: text</title>
+      <text
+        x="50%" y="79%" dy=".35em"
+        text-anchor="middle"
+        class="example-text"
+      >Text</text>
+    </symbol>
+
+    <symbol id="symb-big-example-text">
+      <title>Example text: text</title>
+      <text
+        x="50%" y="50%" dy=".35em"
+        text-anchor="middle"
+        class="svg-text svg-text--big"
+      >TEXT</text>
+    </symbol>
+
+    <symbol id="symb-example-img">
+      <title>Example image: yellow leaf on green needles</title>
+      <image
+        xlink:href="../assets/img/needles.jpeg"
+        width="90%" height="50%"
+        x="5%" y="5%"
+        preserveAspectRatio="xMidYMid slice"
+      />
+    </symbol>
+
+    <symbol id="icon-burger" viewBox="0 0 20 16"><path d="M17.182 2H20V0H0v2h17.182zM17.182 9H20V7H0v2h17.182zM17.182 16H20v-2H0v2h17.182z"></path></symbol>
+
+    <symbol id="icon-cross" viewBox="0 0 30 30"><path d="M30 2.728L27.272 0 15 12.273 2.727 0 0 2.728 12.272 15 0 27.273 2.727 30 15 17.728 27.272 30 30 27.273 17.727 15z"></path></symbol>
+  </defs>
+</svg>

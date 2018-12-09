@@ -1,0 +1,22 @@
+<figure class="demo">
+  <figcaption class="demo__caption">Склейка слоёв: <b>feMerge</b></figcaption>
+
+  <svg class="demo__svg">
+    <filter
+      id="filter-merge"
+      x="-20%" y="-20%" width="140%" height="140%" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="linearRGB">
+      <feOffset dx="50" dy="50" in="SourceGraphic" result="offset"/>
+      <feMerge result="merge">
+        <feMergeNode in="SourceGraphic"/>
+        <feMergeNode in="offset"/>
+      </feMerge>
+    </filter>
+
+    <use
+      xlink:href="#symb-example-img"
+      filter="url(#filter-merge)"/>
+    <use
+      xlink:href="#symb-example-text"
+      filter="url(#filter-merge)"/>
+  </svg>
+</figure>

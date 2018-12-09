@@ -1,0 +1,39 @@
+<figure class="demo">
+  <figcaption class="demo__caption">Источники света: <b>feDiffuseLighting</b></figcaption>
+
+  <svg class="demo__svg">
+    <filter
+      id="filter-diffuseLighting-spotLight"
+      x="-20%" y="-20%" width="140%" height="140%" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="linearRGB">
+      <feGaussianBlur
+        stdDeviation="3 3" x="0%" y="0%" width="100%" height="100%" edgeMode="none"
+        in="SourceGraphic"
+        result="blur"/>
+
+      <feDiffuseLighting
+        surfaceScale="10" diffuseConstant="3.5" lighting-color="#e1f9aa" x="0%" y="0%" width="100%" height="100%"
+        in="blur"
+        result="diffuseLighting">
+        <feSpotLight
+          x="70" y="50" z="40" pointsAtX="125" pointsAtY="110" pointsAtZ="15" specularExponent="0" limitingConeAngle="22"></feSpotLight>
+      </feDiffuseLighting>
+
+      <feComposite
+        operator="lighter" x="0%" y="0%" width="100%" height="100%"
+        in="diffuseLighting" in2="SourceGraphic"
+        result="composite"/>
+
+      <feComposite
+        operator="in" x="0%" y="0%" width="100%" height="100%"
+        in="composite" in2="SourceAlpha"
+        result="composite1"/>
+    </filter>
+
+    <use
+      xlink:href="#symb-example-img"
+      filter="url(#filter-diffuseLighting-spotLight)"/>
+    <use
+      xlink:href="#symb-example-text"
+      filter="url(#filter-diffuseLighting-spotLight)"/>
+  </svg>
+</figure>

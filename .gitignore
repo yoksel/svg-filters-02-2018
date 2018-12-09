@@ -1,4 +1,7 @@
 node_modules
+.sass-cache
 prepared
 archive.zip
 presentation.pdf
+text.md
+.DS_Store

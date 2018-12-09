@@ -1,0 +1,26 @@
+<figure class="demo">
+  <figcaption class="demo__caption">Режимы наложения: <b>feBlend</b> multiply</figcaption>
+
+  <svg class="demo__svg">
+    <filter
+      id="filter-blend"
+      x="-20%" y="-20%" width="140%" height="140%" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feBlend
+        mode="multiply" x="50%" y="0%" width="50%" height="100%"
+        in="SourceGraphic" in2="SourceGraphic"
+        result="blend"/>
+
+      <feMerge result="merge">
+        <feMergeNode in="SourceGraphic"/>
+        <feMergeNode in="blend"/>
+      </feMerge>
+    </filter>
+
+    <use
+      xlink:href="#symb-example-img"
+      filter="url(#filter-blend)"/>
+    <use
+      xlink:href="#symb-example-text"
+      filter="url(#filter-blend)"/>
+  </svg>
+</figure>

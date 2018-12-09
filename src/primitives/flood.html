@@ -1,0 +1,20 @@
+<figure class="demo">
+  <figcaption class="demo__caption">Заливка цветом: <b>feFlood</b></figcaption>
+
+  <svg class="demo__svg">
+    <filter
+      id="filter-flood"
+      x="-20%" y="-20%" width="140%" height="140%" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="linearRGB">
+      <feFlood
+        flood-color="#a9ffbc" flood-opacity="1" x="0%" y="0%" width="100%" height="100%"
+        result="flood"/>
+    </filter>
+
+    <use
+      xlink:href="#symb-example-img"
+      filter="url(#filter-flood)"/>
+    <use
+      xlink:href="#symb-example-text"
+      filter="url(#filter-flood)"/>
+  </svg>
+</figure>

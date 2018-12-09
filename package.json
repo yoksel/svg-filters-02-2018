@@ -1,27 +1,21 @@
 {
-  "name": "shower",
-  "description": "Shower HTML presentation engine",
-  "version": "2.6.6",
+  "name": "svg-filters-02-2018",
+  "description": "Presentation about SVG Filters",
+  "version": "0.0.1",
   "author": {
-    "name": "Vadim Makeev",
-    "url": "https://pepelsbey.net/"
+    "name": "Yoksel",
+    "url": "http://css.yoksel.ru"
   },
-  "homepage": "https://github.com/shower/shower",
+  "homepage": "https://github.com/yoksel/svg-filters-02-2018",
   "repository": {
     "type": "git",
-    "url": "git://github.com/shower/shower.git"
+    "url": "git://github.com/yoksel/svg-filters-02-2018.git"
   },
   "bugs": {
-    "url": "http://github.com/shower/shower/issues"
+    "url": "http://github.com/yoksel/svg-filters-02-2018/issues"
   },
   "license": "MIT",
-  "keywords": [
-    "shower",
-    "presentation",
-    "template"
-  ],
   "files": [
-    "pictures/**",
     "index.html",
     "LICENSE.md",
     "README.md"
@@ -32,20 +26,26 @@
     "shower-core": "^2.1.0"
   },
   "devDependencies": {
+    "autoprefixer": "^9.4.4",
     "browser-sync": "^2.26.3",
     "del": "^3.0.0",
     "gh-pages": "^2.0.0",
     "gulp": "^4.0.0",
+    "gulp-include": "^2.3.1",
+    "gulp-postcss": "^8.0.0",
     "gulp-rename": "^1.2.2",
     "gulp-replace": "^1.0.0",
+    "gulp-sass": "^4.0.2",
     "gulp-zip": "^4.0.0",
     "merge-stream": "^1.0.0",
+    "node-sass": "^4.11.0",
     "path-exists-cli": "^1.0.0",
+    "postcss": "^7.0.7",
     "shower-cli": "^0.2.3"
   },
   "scripts": {
     "pdf": "shower pdf",
-    "start": "gulp serve",
+    "start": "gulp includeSnippets && gulp serve",
     "prepare": "gulp prepare",
     "archive": "gulp archive",
     "publish": "gulp publish",
