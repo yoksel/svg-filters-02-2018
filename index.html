@@ -1,0 +1,3759 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <title>SVG-фильтры</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="shower/themes/ribbon/styles/styles.css">
+  <link rel="stylesheet" href="assets/css/styles.css">
+   <style>
+    .shower {
+      --slide-ratio: calc(16 / 9);
+    }
+  </style>
+</head>
+<body class="shower list">
+  <svg class="svg-defs">
+    <filter
+      id="filter-blur"
+      color-interpolation-filters="sRGB">
+      <feGaussianBlur
+        stdDeviation="5"/>
+    </filter>
+  
+    <filter
+      id="filter-blur-grayscale"
+      color-interpolation-filters="sRGB">
+      <feGaussianBlur
+        stdDeviation="5"/>
+      <feColorMatrix
+        type="saturate" values=".5"/>
+    </filter>
+  
+    <filter
+      id="filter-grayscale-no-blur"
+      color-interpolation-filters="sRGB">
+      <feGaussianBlur
+        stdDeviation="5"/>
+      <feColorMatrix
+        type="saturate" values=".5"
+        in="SourceGraphic"/>
+    </filter>
+  
+    <filter
+      id="wind--no-source"
+      x="-20%" y="-20%" width="140%" height="140%" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feGaussianBlur
+        stdDeviation="30 0"
+        in="SourceGraphic" edgeMode="none"
+        result="blur"/>
+      <feOffset dx="-30" dy="0"
+        result="offset"/>
+    </filter>
+  
+    <filter
+      id="wind"
+      x="-20%" y="-20%" width="140%" height="140%" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feGaussianBlur
+        stdDeviation="30 0"
+        in="SourceGraphic" edgeMode="none"
+        result="blur"/>
+      <feOffset dx="-30" dy="0"
+        result="offset"/>
+  
+      <feMerge result="merge">
+        <feMergeNode in="offset"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  
+    <filter
+      id="filter-sepia-G-color"
+      x="-10%" y="-10%" width="120%" height="120%" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feColorMatrix
+        type="matrix"
+        values="0 1 0 0 0
+                0 1 0 0 0
+                0 1 0 0 0
+                0 0 0 1 0"
+        in="SourceGraphic"
+        result="colormatrix"/>
+      <feComponentTransfer
+        in="colormatrix"
+        result="componentTransfer">
+        <feFuncR type="table" tableValues="0.26 0.95"/>
+        <feFuncG type="table" tableValues="0.19 0.78"/>
+        <feFuncB type="table" tableValues="0.11 0.59"/>
+        <feFuncA type="table" tableValues="0 1"/>
+        </feComponentTransfer>
+      <feBlend
+        mode="color"
+        in="componentTransfer" in2="SourceGraphic"
+        result="blend"/>
+    </filter>
+  
+    <filter
+      id="filter-sea"
+      x="-10%" y="-10%" width="120%" height="120%" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feColorMatrix
+        type="matrix"
+        values="1 0 0 0 0
+                1 0 0 0 0
+                1 0 0 0 0
+                0 0 0 1 0"
+        in="SourceGraphic"
+        result="colormatrix"/>
+      <feComponentTransfer
+        in="colormatrix"
+        result="componentTransfer">
+        <feFuncR type="table" tableValues="0.02 0.13 0.8"/>
+        <feFuncG type="table" tableValues="0.02 0.47 0.97"/>
+        <feFuncB type="table" tableValues="0.26 0.52 0.48"/>
+        <feFuncA type="table" tableValues="0 1"/>
+        </feComponentTransfer>
+      <feBlend
+        mode="normal"
+        in="componentTransfer" in2="SourceGraphic"
+        result="blend"/>
+    </filter>
+  
+    <filter
+      id="filter-yellow-blue-acid-B-overlay"
+      x="-10%" y="-10%" width="120%" height="120%" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feColorMatrix
+        type="matrix"
+        values="0 0 1 0 0
+                0 0 1 0 0
+                0 0 1 0 0
+                0 0 0 1 0"
+        in="SourceGraphic"
+        result="colormatrix"/>
+      <feComponentTransfer
+        in="colormatrix"
+        result="componentTransfer">
+        <feFuncR type="table" tableValues="0.01 0.97 0.89"/>
+        <feFuncG type="table" tableValues="0.38 1 1"/>
+        <feFuncB type="table" tableValues="1 0.89 0.01"/>
+        <feFuncA type="table" tableValues="0 1"/>
+        </feComponentTransfer>
+      <feBlend
+        mode="overlay"
+        in="componentTransfer" in2="SourceGraphic"
+        result="blend"/>
+    </filter>
+  
+    <filter
+      id="golden-x-rays-difference"
+      x="-10%" y="-10%" width="120%" height="120%" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feColorMatrix
+        type="matrix"
+        values="0 0 1 0 0
+                0 0 1 0 0
+                0 0 1 0 0
+                0 0 0 1 0"
+        in="SourceGraphic"
+        result="colormatrix"/>
+      <feComponentTransfer
+        in="colormatrix"
+        result="componentTransfer">
+        <feFuncR type="table" tableValues="0.98 1 0.94"/>
+        <feFuncG type="table" tableValues="1 0.98 0.44"/>
+        <feFuncB type="table" tableValues="0.91 0.43 0.02"/>
+        <feFuncA type="table" tableValues="0 1"/>
+        </feComponentTransfer>
+      <feBlend
+        mode="difference"
+        in="componentTransfer" in2="SourceGraphic"
+        result="blend"/>
+    </filter>
+  
+    <filter
+      id="x-rays-normal"
+      x="-10%" y="-10%" width="120%" height="120%" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feColorMatrix
+        type="matrix"
+        values="0 0 1 0 0
+                0 0 1 0 0
+                0 0 1 0 0
+                0 0 0 1 0"
+        in="SourceGraphic"
+        result="colormatrix"/>
+      <feComponentTransfer
+        in="colormatrix"
+        result="componentTransfer">
+        <feFuncR type="table" tableValues="0.98 0.3 0.25"/>
+        <feFuncG type="table" tableValues="1 0.44 0.24"/>
+        <feFuncB type="table" tableValues="0.91 0.62 0.39"/>
+        <feFuncA type="table" tableValues="0 1"/>
+        </feComponentTransfer>
+      <feBlend
+        mode="normal"
+        in="componentTransfer" in2="SourceGraphic"
+        result="blend"/>
+    </filter>
+  
+    <filter
+      id="spring-grass-lighten" x="-10%" y="-10%" width="120%" height="120%" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feColorMatrix
+        type="matrix"
+        values="0 0 1 0 0
+                0 0 1 0 0
+                0 0 1 0 0
+                0 0 0 1 0"
+        in="SourceGraphic"
+        result="colormatrix"/>
+      <feComponentTransfer
+        in="colormatrix"
+        result="componentTransfer">
+        <feFuncR type="table" tableValues="0 0.38 0.92"/>
+        <feFuncG type="table" tableValues="0.5 0.8 1"/>
+        <feFuncB type="table" tableValues="0.5 0.56 0.74"/>
+        <feFuncA type="table" tableValues="0 1"/>
+        </feComponentTransfer>
+      <feBlend
+        mode="lighten"
+        in="componentTransfer" in2="SourceGraphic"
+        result="blend"/>
+    </filter>
+  
+    <filter
+      id="blackCurrant-and-mint" x="-10%" y="-10%" width="120%" height="120%" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feColorMatrix
+        type="matrix"
+        values="1 0 0 0 0
+                1 0 0 0 0
+                1 0 0 0 0
+                0 0 0 1 0"
+        in="SourceGraphic"
+        result="colormatrix"/>
+      <feComponentTransfer
+        in="colormatrix"
+        result="componentTransfer">
+        <feFuncR type="table" tableValues="0.75 0.53"/>
+        <feFuncG type="table" tableValues="0.25 0.97"/>
+        <feFuncB type="table" tableValues="0.64 0.77"/>
+        <feFuncA type="table" tableValues="0 1"/>
+        </feComponentTransfer>
+      <feBlend
+        mode="normal"
+        in="componentTransfer" in2="SourceGraphic"
+        result="blend"/>
+    </filter>
+  
+    <filter
+      id="filter-glass-lighthouse"
+      x="-20%" y="-20%" width="140%" height="140%" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feImage
+        xlink:href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600' viewBox='0 0 800 600'%3E%3Ccircle r='600' cx='400' cy='300' fill='white'/%3E%3Ccircle r='550' cx='400' cy='300'/%3E%3Ccircle r='500' cx='400' cy='300' fill='white'/%3E%3Ccircle r='450' cx='400' cy='300'/%3E%3Ccircle r='400' cx='400' cy='300' fill='white'/%3E%3Ccircle r='350' cx='400' cy='300'/%3E%3Ccircle r='300' cx='400' cy='300' fill='white'/%3E%3Ccircle r='250' cx='400' cy='300'/%3E%3Ccircle r='200' cx='400' cy='300' fill='white'/%3E%3Ccircle r='150' cx='400' cy='300'/%3E%3Ccircle r='100' cx='400' cy='300' fill='white'/%3E%3Ccircle r='50' cx='400' cy='300'/%3E%3C/svg%3E"
+        result='circles'/>
+      <feDisplacementMap
+        in="SourceGraphic" in2="circles"
+        scale="30"
+        xChannelSelector="R" yChannelSelector="A"
+        result="displacementMap"
+        />
+      <feMerge result="merge">
+        <feMergeNode in="SourceGraphic"/>
+        <feMergeNode in="displacementMap"/>
+      </feMerge>
+    </filter>
+  
+    <filter
+      id="filter-blob-text"
+      x="-20%" y="-20%" width="140%" height="140%" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feGaussianBlur
+        stdDeviation="4 3"
+        in="SourceGraphic" edgeMode="none"
+        result="blur"/>
+      <feColorMatrix
+          type="matrix"
+          values="1 0 0 0 0
+                  0 1 0 0 0
+                  0 0 1 0 0
+                  0 0 0 40 -15"
+          in="blur"
+          result="colormatrix"/>
+      <feFlood flood-color="teal" flood-opacity="1"
+        result="flood"/>
+      <feComposite
+        in="flood" in2="colormatrix" operator="in"
+        result="composite"/>
+      <feOffset dx="0" dy="9"
+        in="composite"
+        result="offset"/>
+      <feMorphology operator="dilate" radius="0 7"
+        in="offset"
+        result="morphology"/>
+      <feSpecularLighting surfaceScale="3" specularConstant="2" specularExponent="59" lighting-color="white"
+        in="blur"
+        result="specularLighting">
+        <fePointLight x="500" y="100" z="300"/>
+        </feSpecularLighting>
+      <feComposite
+        in="specularLighting" in2="colormatrix" operator="atop"
+        result="composite1"/>
+      <feMerge result="merge">
+        <feMergeNode in="morphology"/>
+        <feMergeNode in="composite1"/>
+        </feMerge>
+    </filter>
+  </svg>
+  
+  <svg class="svg-defs">
+    <symbol id="triangles">
+      <polygon fill="lightseagreen" points="115 0 230 230 0 230"/>
+      <polygon fill="gold" points="115.5 55 203 230 28 230"/>
+      <polygon fill="tomato" points="115.5 99 181 230 50 230"/>
+      <polygon fill="crimson" points="115 147 156 230 74 230"/>
+      <polygon fill="purple" points="115.5 188 136 230 95 230"/>
+    </symbol>
+  
+    <pattern id="pattern-rhombs"
+     patternUnits="userSpaceOnUse"
+      width="101.5" height="200.5" viewBox="0 0 203 401">
+     <g transform="translate(-114 -232)">
+      <g transform="translate(0 200)">
+        <use xlink:href="#triangles"></use>
+        <g transform="matrix(1 0 0 -1 0 459)">
+          <use xlink:href="#triangles"></use>
+        </g>
+      </g>
+      <g transform="translate(202 200)">
+        <use xlink:href="#triangles"></use>
+        <g transform="matrix(1 0 0 -1 0 459)">
+          <use xlink:href="#triangles"></use>
+        </g>
+      </g>
+      <g transform="translate(101)">
+        <use xlink:href="#triangles"></use>
+        <g transform="matrix(1 0 0 -1 0 459)">
+          <use xlink:href="#triangles"></use>
+        </g>
+      </g>
+      <g transform="translate(303)">
+        <use xlink:href="#triangles"></use>
+        <g transform="matrix(1 0 0 -1 0 459)">
+          <use xlink:href="#triangles"></use>
+        </g>
+      </g>
+      <g transform="translate(101 403)">
+        <use xlink:href="#triangles"></use>
+        <g transform="matrix(1 0 0 -1 0 459)">
+          <use xlink:href="#triangles"></use>
+        </g>
+      </g>
+      <g transform="translate(303 403)">
+        <use xlink:href="#triangles"></use>
+        <g transform="matrix(1 0 0 -1 0 459)">
+          <use xlink:href="#triangles"></use>
+        </g>
+      </g>
+    </g>
+  </pattern>
+  </svg>
+  
+  <svg class="svg-defs">
+    <defs>
+      <symbol id="symb-example-text">
+        <title>Example text: text</title>
+        <text
+          x="50%" y="79%" dy=".35em"
+          text-anchor="middle"
+          class="example-text"
+        >Text</text>
+      </symbol>
+  
+      <symbol id="symb-big-example-text">
+        <title>Example text: text</title>
+        <text
+          x="50%" y="50%" dy=".35em"
+          text-anchor="middle"
+          class="svg-text svg-text--big"
+        >TEXT</text>
+      </symbol>
+  
+      <symbol id="symb-example-img">
+        <title>Example image: yellow leaf on green needles</title>
+        <image
+          xlink:href="./assets/img/needles.jpeg"
+          width="90%" height="50%"
+          x="5%" y="5%"
+          preserveAspectRatio="xMidYMid slice"
+        />
+      </symbol>
+  
+      <symbol id="icon-burger" viewBox="0 0 20 16"><path d="M17.182 2H20V0H0v2h17.182zM17.182 9H20V7H0v2h17.182zM17.182 16H20v-2H0v2h17.182z"></path></symbol>
+  
+      <symbol id="icon-cross" viewBox="0 0 30 30"><path d="M30 2.728L27.272 0 15 12.273 2.727 0 0 2.728 12.272 15 0 27.273 2.727 30 15 17.728 27.272 30 30 27.273 17.727 15z"></path></symbol>
+    </defs>
+  </svg>
+  
+
+  <header class="caption">
+    <h1>SVG-фильтры</h1>
+    <p>Бухвалова Юлия, LiveJournal</p>
+  </header>
+
+  <section class="slide about-slide"><div>
+    <h3>Бухвалова Юлия, <span class="about-slide__company">LiveJournal</span></h3>
+
+    <div class="columns">
+      <ul class="about-slide__list next">
+        <li><a href="https://github.com/yoksel/common-words">Common Words</a></li>
+        <li><a href="http://yoksel.github.io/html-tree/">HTML Tree</a></li>
+        <li><a href="http://yoksel.github.io/url-encoder/">URL-encoder для SVG</a></li>
+      </ul>
+
+      <ul class="about-slide__list next">
+        <li><a href="http://css.yoksel.ru/">css.yoksel.ru</a></li>
+        <li><a href="https://twitter.com/yoksel">@yoksel</a></li>
+        <li><a href="http://codepen.io/yoksel">codepen.io/yoksel</a></li>
+      </ul>
+
+      <img src="./assets/img/me.jpeg" class="about-slide__photo">
+    </div>
+  </div></section>
+
+  <section class="slide"><div>
+    <h3>Статьи</h3>
+
+    <ul class="about-slide__list">
+      <li><a href="http://css.yoksel.ru/svg-shapes/">SVG-фигуры и трансформации</a></li>
+      <li><a href="http://css.yoksel.ru/svg-fill-and-stroke/">SVG: заливка и обводка</a></li>
+      <li><a href="http://css.yoksel.ru/svg-sizes/">Размеры в SVG</a></li>
+      <li><a href="http://css.yoksel.ru/svg-masks/">SVG-маски</a></li>
+      <li><a href="http://css.yoksel.ru/svg-gradients/">SVG-градиенты</a></li>
+      <li><a href="http://css.yoksel.ru/svg-patterns/">SVG-паттерны</a></li>
+      <li class="next disabled">SVG-фильтры</li>
+    </ul>
+  </div></section>
+
+  <section class="slide slide--dark slide--section-title slide--main-title" data-animation="title-animated">
+    <h2 class="main-title">
+      <svg class="demo demo--full aberrations">
+        <filter
+          id="filter-aberrations" x="-20%" y="-20%" width="140%" height="140%" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+          <feTurbulence
+            type="fractalNoise" baseFrequency="0.01" numOctaves="1" seed="2" stitchTiles="stitch"
+            result="turbulence"
+            class="aberrations__turbulence"/>
+    
+          <feFlood
+            flood-color="#ff5b05" flood-opacity="1"
+            result="flood"/>
+          <feFlood
+            flood-color="#8dff09" flood-opacity="1"
+            result="flood1"/>
+          <feFlood
+            flood-color="#0a7cff" flood-opacity="1"
+            result="flood2"/>
+    
+          <feComposite
+            in="flood" in2="SourceAlpha" operator="in"
+            result="composite"/>
+          <feComposite
+            in="flood1" in2="SourceAlpha" operator="in"
+            result="composite1"/>
+          <feComposite
+            in="flood2" in2="SourceAlpha" operator="in"
+            result="composite2"/>
+    
+          <feDisplacementMap
+            scale="0" xChannelSelector="R" yChannelSelector="B"
+            in="composite" in2="turbulence"
+            result="displacementMap"
+            class="aberrations__displacementMap-1"/>
+          <feDisplacementMap
+            scale="0" xChannelSelector="G" yChannelSelector="B"
+            in="composite1" in2="turbulence"
+            result="displacementMap1"
+            class="aberrations__displacementMap-2"/>
+          <feDisplacementMap
+            scale="0" xChannelSelector="B" yChannelSelector="A"
+            in="composite2" in2="turbulence"
+            result="displacementMap2"
+            class="aberrations__displacementMap-3"/>
+    
+          <feBlend
+            mode="screen"
+            in="SourceGraphic" in2="displacementMap"
+            result="blend"/>
+          <feBlend
+            mode="screen"
+            in="blend" in2="displacementMap1"
+            result="blend1"/>
+          <feBlend
+            mode="screen"
+            in="blend1" in2="displacementMap2"
+            result="blend2"/>
+        </filter>
+    
+        <text
+          x="50%" y="50%" dy=".31em"
+          text-anchor="middle"
+          fill="white"
+          filter="url(#filter-aberrations)"
+          id="text"
+        >SVG-фильтры</text>
+      </svg>
+    </h2>
+    
+    <script type="text/javascript">
+      (function() {
+        var requestAnimationFrame = window.requestAnimationFrame
+          || window.mozRequestAnimationFrame
+          || window.webkitRequestAnimationFrame
+          || window.msRequestAnimationFrame;
+    
+        const turbulence = document.querySelector('.aberrations__turbulence');
+        const offset = document.querySelector('.aberrations__offset');
+        const displacementMap1 = document.querySelector('.aberrations__displacementMap-1');
+        const displacementMap2 = document.querySelector('.aberrations__displacementMap-2');
+        const displacementMap3 = document.querySelector('.aberrations__displacementMap-3');
+    
+        const min = 0;
+        let counter = 0;
+        const maxCounter = 55;
+        let isRunning = false;
+        const delay = 1; // s
+        let direction = 'forward';
+        const duration = 0.03; // s
+        const pausa = 1; // s
+    
+        const changedElems = [
+          {
+            elem: displacementMap1,
+            propName: 'scale',
+            initial: 0,
+            step: 2,
+          },
+          {
+            elem: displacementMap2,
+            propName: 'scale',
+            initial: 0,
+            step: 2,
+          },
+          {
+            elem: displacementMap3,
+            propName: 'scale',
+            initial: 0,
+            step: 2,
+          },
+        ];
+    
+        function changeProp() {
+          if(!isRunning) {
+            return;
+          }
+    
+          let hasNextStep = false;
+          let currentDuration = duration;
+    
+          changedElems.forEach(item => {
+            const delay = item.delay || 0;
+            let itemCounter = item.counter || counter;
+    
+            if(itemCounter > delay) {
+              let newValue = itemCounter * item.step + item.initial;
+    
+              if(direction === 'backward'){
+                itemCounter++;
+              }
+              else {
+                itemCounter--;
+              }
+    
+              const itemMax = item.max || maxCounter;
+    
+              if(itemCounter <= itemMax) {
+                hasNextStep = true;
+    
+                item.elem.setAttribute(item.propName, newValue);
+              }
+            }
+            else {
+              hasNextStep = true;
+            }
+          });
+    
+          if(direction === 'forward') {
+            counter++;
+          }
+          else {
+            counter--;
+          }
+    
+          if (counter >= maxCounter) {
+            direction = 'backward';
+          }
+          else if (counter <= 0) {
+            direction = 'forward';
+            currentDuration = pausa;
+    
+            const newFreq = 0.0005 + Math.random() * 0.015;
+    
+            turbulence.setAttribute('seed', turbulence.seed.baseVal + 1);
+            turbulence.setAttribute('baseFrequency', newFreq);
+          }
+    
+          setTimeout(() => {
+              requestAnimationFrame(changeProp);
+            }, currentDuration * 1000);
+        }
+    
+        function setInitial() {
+          direction = 'forward';
+          counter = 0;
+    
+          changedElems.forEach(item => {
+            let newValue = item.initial;
+    
+            const attrName = item.attrName || item.propName;
+    
+            item.elem.setAttribute(attrName, newValue);
+    
+          });
+        }
+    
+        // ------------------------------
+    
+        window['title-animated'] = {
+          play: () => {
+            setTimeout(() => {
+              if(!isRunning) {
+                requestAnimationFrame(changeProp);
+                isRunning = true;
+              }
+            }, delay * 1000);
+          },
+          pause: () => {
+            setInitial();
+            isRunning = false;
+          }
+        };
+      })(window);
+    </script>
+    
+  </section>
+
+  <section class="slide slide--dark slide--section-title">
+    <h2>Немного истории</h2>
+  </section>
+
+  <section class="slide slide--tiny-padding">
+
+    <h2 class="next">Internet Explorer</h2>
+
+<pre class="next"><code class="language-css">.img {
+  filter:
+    progid:DXImageTransform.Microsoft.dropshadow(OffX=5, OffY=5,
+           Color="gray", Positive="true");
+}</code></pre>
+
+    <ul>
+      <li class="next">Появились в 1997 в IE 4.0</li>
+      <li class="next">Максимальная поддержка в IE 5.5</li>
+      <li class="next">Выпилены в 2012 в IE 10.0</li>
+    </ul>
+  </section>
+
+  <section class="slide slide--tiny-padding">
+    <div class="history">
+      <div class="history__column history__column--svg">
+        <h3 class="
+          history__title
+          history__title--svg
+          next
+        ">SVG-фильтры</h3>
+    
+        <dl class="history__list history__list--svg">
+          <div class="
+            history__line
+            next
+          ">
+            <dt class="history__year">1999</dt>
+            <dd class="history__event">
+              Первые <a href="https://www.w3.org/TR/1999/WD-SVG-19990211/filters.html">описания</a> в спеке
+            </dd>
+          </div>
+    
+          <div class="
+            history__line
+            next
+          ">
+            <dt class="history__year">2008</dt>
+            <dd class="history__event history__event--double">Firefox</dd>
+          </div>
+    
+          <div class="
+            history__line
+            next
+          ">
+            <dt class="history__year">2009</dt>
+            <dd class="history__event">Opera</dd>
+          </div>
+    
+          <div class="
+            history__line
+            next
+          ">
+            <dt class="history__year">2010</dt>
+            <dd class="history__event">Chrome</dd>
+          </div>
+    
+          <div class="
+            history__line
+            next
+          ">
+            <dt class="history__year">2012</dt>
+            <dd class="history__event">Safari, IE10</dd>
+          </div>
+    
+          <div class="
+            history__line
+            next
+          ">
+            <dt class="history__year">2013</dt>
+            <dd class="history__event">Мобильные браузеры</dd>
+          </div>
+    
+          <!-- <div class="
+            history__line
+    
+          ">
+            <dt class="history__year">2015</dt>
+            <dd class="history__event"></dd>
+          </div> -->
+        </dl>
+      </div>
+    
+      <div class="history__column history__column--css">
+        <h3 class="
+          history__title
+          history__title--css
+          next
+        ">CSS-фильтры</h3>
+        <dl class="history__list history__list--css">
+    
+          <div class="
+            history__line
+          ">
+            <dt class="history__year">1999</dt>
+            <dd class="history__event"></dd>
+          </div>
+    
+          <div class="
+            history__line
+            next
+          ">
+            <dt class="history__year">2008</dt>
+            <dd class="history__event history__event--double">Robert O'Callahan из Mozilla <a href="https://robert.ocallahan.org/2008/06/applying-svg-effects-to-html-content_04.html">предложил</a> применить SVG-фильтры к&nbsp;HTML</dd>
+          </div>
+    
+          <div class="
+            history__line
+          ">
+            <dt class="history__year">2009</dt>
+            <dd class="history__event"></dd>
+          </div>
+    
+          <div class="
+            history__line
+            next
+          ">
+            <dt class="history__year">2010</dt>
+            <dd class="history__event">Firefox</dd>
+          </div>
+    
+          <div class="
+            history__line
+            next
+          ">
+            <dt class="history__year">2012</dt>
+            <dd class="history__event">Safari, Chrome</dd>
+          </div>
+    
+          <div class="
+            history__line
+          ">
+            <dt class="history__year">2013</dt>
+            <dd class="history__event"></dd>
+          </div>
+    
+          <div class="
+            history__line
+            next
+          ">
+            <dt class="history__year history__year--visible">2015</dt>
+            <dd class="history__event">Edge</dd>
+          </div>
+        </dl>
+      </div>
+    </div>
+    
+  </section>
+
+  <section class="slide slide--caniuse slide--tiny-padding">
+    <figure class="next">
+      <figcaption>SVG-фильтры</figcaption>
+      <img src="./assets/img/support/svg-filters.png">
+    </figure>
+
+    <figure class="next">
+      <figcaption>CSS-фильтры</figcaption>
+      <img src="./assets/img/support/css-filters.png">
+    </figure>
+  </section>
+
+  <section class="slide slide--dark slide--section-title">
+    <h2>Общие принципы работы</h2>
+  </section>
+
+  <section class="slide">
+    <h2>CSS</h2>
+
+<pre><code class="language-css">.img {
+
+}</code></pre>
+
+    <img
+      src="./assets/img/berries.jpeg"
+      class="demo-image">
+  </section>
+
+  <section class="slide">
+    <h2>CSS</h2>
+
+<pre><code class="language-css">.img {
+  filter: blur(5px);
+}</code></pre>
+
+    <img
+      src="./assets/img/berries.jpeg"
+      class="demo-image"
+      style="filter: blur(5px);">
+  </section>
+
+  <section class="slide">
+    <h2>CSS</h2>
+
+<pre><code class="language-css">.img {
+  filter: blur(5px) grayscale(.5);
+}</code></pre>
+
+    <img
+      src="./assets/img/berries.jpeg"
+      class="demo-image"
+      style="filter: blur(5px) grayscale(.5);">
+  </section>
+
+  <section class="slide">
+    <h2>SVG</h2>
+
+<pre class="next"><code class="language-svg">&lt;svg>
+  &lt;filter id="<mark>my-fancy-filter</mark>">
+
+  &lt;/filter>
+&lt;/svg></code></pre>
+  </section>
+
+  <section class="slide">
+    <h2>SVG</h2>
+
+<pre><code class="language-svg">&lt;svg>
+  &lt;filter id="my-fancy-filter">
+    &lt;feGaussianBlur
+      stdDeviation="5"/>
+  &lt;/filter>
+&lt;/svg></code></pre>
+  </section>
+
+  <section class="slide">
+    <h2>SVG</h2>
+
+<pre><code class="language-svg">&lt;svg>
+  &lt;filter id="my-fancy-filter">
+    &lt;feGaussianBlur
+      stdDeviation="5"/>
+    &lt;feColorMatrix
+      type="saturate" values=".5"/>
+  &lt;/filter>
+&lt;/svg></code></pre>
+  </section>
+
+  <section class="slide">
+    <h2>SVG</h2>
+<pre><code class="language-css">.img {
+
+}</code></pre>
+
+    <img
+      src="./assets/img/berries.jpeg"
+      class="demo-image">
+  </section>
+
+  <section class="slide">
+    <h2>SVG</h2>
+<pre><code class="language-css">.img {
+  filter: url("<mark>#my-fancy-filter</mark>");
+}</code></pre>
+
+<pre class="next"><code class="language-svg">&lt;svg>
+  &lt;circle
+    filter="url(#my-fancy-filter)"/>
+&lt;/svg></code></pre>
+
+    <img
+      src="./assets/img/berries.jpeg"
+      class="demo-image"
+      style="filter: url('#filter-blur-grayscale')">
+  </section>
+
+  <section class="slide">
+    <div class="columns columns--full-page">
+      <figure class="column next">
+        <img
+          src="./assets/img/berries.jpeg"
+          class="_demo-image"
+          style="filter: blur(5px) grayscale(.5);">
+
+        <figcaption class="column__title">CSS</figcaption>
+      </figure>
+      <figure class="column next">
+        <img
+          src="./assets/img/berries.jpeg"
+          class="_demo-image"
+          style="filter: url('#filter-blur-grayscale')">
+
+        <figcaption class="column__title">SVG</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="slide slide--dark slide--section-title">
+    <h2>Что умеют <nobr>SVG-фильтры?</nobr></h2>
+  </section>
+
+  <section class="slide">
+    <figure class="demo">
+      <figcaption class="demo__caption">Демо без фильтров</figcaption>
+    
+      <svg class="demo__svg">
+        <use xlink:href="#symb-example-img"/>
+    
+        <use xlink:href="#symb-example-text"/>
+      </svg>
+    </figure>
+    
+  </section>
+
+  <section class="slide slide--section-title">
+    <h3>Добавление картинки или&nbsp;цвета</h3>
+  </section>
+
+  <section class="slide">
+    <figure class="demo">
+      <figcaption class="demo__caption">Заливка цветом: <b>feFlood</b></figcaption>
+    
+      <svg class="demo__svg">
+        <filter
+          id="filter-flood"
+          x="-20%" y="-20%" width="140%" height="140%" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="linearRGB">
+          <feFlood
+            flood-color="#a9ffbc" flood-opacity="1" x="0%" y="0%" width="100%" height="100%"
+            result="flood"/>
+        </filter>
+    
+        <use
+          xlink:href="#symb-example-img"
+          filter="url(#filter-flood)"/>
+        <use
+          xlink:href="#symb-example-text"
+          filter="url(#filter-flood)"/>
+      </svg>
+    </figure>
+    
+  </section>
+
+  <section class="slide">
+    <figure class="demo">
+      <figcaption class="demo__caption">Добавление картинки: <b>feImage</b></figcaption>
+    
+      <svg class="demo__svg">
+        <filter
+          id="filter-image"
+          x="0" y="0" width="140%" height="140%" filterUnits="objectBoundingBox" primitiveUnits="objectBoundingBox" color-interpolation-filters="linearRGB">
+          <feImage
+            xlink:href="./assets/img/berries.jpeg"
+            x="0%" y="0%" width="100%" height="1" preserveAspectRatio="xMidYMid slice" crossOrigin="anonymous"
+            result="image"/>
+        </filter>
+    
+        <use
+          xlink:href="#symb-example-img"
+          filter="url(#filter-image)"/>
+        <use
+          xlink:href="#symb-example-text"
+          filter="url(#filter-image)"/>
+      </svg>
+    </figure>
+    
+    
+  </section>
+
+  <section class="slide">
+    <figure class="demo">
+      <figcaption class="demo__caption">Повторение: <b>feTile</b></figcaption>
+    
+      <svg class="demo__svg">
+        <filter
+          id="filter-tile"
+          x="-10%" y="-10%" width="140%" height="140%"
+          filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse"
+          color-interpolation-filters="linearRGB">
+          <feImage
+            xlink:href="./assets/img/berries.jpeg"
+            x="50%" y="50%" width="220" height="220" preserveAspectRatio="xMidYMid slice"
+            crossOrigin="anonymous"
+            result="image"/>
+    
+          <feTile
+            x="0" y="0"
+            width="1000" height="1000"
+            in="image"
+            result="tile"/>
+    
+          <!-- Fix for transparent lines on the edges -->
+          <feMorphology
+            operator="dilate" radius="2"
+            in="tile"
+            result="morphology"/>
+    
+          <feMerge result="merge">
+            <feMergeNode in="morphology"/>
+            <feMergeNode in="tile"/>
+          </feMerge>
+        </filter>
+    
+        <use
+          xlink:href="#symb-example-img"
+          filter="url(#filter-tile)"/>
+        <use
+          xlink:href="#symb-example-text"
+          filter="url(#filter-tile)"/>
+      </svg>
+    </figure>
+    
+    
+  </section>
+
+  <section class="slide">
+    <figure class="demo">
+      <figcaption class="demo__caption">Облака: <b>feTurbulence</b> </figcaption>
+    
+      <svg class="demo__svg">
+        <filter
+          id="filter-turbulence-2"
+          x="-20%" y="-20%" width="140%" height="140%" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="linearRGB">
+          <feTurbulence
+            type="fractalNoise" baseFrequency="0.015 0.015" numOctaves="5" seed="2" stitchTiles="stitch"
+            result="turbulence"/>
+    
+          <feMerge>
+            <feMergeNode in="turbulence"/>
+            <feMergeNode in="turbulence"/>
+          </feMerge>
+        </filter>
+    
+        <use
+          xlink:href="#symb-example-img"
+          filter="url(#filter-turbulence-2)"/>
+        <use
+          xlink:href="#symb-example-text"
+          filter="url(#filter-turbulence-2)"/>
+      </svg>
+    </figure>
+    
+  </section>
+
+  <section class="slide">
+    <figure class="demo">
+      <figcaption class="demo__caption">Облака: <b>feTurbulence</b> </figcaption>
+    
+      <svg class="demo__svg">
+        <filter
+          id="filter-turbulence"
+          x="-20%" y="-20%" width="140%" height="140%" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="linearRGB">
+          <feTurbulence
+            type="turbulence" baseFrequency="0.015 0.015" numOctaves="5" seed="2" stitchTiles="stitch" result="turbulence"/>
+    
+          <feMerge>
+            <feMergeNode in="turbulence"/>
+            <feMergeNode in="turbulence"/>
+            <feMergeNode in="turbulence"/>
+            <feMergeNode in="turbulence"/>
+          </feMerge>
+        </filter>
+    
+        <use
+          xlink:href="#symb-example-img"
+          filter="url(#filter-turbulence)"/>
+        <use
+          xlink:href="#symb-example-text"
+          filter="url(#filter-turbulence)"/>
+      </svg>
+    </figure>
+    
+  </section>
+
+  <section class="slide">
+    <figure class="demo">
+      <figcaption class="demo__caption">Облака: <b>feTurbulence</b> </figcaption>
+    
+      <svg class="demo__svg">
+        <filter
+          id="filter-turbulence-huge"
+          x="-20%" y="-20%" width="140%" height="140%" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="linearRGB">
+          <feTurbulence
+            type="turbulence" baseFrequency="0.01 0.01" numOctaves="1" seed="2" stitchTiles="stitch"
+            result="turbulence"/>
+    
+          <feMerge>
+            <feMergeNode in="turbulence"/>
+            <feMergeNode in="turbulence"/>
+            <feMergeNode in="turbulence"/>
+            <feMergeNode in="turbulence"/>
+          </feMerge>
+        </filter>
+    
+        <use
+          xlink:href="#symb-example-img"
+          filter="url(#filter-turbulence-huge)"/>
+        <use
+          xlink:href="#symb-example-text"
+          filter="url(#filter-turbulence-huge)"/>
+      </svg>
+    </figure>
+    
+  </section>
+
+  <section class="slide">
+    <figure class="demo">
+      <figcaption class="demo__caption">Облака: <b>feTurbulence</b> </figcaption>
+    
+      <svg class="demo__svg">
+        <filter
+          id="filter-turbulence-stripes"
+          x="-20%" y="-20%" width="140%" height="140%" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="linearRGB">
+          <feTurbulence
+            type="turbulence" baseFrequency="0 0.05" numOctaves="3" seed="2" stitchTiles="stitch"
+            result="turbulence"/>
+    
+          <feMerge>
+            <feMergeNode in="turbulence"/>
+            <feMergeNode in="turbulence"/>
+            <feMergeNode in="turbulence"/>
+            <feMergeNode in="turbulence"/>
+          </feMerge>
+        </filter>
+    
+        <use
+          xlink:href="#symb-example-img"
+          filter="url(#filter-turbulence-stripes)"/>
+        <use
+          xlink:href="#symb-example-text"
+          filter="url(#filter-turbulence-stripes)"/>
+      </svg>
+    </figure>
+    
+  </section>
+
+  <section class="slide slide--section-title">
+    <h3>Размытие и искажение</h3>
+  </section>
+
+  <section class="slide">
+    <figure class="demo">
+      <figcaption class="demo__caption">Размытие: <b>feGaussianBlur</b></figcaption>
+    
+      <svg class="demo__svg">
+        <filter
+          id="filter-blur"
+          x="-20%" y="-20%" width="140%" height="140%" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+          <feGaussianBlur
+            stdDeviation="10" edgeMode="none"
+            in="SourceGraphic"
+            result="blur"/>
+        </filter>
+    
+        <use
+          xlink:href="#symb-example-img"
+          filter="url(#filter-blur)"/>
+        <use
+          xlink:href="#symb-example-text"
+          filter="url(#filter-blur)"/>
+      </svg>
+    </figure>
+    
+  </section>
+
+  <section class="slide">
+    <figure class="demo">
+      <figcaption class="demo__caption">Размытие: <b>feGaussianBlur</b></figcaption>
+    
+      <svg class="demo__svg">
+        <filter
+          id="filter-blur-horizontal"
+          x="-20%" y="-20%" width="140%" height="140%" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+          <feGaussianBlur
+            stdDeviation="25 0" edgeMode="none"
+            in="SourceGraphic"
+            result="blur"/>
+        </filter>
+    
+        <use
+          xlink:href="#symb-example-img"
+          filter="url(#filter-blur-horizontal)"/>
+        <use
+          xlink:href="#symb-example-text"
+          filter="url(#filter-blur-horizontal)"/>
+      </svg>
+    </figure>
+    
+  </section>
+
+  <section class="slide">
+    <figure class="demo">
+      <figcaption class="demo__caption">Сужение: <b>feMorphology</b> erode</figcaption>
+    
+      <svg class="demo__svg">
+        <filter
+          id="filter-morphology-erode"
+          x="-20%" y="-20%" width="140%" height="140%" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+          <feMorphology
+            operator="erode" radius="5 3"
+            in="SourceGraphic"
+            result="morphology"/>
+        </filter>
+    
+        <use
+          xlink:href="#symb-example-img"
+          filter="url(#filter-morphology-erode)"/>
+        <use
+          xlink:href="#symb-example-text"
+          filter="url(#filter-morphology-erode)"/>
+      </svg>
+    </figure>
+    
+  </section>
+
+  <section class="slide">
+    <figure class="demo">
+      <figcaption class="demo__caption">Расширение: <b>feMorphology</b> dilate</figcaption>
+    
+      <svg class="demo__svg">
+        <filter
+          id="filter-morphology-dilate"
+          x="-20%" y="-20%" width="140%" height="140%" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+          <feMorphology
+            operator="dilate" radius="3 5"
+            in="SourceGraphic"
+            result="morphology"/>
+        </filter>
+    
+        <use
+          xlink:href="#symb-example-img"
+          filter="url(#filter-morphology-dilate)"/>
+        <use
+          xlink:href="#symb-example-text"
+          filter="url(#filter-morphology-dilate)"/>
+      </svg>
+    </figure>
+    
+  </section>
+
+  <section class="slide">
+    <figure class="demo">
+      <figcaption class="demo__caption">Смещение: <b>feOffset</b></figcaption>
+    
+      <svg class="demo__svg">
+        <filter
+          id="filter-offset"
+          x="-20%" y="-20%"
+          width="140%" height="140%"
+          filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="linearRGB">
+          <feOffset
+            dx="100" dy="30"
+            in="SourceGraphic"
+            result="offset"/>
+        </filter>
+    
+        <use
+          xlink:href="#symb-example-img"
+          filter="url(#filter-offset)"/>
+        <use
+          xlink:href="#symb-example-text"
+          filter="url(#filter-offset)"/>
+      </svg>
+    </figure>
+    
+  </section>
+
+  <section class="slide">
+    <figure class="demo">
+      <figcaption class="demo__caption">Волны и искажения: <b>feDisplacementMap</b></figcaption>
+    
+      <svg class="demo__svg">
+        <filter
+          id="filter-displacementMap"
+          x="-20%" y="-20%" width="140%" height="140%" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="linearRGB">
+          <feTurbulence
+            type="turbulence" baseFrequency="0.004 0.04" numOctaves="2" seed="2" stitchTiles="stitch"
+            result="turbulence"/>
+    
+          <feDisplacementMap
+            in="SourceGraphic" in2="turbulence" scale="40" xChannelSelector="R" yChannelSelector="B"
+            result="displacementMap"/>
+        </filter>
+    
+        <use
+          xlink:href="#symb-example-img"
+          filter="url(#filter-displacementMap)"/>
+        <use
+          xlink:href="#symb-example-text"
+          filter="url(#filter-displacementMap)"/>
+      </svg>
+    </figure>
+    
+  </section>
+
+  <section class="slide">
+    <figure class="demo">
+      <figcaption class="demo__caption">Тень: <b>feDropShadow</b></figcaption>
+    
+      <svg class="demo__svg">
+        <filter
+          id="filter-shadow"
+          x="-20%" y="-20%" width="140%" height="140%" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+          <feDropShadow
+            stdDeviation="10 5"
+            in="SourceGraphic" dx="20" dy="20"
+            flood-color="yellowgreen" flood-opacity="1" result="dropShadow"/>
+        </filter>
+    
+        <use
+          xlink:href="#symb-example-img"
+          filter="url(#filter-shadow)"/>
+        <use
+          xlink:href="#symb-example-text"
+          filter="url(#filter-shadow)"/>
+      </svg>
+    </figure>
+    
+  </section>
+
+  <section class="slide slide--section-title">
+    <h3>Управление цветом</h3>
+  </section>
+
+  <section class="slide">
+    <figure class="demo">
+      <figcaption class="demo__caption">Режимы наложения: <b>feBlend</b> multiply</figcaption>
+    
+      <svg class="demo__svg">
+        <filter
+          id="filter-blend"
+          x="-20%" y="-20%" width="140%" height="140%" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+          <feBlend
+            mode="multiply" x="50%" y="0%" width="50%" height="100%"
+            in="SourceGraphic" in2="SourceGraphic"
+            result="blend"/>
+    
+          <feMerge result="merge">
+            <feMergeNode in="SourceGraphic"/>
+            <feMergeNode in="blend"/>
+          </feMerge>
+        </filter>
+    
+        <use
+          xlink:href="#symb-example-img"
+          filter="url(#filter-blend)"/>
+        <use
+          xlink:href="#symb-example-text"
+          filter="url(#filter-blend)"/>
+      </svg>
+    </figure>
+    
+  </section>
+
+  <section class="slide">
+    <figure class="demo">
+      <figcaption class="demo__caption">Режимы наложения: <b>feBlend</b> screen</figcaption>
+    
+      <svg class="demo__svg">
+        <filter
+          id="filter-blend-screen"
+          x="-20%" y="-20%" width="140%" height="140%" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+          <feBlend
+            mode="screen" x="50%" y="0%" width="50%" height="100%"
+            in="SourceGraphic" in2="SourceGraphic"
+            result="blend"/>
+    
+          <feMerge result="merge">
+            <feMergeNode in="SourceGraphic"/>
+            <feMergeNode in="blend"/>
+          </feMerge>
+        </filter>
+    
+        <use
+          xlink:href="#symb-example-img"
+          filter="url(#filter-blend-screen)"/>
+        <use
+          xlink:href="#symb-example-text"
+          filter="url(#filter-blend-screen)"/>
+      </svg>
+    </figure>
+    
+  </section>
+
+  <section class="slide">
+    <figure class="demo">
+      <figcaption class="demo__caption">Управление цветом: <b>feColorMatrix</b> hueRotate</figcaption>
+    
+      <svg class="demo__svg">
+        <filter
+          id="filter-colormatrix-hueRotate"
+          x="-20%" y="-20%" width="140%" height="140%" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+          <feColorMatrix
+            type="hueRotate" values="180" x="50%" y="0%" width="50%" height="100%"
+            in="SourceGraphic"
+            result="colormatrix"/>
+    
+          <feMerge result="merge">
+            <feMergeNode in="SourceGraphic"/>
+            <feMergeNode in="colormatrix"/>
+          </feMerge>
+        </filter>
+    
+        <use
+          xlink:href="#symb-example-img"
+          filter="url(#filter-colormatrix-hueRotate)"/>
+        <use
+          xlink:href="#symb-example-text"
+          filter="url(#filter-colormatrix-hueRotate)"/>
+      </svg>
+    </figure>
+    
+  </section>
+
+  <section class="slide">
+    <figure class="demo">
+      <figcaption class="demo__caption">Управление цветом: <b>feColorMatrix</b> matrix</figcaption>
+    
+      <svg class="demo__svg">
+        <filter
+          id="filter-colormatrix-lightness"
+          x="-20%" y="-20%" width="140%" height="140%" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+          <feColorMatrix
+            type="matrix"
+            values="3 0 0 0 0
+                    0 3 0 0 0
+                    0 0 3 0 0
+                    0 0 0 1 0"
+            x="50%" y="0%" width="50%" height="100%"
+            in="SourceGraphic"
+            result="colormatrix"/>
+    
+          <feMerge result="merge">
+            <feMergeNode in="SourceGraphic"/>
+            <feMergeNode in="colormatrix"/>
+          </feMerge>
+        </filter>
+    
+        <use
+          xlink:href="#symb-example-img"
+          filter="url(#filter-colormatrix-lightness)"/>
+        <use
+          xlink:href="#symb-example-text"
+          filter="url(#filter-colormatrix-lightness)"/>
+      </svg>
+    </figure>
+    
+  </section>
+
+  <section class="slide">
+    <figure class="demo">
+      <figcaption class="demo__caption">Управление цветом: <b>feColorMatrix</b> luminanceToAlpha</figcaption>
+    
+      <svg class="demo__svg">
+        <filter
+          id="filter-colormatrix-luminanceToAlpha"
+          x="-20%" y="-20%" width="140%" height="140%" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+          <feColorMatrix
+            type="luminanceToAlpha" x="50%" y="0%" width="50%" height="100%"
+            in="SourceGraphic"
+            result="colormatrix"/>
+    
+          <feOffset
+            dx="0" dy="0" x="0%" y="0%" width="50%" height="100%"
+            in="SourceGraphic"
+            result="offset"/>
+    
+          <feMerge result="merge">
+            <feMergeNode in="colormatrix"/>
+            <feMergeNode in="offset"/>
+          </feMerge>
+        </filter>
+    
+        <use
+          xlink:href="#symb-example-img"
+          filter="url(#filter-colormatrix-luminanceToAlpha)"/>
+        <use
+          xlink:href="#symb-example-text"
+          filter="url(#filter-colormatrix-luminanceToAlpha)"/>
+      </svg>
+    </figure>
+    
+  </section>
+
+  <section class="slide">
+    <figure class="demo">
+      <figcaption class="demo__caption">Управление каналами: <b>feComponentTransfer</b></figcaption>
+    
+      <svg class="demo__svg">
+        <filter
+          id="filter-componentTransfer"
+          x="-10%" y="-10%" width="120%" height="120%" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+          <feColorMatrix type="matrix"
+            values="1 0 0 0 0
+              1 0 0 0 0
+              1 0 0 0 0
+              0 0 0 1 0"
+            in="SourceGraphic"
+            result="colormatrix"/>
+    
+          <feComponentTransfer
+            x="50%" width="50%"
+            in="colormatrix"
+            result="componentTransfer">
+            <feFuncR
+              type="table" tableValues="0.02 0.13 0.8"/>
+            <feFuncG
+              type="table" tableValues="0.02 0.47 0.97"/>
+            <feFuncB
+              type="table" tableValues="0.26 0.52 0.48"/>
+            <feFuncA type="table" tableValues="0 1"/>
+          </feComponentTransfer>
+    
+          <feOffset
+            dx="0" dy="0" x="0%" y="0%" width="50%" height="100%"
+            in="SourceGraphic"
+            result="offset"/>
+    
+          <feMerge result="merge">
+            <feMergeNode in="offset"/>
+            <feMergeNode in="componentTransfer"/>
+          </feMerge>
+        </filter>
+    
+        <use
+          xlink:href="#symb-example-img"
+          filter="url(#filter-componentTransfer)"/>
+        <use
+          xlink:href="#symb-example-text"
+          filter="url(#filter-componentTransfer)"/>
+      </svg>
+    </figure>
+    
+  </section>
+
+  <section class="slide">
+    <figure class="demo">
+      <figcaption class="demo__caption">Резкость: <b>feConvolveMatrix</b></figcaption>
+    
+      <svg class="demo__svg">
+        <filter
+          id="filter-convolveMatrix"
+          x="-20%" y="-20%" width="140%" height="140%" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="linearRGB">
+            <feConvolveMatrix
+              order="3"
+              kernelMatrix="2  -2   2
+                           -2  -2  -2
+                            2  -2   2"
+              x="50%" width="50%"
+              result="convolveMatrix"/>
+    
+            <feOffset
+              dx="0" dy="0" x="0%" y="0%" width="50%" height="100%" in="SourceGraphic"
+              result="offset"/>
+    
+            <feMerge result="merge">
+              <feMergeNode in="offset"/>
+              <feMergeNode in="convolveMatrix"/>
+            </feMerge>
+        </filter>
+    
+        <use
+          xlink:href="#symb-example-img"
+          filter="url(#filter-convolveMatrix)"/>
+        <use
+          xlink:href="#symb-example-text"
+          filter="url(#filter-convolveMatrix)"/>
+      </svg>
+    </figure>
+    
+  </section>
+
+  <section class="slide slide--section-title">
+    <h3>Источники света</h3>
+  </section>
+
+  <section class="slide">
+    <figure class="demo">
+      <figcaption class="demo__caption">Источники света: <b>feSpecularLighting</b></figcaption>
+    
+      <svg class="demo__svg">
+        <filter
+          id="filter-specular-distantLight"
+          x="-20%" y="-20%" width="140%" height="140%" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="linearRGB">
+          <feGaussianBlur
+            stdDeviation="5 5" edgeMode="none"
+            in="SourceGraphic"
+            result="blur"/>
+    
+          <feSpecularLighting
+            surfaceScale="6" specularConstant="1.6" specularExponent="40" lighting-color="#eff9ed"
+            in="blur"
+            result="specularLighting">
+            <feDistantLight azimuth="115" elevation="128"/>
+          </feSpecularLighting>
+    
+          <feComposite
+            operator="atop"
+            in="specularLighting" in2="SourceGraphic"
+            result="composite"/>
+        </filter>
+    
+        <use
+          xlink:href="#symb-example-img"
+          filter="url(#filter-specular-distantLight)"/>
+        <use
+          xlink:href="#symb-example-text"
+          filter="url(#filter-specular-distantLight)"/>
+      </svg>
+    </figure>
+    
+  </section>
+
+  <section class="slide">
+    <figure class="demo">
+      <figcaption class="demo__caption">Источники света: <b>feDiffuseLighting</b></figcaption>
+    
+      <svg class="demo__svg">
+        <filter
+          id="filter-diffuseLighting-spotLight"
+          x="-20%" y="-20%" width="140%" height="140%" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="linearRGB">
+          <feGaussianBlur
+            stdDeviation="3 3" x="0%" y="0%" width="100%" height="100%" edgeMode="none"
+            in="SourceGraphic"
+            result="blur"/>
+    
+          <feDiffuseLighting
+            surfaceScale="10" diffuseConstant="3.5" lighting-color="#e1f9aa" x="0%" y="0%" width="100%" height="100%"
+            in="blur"
+            result="diffuseLighting">
+            <feSpotLight
+              x="70" y="50" z="40" pointsAtX="125" pointsAtY="110" pointsAtZ="15" specularExponent="0" limitingConeAngle="22"></feSpotLight>
+          </feDiffuseLighting>
+    
+          <feComposite
+            operator="lighter" x="0%" y="0%" width="100%" height="100%"
+            in="diffuseLighting" in2="SourceGraphic"
+            result="composite"/>
+    
+          <feComposite
+            operator="in" x="0%" y="0%" width="100%" height="100%"
+            in="composite" in2="SourceAlpha"
+            result="composite1"/>
+        </filter>
+    
+        <use
+          xlink:href="#symb-example-img"
+          filter="url(#filter-diffuseLighting-spotLight)"/>
+        <use
+          xlink:href="#symb-example-text"
+          filter="url(#filter-diffuseLighting-spotLight)"/>
+      </svg>
+    </figure>
+    
+  </section>
+
+  <section class="slide slide--section-title">
+    <h3>Объединение слоёв</h3>
+  </section>
+
+  <section class="slide">
+    <figure class="demo">
+      <figcaption class="demo__caption">Склейка слоёв: <b>feMerge</b></figcaption>
+    
+      <svg class="demo__svg">
+        <filter
+          id="filter-merge"
+          x="-20%" y="-20%" width="140%" height="140%" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="linearRGB">
+          <feOffset dx="50" dy="50" in="SourceGraphic" result="offset"/>
+          <feMerge result="merge">
+            <feMergeNode in="SourceGraphic"/>
+            <feMergeNode in="offset"/>
+          </feMerge>
+        </filter>
+    
+        <use
+          xlink:href="#symb-example-img"
+          filter="url(#filter-merge)"/>
+        <use
+          xlink:href="#symb-example-text"
+          filter="url(#filter-merge)"/>
+      </svg>
+    </figure>
+    
+  </section>
+
+  <section class="slide">
+    <figure class="demo">
+      <figcaption class="demo__caption">Обрезка слоёв: <b>feComposite</b></figcaption>
+    
+      <svg class="demo__svg">
+        <filter
+          id="filter-composite"
+          x="-20%" y="-20%" width="140%" height="140%" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="linearRGB">
+          <feOffset
+            dx="20" dy="20" in="SourceGraphic"
+            result="offset"/>
+    
+          <feComposite
+            operator="xor"
+            in="offset" in2="SourceGraphic"
+            result="composite"/>
+        </filter>
+    
+        <use
+          xlink:href="#symb-example-img"
+          filter="url(#filter-composite)"/>
+        <use
+          xlink:href="#symb-example-text"
+          filter="url(#filter-composite)"/>
+      </svg>
+    </figure>
+    
+  </section>
+
+  <section class="slide slide--dark slide--section-title">
+    <h3>Управление<br/>источниками</h3>
+  </section>
+
+  <section class="slide slide--section-title">
+    <h3>Атрибут <code>in</code></h3>
+  </section>
+
+  <section class="slide">
+<pre class="narrow-pre"><code class="language-svg">&lt;svg>
+  &lt;filter id="my-fancy-filter">
+    &lt;feGaussianBlur
+      stdDeviation="5"/>
+  &lt;/filter>
+&lt;/svg></code></pre>
+
+    <img
+      src="./assets/img/berries.jpeg"
+      class="demo-image"
+      style="filter: url('#filter-blur')">
+  </section>
+
+  <section class="slide">
+<pre class="narrow-pre"><code class="language-svg">&lt;svg>
+  &lt;filter id="my-fancy-filter">
+    &lt;feGaussianBlur
+      stdDeviation="5"/>
+    &lt;feColorMatrix
+      type="saturate" values=".5"/>
+  &lt;/filter>
+&lt;/svg></code></pre>
+
+    <img
+      src="./assets/img/berries.jpeg"
+      class="demo-image"
+      style="filter: url('#filter-blur-grayscale')">
+  </section>
+
+  <section class="slide">
+<pre class="narrow-pre" data-highlight-lines="5"><code class="language-svg">&lt;svg>
+  &lt;filter id="my-fancy-filter">
+    &lt;feGaussianBlur
+      stdDeviation="5"/>
+    &lt;feColorMatrix in="SourceGraphic"
+      type="saturate" values=".5"/>
+  &lt;/filter>
+&lt;/svg></code></pre>
+
+    <img
+      src="./assets/img/berries.jpeg"
+      class="demo-image"
+      style="filter: url('#filter-grayscale-no-blur')">
+  </section>
+
+  <section class="slide slide--section-title">
+    <h3>Атрибут <code>result</code></h3>
+  </section>
+
+  <section class="slide">
+    <pre class="narrow-pre"><code class="language-svg">&lt;filter id="wind">
+  &lt;feGaussianBlur stdDeviation="30"/>
+  &lt;feOffset dx="-30"/>
+&lt;/filter></code></pre>
+
+    <div class="demo-text demo-text--wind"
+      contenteditable spellcheck="false"
+      style="filter: url(#wind--no-source)">Wind</div>
+  </section>
+
+  <section class="slide">
+<pre class="narrow-pre" data-highlight-lines="3"><code class="language-svg">&lt;filter id="wind">
+  &lt;feGaussianBlur stdDeviation="30"/>
+  &lt;feOffset dx="-30" result="offset"/>
+&lt;/filter></code></pre>
+
+    <div class="demo-text demo-text--wind"
+      contenteditable spellcheck="false"
+      style="filter: url(#wind--no-source)">Wind</div>
+  </section>
+
+  <section class="slide">
+<pre class="narrow-pre" data-highlight-lines="4,7"><code class="language-svg">&lt;filter id="wind">
+  &lt;feGaussianBlur stdDeviation="30"/>
+  &lt;feOffset dx="-30" result="offset"/>
+  &lt;feMerge>
+
+
+  &lt;/feMerge>
+&lt;/filter></code></pre>
+
+    <div class="demo-text demo-text--wind"
+      contenteditable spellcheck="false"
+      style="filter: url(#wind--no-source)">Wind</div>
+  </section>
+
+  <section class="slide">
+<pre class="narrow-pre" data-highlight-lines="5"><code class="language-svg">&lt;filter id="wind">
+  &lt;feGaussianBlur stdDeviation="30"/>
+  &lt;feOffset dx="-30" result="offset"/>
+  &lt;feMerge>
+    &lt;feMergeNode in="offset"/>
+
+  &lt;/feMerge>
+&lt;/filter></code></pre>
+
+    <div class="demo-text demo-text--wind"
+      contenteditable spellcheck="false"
+      style="filter: url(#wind--no-source)">Wind</div>
+  </section>
+
+  <section class="slide">
+<pre class="narrow-pre" data-highlight-lines="6"><code class="language-svg">&lt;filter id="wind">
+  &lt;feGaussianBlur stdDeviation="30"/>
+  &lt;feOffset dx="-30" result="offset"/>
+  &lt;feMerge>
+    &lt;feMergeNode in="offset"/>
+    &lt;feMergeNode in="SourceGraphic"/>
+  &lt;/feMerge>
+&lt;/filter></code></pre>
+    <div class="demo-text demo-text--wind"
+      contenteditable spellcheck="false"
+      style="filter: url(#wind)">Wind</div>
+  </section>
+
+  <section class="slide slide--dark slide--section-title">
+    <h2>Сочетание примитивов</h2>
+  </section>
+
+  <section class="slide slide--dark">
+    <div class="primitives-switcher primitives-switcher--broken">
+      <svg class="primitives-switcher__svg">
+        <filter id="filter-broken" class="filter-source">
+          <feTurbulence
+            type="turbulence" baseFrequency="0.0003 0.006"
+            numOctaves="2" seed="7" stitchTiles="noStitch"
+            result="turbulence"/>
+    
+          <feColorMatrix
+            type="saturate" values="30"
+            in="turbulence" result="colormatrix"/>
+    
+          <feColorMatrix type="matrix"
+            values="1 0 0 0 0
+              0 1 0 0 0
+              0 0 1 0 0
+              0 0 0 150 -30"
+            in="colormatrix" result="colormatrix1"/>
+    
+          <feComposite
+            operator="in"
+            in="SourceGraphic" in2="colormatrix1"
+            result="composite"/>
+    
+          <feDisplacementMap
+            scale="20" xChannelSelector="R" yChannelSelector="A"
+            in="SourceGraphic" in2="colormatrix1"
+            result="displacementMap"/>
+        </filter>
+      </svg>
+    
+      <div
+        class="primitives-switcher__text"
+        style="filter: url(#filter-broken)"
+        contenteditable spellcheck="false">
+        TEXT
+      </div>
+    </div>
+    
+  </section>
+
+  <section class="slide slide--dark slide--section-title">
+    <h2>Анимация</h2>
+  </section>
+
+  <section class="slide slide--dark">
+    <svg class="svg-fulscreen fire-static">
+      <filter
+        id="filter-fire-static">
+        <feTurbulence
+          type="fractalNoise" baseFrequency="0.035 0.008" numOctaves="1" seed="2" stitchTiles="stitch"
+          result="turbulence"/>
+    
+        <feTurbulence
+          type="fractalNoise" baseFrequency="0.035 0.007" numOctaves="1" seed="1" stitchTiles="stitch"
+          result="turbulence1"/>
+    
+        <feMerge result="merge">
+          <feMergeNode in="turbulence1"/>
+          <feMergeNode in="turbulence"/>
+        </feMerge>
+    
+        <feColorMatrix
+          type="saturate" values="9"
+          in="merge"
+          result="colormatrix"/>
+    
+        <feColorMatrix
+          type="matrix"
+          values="1 0 0 0 0
+                  0 1 0 0 0
+                  0 0 1 0 0
+                  0 0 0 10 0"
+          in="colormatrix"
+          result="colormatrix1"/>
+    
+        <feDisplacementMap
+          scale="40" xChannelSelector="R" yChannelSelector="G"
+          in="colormatrix1" in2="colormatrix"
+          result="displacementMap"/>
+    
+        <feComposite
+          operator="in"
+          in="displacementMap" in2="SourceAlpha"
+          result="composite1"/>
+      </filter>
+    
+      <use
+        xlink:href="#symb-big-example-text"
+        filter="url(#filter-fire-static)"/>
+    </svg>
+    
+  </section>
+
+  <section class="slide">
+<pre class="next"><code class="language-js">const primitive = document.querySelector('#turbulence');</code></pre>
+
+<pre class="next" data-highlight-lines="2"><code class="language-js">function changeProp() {
+  primitive.setAttribute('seed', primitive.seed.baseVal + 1);
+
+  setTimeout(() => {
+    requestAnimationFrame(changeProp);
+  }, 75);
+}</code></pre>
+
+<pre class="next"><code class="language-js">requestAnimationFrame(changeProp);</code></pre>
+  </section>
+
+  <section class="slide slide--dark slide--fire-animated" data-animation="fire-animated">
+    <svg class="svg-fulscreen fire-ainmated">
+      <filter id="filter-fire-animated">
+        <feTurbulence
+          type="fractalNoise" baseFrequency="0.035 0.008" numOctaves="1" seed="2" stitchTiles="stitch"
+          result="turbulence"
+          class="fire-ainmated__turbulence"/>
+    
+        <feTurbulence
+          type="fractalNoise" baseFrequency="0.035 0.007" numOctaves="1" seed="1" stitchTiles="stitch"
+          result="turbulence1"/>
+    
+        <feMerge result="merge">
+          <feMergeNode in="turbulence1"/>
+          <feMergeNode in="turbulence"/>
+        </feMerge>
+    
+        <feColorMatrix
+          type="saturate" values="9"
+          in="merge"
+          result="colormatrix"/>
+    
+        <feColorMatrix
+          type="matrix"
+          values="1 0 0 0 0
+                  0 1 0 0 0
+                  0 0 1 0 0
+                  0 0 0 10 0"
+          in="colormatrix"
+          result="colormatrix1"/>
+    
+        <feDisplacementMap
+          scale="40" xChannelSelector="R" yChannelSelector="G"
+           in="colormatrix1" in2="colormatrix"
+           result="displacementMap"/>
+    
+        <feComposite
+          operator="in"
+          in="displacementMap" in2="SourceAlpha"
+          result="composite1"/>
+      </filter>
+    
+      <use
+        xlink:href="#symb-big-example-text"
+        filter="url(#filter-fire-animated)"/>
+    </svg>
+    
+    <script type="text/javascript">
+      (function() {
+        var requestAnimationFrame = window.requestAnimationFrame
+          || window.mozRequestAnimationFrame
+          || window.webkitRequestAnimationFrame
+          || window.msRequestAnimationFrame;
+    
+        const primitiveToAnimate = document.querySelector('.fire-ainmated__turbulence');
+        let isRunning = false;
+    
+        function changeProp() {
+          if(!isRunning) {
+            return;
+          }
+    
+          const newValue = primitiveToAnimate.seed.baseVal + 2;
+          primitiveToAnimate.setAttribute('seed', newValue);
+    
+          setTimeout(() => {
+            requestAnimationFrame(changeProp);
+          }, 75);
+        }
+    
+        // ------------------------------
+    
+        window['fire-animated'] = {
+          play: () => {
+            if(!isRunning) {
+              isRunning = true;
+              requestAnimationFrame(changeProp);
+            }
+          },
+          pause: () => {
+            isRunning = false;
+          }
+        };
+      })(window);
+    </script>
+    
+  </section>
+
+  <section class="slide slide--dark slide--section-title">
+    <h2>Практическое применение</h2>
+  </section>
+
+  <section class="slide slide--dark" data-animation="motion-blur">
+    <div class="demo demo--full demo--motion-blur motion-blur">
+      <svg class="svg-defs">
+        <filter
+          id="filter-motion-blur"
+          x="-20%" y="-20%" width="140%" height="140%"  color-interpolation-filters="sRGB">
+          <feOffset dx="30" dy="0"/>
+    
+          <feGaussianBlur stdDeviation="50 0"/>
+        </filter>
+      </svg>
+    
+      <ul class="gallery">
+        <li class="gallery__item">
+          <img
+            class="gallery__img"
+            src="./assets/img/gallery/yoksel-zok-420552-unsplash.jpg"
+          />
+        </li>
+        <li class="gallery__item">
+          <img
+            class="gallery__img"
+            src="./assets/img/gallery/yoksel-zok-420835-unsplash.jpg"
+          />
+        </li>
+        <li class="gallery__item">
+          <img
+            class="gallery__img"
+            src="./assets/img/gallery/yoksel-zok-447582-unsplash.jpg"
+          />
+        </li>
+        <li class="gallery__item">
+          <img
+            class="gallery__img"
+            src="./assets/img/gallery/yoksel-zok-426181-unsplash.jpg"
+          />
+        </li>
+        <li class="gallery__item">
+          <img
+            class="gallery__img"
+            src="./assets/img/gallery/yoksel-zok-1056711-unsplash.jpg"
+          />
+        </li>
+        <li class="gallery__item">
+          <img
+            class="gallery__img"
+            src="./assets/img/gallery/yoksel-zok-1058458-unsplash.jpg"
+          />
+        </li>
+      </ul>
+    </div>
+    
+    <script type="text/javascript">
+      (function() {
+        var requestAnimationFrame = window.requestAnimationFrame
+          || window.mozRequestAnimationFrame
+          || window.webkitRequestAnimationFrame
+          || window.msRequestAnimationFrame;
+    
+        const demo = document.querySelector('.motion-blur');
+        const slideWidth = demo.clientWidth;
+        const gallery = document.querySelector('.gallery');
+        const galleryItemsSrc = document.querySelectorAll('.gallery__item');
+        const galleryItems = [...galleryItemsSrc];
+        const firstItem = galleryItems[0].cloneNode(true);
+        let counter = 0;
+        let duration = 2000;
+        const transitionClass = 'gallery--moving';
+        let isRunning = false;
+    
+        gallery.appendChild(firstItem);
+        galleryItems.push(firstItem);
+        const max = galleryItems.length;
+    
+        galleryItems.forEach(item => {
+          item.style.width = `${slideWidth}px`;
+        });
+    
+        function changeProp() {
+          if(!isRunning) {
+            return;
+          }
+    
+          let currentDuration = duration;
+          let translateSize = 0;
+    
+          if(counter < max) {
+            translateSize = - slideWidth * counter;
+    
+            if(counter > 0) {
+              gallery.classList.add(transitionClass);
+            }
+            else {
+              currentDuration = 0;
+            }
+    
+            counter++;
+          }
+          else {
+            counter = 0;
+            currentDuration = 0;
+          }
+    
+          gallery.style.transform = `translateX(${translateSize}px)`;
+          setTimeout(() => {
+            requestAnimationFrame(changeProp);
+          }, currentDuration);
+        }
+    
+        gallery.addEventListener('transitionend', function() {
+          gallery.classList.remove(transitionClass);
+        });
+    
+        // ------------------------------
+    
+        window['motion-blur'] = {
+          play: () => {
+            if(!isRunning) {
+              isRunning = true;
+              requestAnimationFrame(changeProp);
+            }
+          },
+          pause: () => {
+            isRunning = false;
+          }
+        };
+      })(window);
+    </script>
+    
+  </section>
+
+  <section class="slide slide--dark">
+    <div
+      class="demo demo--full partial-blur">
+      <svg class="svg-fulscreen">
+        <filter id="filter-partial-blur" x="0%" y="0%" width="100%" height="100%" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+          <feImage
+            xlink:href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='500' height='500'%3E%3Crect x='0' y='0' width='100%25' height='100%25' fill='teal'/%3E%3C/svg%3E%0A" preserveAspectRatio="xMidYMid slice"
+            x="0" y="0"  width="5%" height="100%"
+            result="image"
+            class="partial-blur__rect"/>
+    
+          <feGaussianBlur
+            stdDeviation="10" width="100%"
+            in="SourceGraphic" edgeMode="none"
+            result="blur"/>
+    
+          <feComposite
+            operator="in"
+            in="blur" in2="image"
+            result="composite"/>
+    
+          <feDropShadow
+            stdDeviation="10" in="composite" dx="0" dy="0" flood-color="#000000" flood-opacity="1" x="0%" y="0%" width="100%" height="100%"
+            result="dropShadow"/>
+    
+          <feMerge result="merge">
+            <feMergeNode in="SourceGraphic"/>
+            <feMergeNode in="dropShadow"/>
+            <feMergeNode in="composite"/>
+          </feMerge>
+        </filter>
+    
+        <image
+          xlink:href="./assets/img/gallery/yoksel-zok-1058458-unsplash.jpg"
+          preserveAspectRatio="xMidYMid slice"
+          filter="url(#filter-partial-blur)"
+          x="0" y="0" width="100%" height="100%"/>
+      </svg>
+    
+    
+      <div class="partial-blur__sidebar">
+        <button class="partial-blur__button">
+          <svg class="partial-blur__svg">
+            <use
+              class="partial-blur__icon-burger"
+              xlink:href="#icon-burger"/>
+            <use
+              class="partial-blur__icon-cross"
+              xlink:href="#icon-cross"/>
+          </svg>
+        </button>
+    
+        <ul class="partial-blur__list">
+          <li><a>Услуги</a></li>
+          <li><a>Вопросы и ответы</a></li>
+          <li><a>Контакты</a></li>
+          <li><a>О компании</a></li>
+        </ul>
+      </div>
+    </div>
+    
+    <script type="text/javascript">
+      (function() {
+        var requestAnimationFrame = window.requestAnimationFrame
+          || window.mozRequestAnimationFrame
+          || window.webkitRequestAnimationFrame
+          || window.msRequestAnimationFrame;
+    
+        const button = document.querySelector('.partial-blur__button');
+        const sidebar = document.querySelector('.partial-blur__sidebar');
+        const classSidebarOpened = 'partial-blur__sidebar--opened';
+        const shapeRect = document.querySelector('.partial-blur__rect');
+        const list = document.querySelector('.partial-blur__list');
+    
+        let isOpened = false;
+        let isRunning = false;
+        const duration = 25; //ms
+    
+        const minSize = 5;
+        const maxSize = 25; //%
+        const step = 5;
+        const steps = (maxSize - minSize) / step;
+        let counter = 1;
+    
+        button.addEventListener('click', () => {
+          if(!isRunning) {
+            isRunning = true;
+            requestAnimationFrame(changeProp);
+          }
+        })
+    
+        function changeProp() {
+          if(!isRunning) {
+            return;
+          }
+    
+          if(isOpened) {
+            counter--;
+          }
+          else {
+            counter++;
+          }
+          let nextSizeValue = counter * step + minSize;
+    
+          shapeRect.setAttribute('width', `${nextSizeValue}%`);
+          sidebar.style.width = `${nextSizeValue}%`;
+    
+          if(counter > steps) {
+            isRunning = false;
+            isOpened = true;
+            sidebar.classList.add(classSidebarOpened);
+            return;
+          }
+          else if(counter == 0) {
+            counter = 1;
+            isRunning = false;
+            isOpened = false;
+            sidebar.classList.remove(classSidebarOpened);
+            return;
+          }
+    
+          setTimeout(() => {
+            requestAnimationFrame(changeProp);
+          }, duration);
+        }
+      })(window);
+    </script>
+    
+  </section>
+
+  <section class="slide slide--dark slide--pixelated" data-animation="pixelated-gallery">
+    <svg class="svg-fulscreen pixelated">
+      <filter id="filter-pixels" x="-20%" y="-20%" width="140%" height="140%" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+        <feFlood
+          flood-color="green" flood-opacity="1" x="0" y="0" width="1" height="1"
+          result="flood"/>
+    
+        <feComposite
+          operator="in" x="0" y="0" width="6" height="6"
+          class="pixelated__composite"
+          in="SourceAlpha" in2="flood"
+          result="composite"/>
+    
+        <feTile
+          x="0" y="0" width="1300" height="800"
+          in="composite"
+          result="tile1"/>
+    
+        <feComposite
+          in="SourceGraphic" in2="tile1"
+          operator="in"
+          result="composite1"/>
+    
+        <feMorphology
+          operator="dilate" radius="2"
+          class="pixelated__morphology"
+          in="composite1"
+          result="morphology"/>
+    
+        <feColorMatrix
+          class="pixelated__colormatrix"
+          type="saturate" values="0" x="0%" y="0%" width="100%" height="100%"
+          in="morphology"
+          result="colormatrix"/>
+      </filter>
+    
+      <image
+        class="pixelated__image"
+        x="0" y="0" width="100%" height="100%" preserveAspectRatio="xMidYMid slice"
+        xlink:href="./assets/img/gallery/yoksel-zok-420552-unsplash.jpg"
+        filter="url(#filter-pixels)"></image>
+    </svg>
+    
+    <script type="text/javascript">
+      (function() {
+        var requestAnimationFrame = window.requestAnimationFrame
+          || window.mozRequestAnimationFrame
+          || window.webkitRequestAnimationFrame
+          || window.msRequestAnimationFrame;
+    
+        const images = [
+          './assets/img/gallery/yoksel-zok-420552-unsplash.jpg',
+          './assets/img/gallery/yoksel-zok-420835-unsplash.jpg',
+          './assets/img/gallery/yoksel-zok-447582-unsplash.jpg',
+          './assets/img/gallery/yoksel-zok-426181-unsplash.jpg',
+          './assets/img/gallery/yoksel-zok-1056711-unsplash.jpg',
+          './assets/img/gallery/yoksel-zok-1058458-unsplash.jpg',
+        ];
+    
+        const composite = document.querySelector('.pixelated__composite');
+        const morphology = document.querySelector('.pixelated__morphology');
+        const image = document.querySelector('.pixelated__image');
+        const colormatrix = document.querySelector('.pixelated__colormatrix');
+    
+        const min = 5;
+        const max = 20;
+        let counter = min;
+        const step = 4;
+        let direction = 'forward';
+        let imagesCounter = 0;
+        const pausa = 2; // seconds
+        let isRunning = false;
+    
+        function changeProp() {
+          if(!isRunning) {
+            return;
+          }
+    
+          if (counter <= min) {
+            image.setAttribute('filter', 'url(#filter-pixels)');
+          }
+    
+          if (direction === 'forward') {
+            counter += step;
+    
+            if (counter >= max) {
+              direction = 'backward';
+              image.setAttribute('xlink:href', images[imagesCounter]);
+              imagesCounter++;
+    
+              if(imagesCounter === images.length) {
+                imagesCounter = 0;
+              }
+            }
+          }
+          else {
+            counter -= step;
+    
+            if (counter <= min) {
+              direction = 'forward';
+            }
+          }
+          composite.setAttribute('width', counter);
+          composite.setAttribute('height', counter);
+          morphology.setAttribute('radius', Math.ceil(counter / 1.95));
+          colormatrix.setAttribute('values', 1 - counter / max);
+    
+          let time = 150;
+    
+          if (counter <= min) {
+            time = pausa * 1000;
+            image.setAttribute('filter', 'none');
+          }
+    
+          setTimeout(() => {
+            requestAnimationFrame(changeProp);
+          }, time);
+        }
+    
+        // ------------------------------
+    
+        window['pixelated-gallery'] = {
+          play: () => {
+            if(!isRunning) {
+              isRunning = true;
+              requestAnimationFrame(changeProp);
+            }
+          },
+          pause: () => {
+            isRunning = false;
+          }
+        };
+      })(window);
+    </script>
+    
+
+    <div class="slide__tip">
+      Источник идеи: <a href="https://codepen.io/eeeps/pen/dqepQm">variable pixelation — Eric Portis</a>
+    </div>
+  </section>
+
+  <section class="slide slide--dark">
+    <svg class="svg-fulscreen">
+      <filter id="filter-paper" x="0%" y="0%" width="140%" height="140%" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+        <feTurbulence
+          type="fractalNoise" baseFrequency="0.05 0.05" numOctaves="5" seed="1" stitchTiles="stitch"
+          result="turbulence"/>
+    
+        <feDiffuseLighting
+          surfaceScale="0.2" diffuseConstant="3.2" lighting-color="#ffffff"
+          in="turbulence"
+          result="diffuseLighting">
+          <feDistantLight
+            azimuth="150" elevation="16"/>
+        </feDiffuseLighting>
+      </filter>
+    
+      <rect
+        x="0" y="0" width="100%" height="100%"
+        fill="white"
+        filter="url(#filter-paper)"/>
+    </svg>
+    
+
+    <div class="slide__tip">
+      Источник идеи: <a href="https://vimeo.com/283654933">Sara Soueidan — The Crash Course</a>
+    </div>
+  </section>
+
+  <section class="slide slide--dark">
+    <svg class="svg-fulscreen">
+      <filter
+        id="filter-watercolor"
+        x="0%" y="0%" width="100%" height="100%" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+        <feTurbulence
+          type="fractalNoise" baseFrequency="0.05 0.05" numOctaves="5" seed="1" stitchTiles="stitch"
+          result="turbulence"/>
+    
+        <feDiffuseLighting
+          surfaceScale="0.5" diffuseConstant="3.2" lighting-color="#ffffff" in="turbulence"
+          result="diffuseLighting">
+          <feDistantLight
+            azimuth="150" elevation="16"/>
+        </feDiffuseLighting>
+    
+        <feTurbulence
+          type="fractalNoise" baseFrequency="0.011 0.004" numOctaves="2" seed="3" stitchTiles="noStitch"
+          result="turbulence1"/>
+    
+        <feColorMatrix
+          type="saturate" values="3"
+          in="turbulence1"
+          result="colormatrix"/>
+    
+        <feColorMatrix
+          type="matrix"
+          values="2 0 0 0 0
+                  0 1.5 0 0 0
+                  0 0 2 0 0
+                  0 0 0 2 0"
+          in="colormatrix"
+          result="colormatrix1"/>
+    
+        <feBlend
+          mode="multiply"
+          in="diffuseLighting" in2="colormatrix1"
+          result="blend"/>
+      </filter>
+    
+      <rect
+        x="0" y="0" width="100%" height="100%"
+        fill="white"
+        filter="url(#filter-watercolor)"/>
+    </svg>
+    
+  </section>
+
+  <section class="slide slide--dark">
+    <svg class="svg-fulscreen" viewBox="0 0 1024 658">
+      <filter
+        id="filter-paper-photo"
+        x="0" y="0" width="100%" height="100%" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+        <feTurbulence
+          type="fractalNoise" baseFrequency="0.05 0.05" numOctaves="5" seed="1" stitchTiles="stitch"
+          result="turbulence"/>
+    
+        <feDiffuseLighting
+          surfaceScale="0.2" diffuseConstant="3.2" lighting-color="#ffffff"
+          in="turbulence"
+          result="diffuseLighting">
+          <feDistantLight
+            azimuth="150" elevation="16"/>
+        </feDiffuseLighting>
+    
+        <feBlend
+          mode="multiply"
+          in="diffuseLighting" in2="SourceGraphic"
+          result="blend"/>
+      </filter>
+    
+      <image
+        xlink:href="./assets/img/simon-matzinger-320332-unsplash.jpg"
+        x="0%" y="0%"
+        width="100%" height="100%"
+        preserveAspectRatio="xMidYMin meet"
+        filter="url(#filter-paper-photo)"
+      />
+    </svg>
+    
+
+    <div class="slide__tip slide__tip--paper-photo">
+      Фото: <a href="https://unsplash.com/photos/twukN12EN7c">Simon Matzinger on Unsplash</a>
+    </div>
+  </section>
+
+  <section class="slide">
+    <svg class="svg-fulscreen">
+      <filter
+        id="filter-liquid"
+        x="-20%" y="-20%" width="140%" height="140%" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="linearRGB">
+        <feTurbulence
+          type="turbulence" baseFrequency="0.02 0.02" numOctaves="1" seed="4" stitchTiles="stitch" x="0%" y="0%" width="100%" height="100%"
+          result="turbulence"/>
+    
+        <feColorMatrix
+          type="matrix"
+          values="1 0 0 0 0
+                  0 1 0 0 0
+                  0 0 1 0 0
+                  0 0 0 40 -7"
+          x="0%" y="0%" width="100%" height="100%" in="turbulence"
+          result="colormatrix"/>
+    
+        <feFlood
+          flood-color="black" flood-opacity="1" x="0%" y="0%" width="100%" height="100%"
+          result="flood"/>
+    
+        <feComposite
+          operator="in" x="0%" y="0%" width="100%" height="100%"
+          in="flood" in2="colormatrix"
+          result="composite5"/>
+    
+        <feGaussianBlur
+          stdDeviation="7 9"
+          edgeMode="none"
+          in="composite5"
+          result="blur"/>
+    
+        <feComposite
+          operator="in"
+          in="blur" in2="SourceAlpha"
+          result="composite"/>
+    
+        <feSpecularLighting
+          surfaceScale="20" specularConstant="3" specularExponent="40" lighting-color="#ffffff" in="composite"
+          x="0%" y="0%" width="100%" height="100%"
+          result="specularLighting">
+          <feDistantLight
+            azimuth="45" elevation="150"/>
+        </feSpecularLighting>
+    
+        <feComposite
+          operator="in"
+          in="specularLighting" in2="composite5"
+          result="composite1"/>
+    
+        <feComposite
+          operator="in"
+          in="composite1" in2="SourceGraphic"
+          result="composite2"/>
+    
+        <feComposite
+          operator="in"
+          in="composite5" in2="SourceGraphic"
+          result="composite4"/>
+    
+        <feMerge result="merge">
+          <feMergeNode in="composite4"/>
+          <feMergeNode in="composite2"/>
+        </feMerge>
+      </filter>
+    
+      <rect
+        x="0" y="0" width="100%" height="100%"
+        fill="white"
+        filter="url(#filter-liquid)"/>
+    </svg>
+    
+  </section>
+
+  <section class="slide">
+    <svg class="svg-fulscreen">
+      <filter id="filter-net" x="-20%" y="-20%" width="140%" height="140%" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="linearRGB">
+        <feTurbulence
+          type="turbulence" baseFrequency="0.05 0.02" numOctaves="1" seed="4" stitchTiles="stitch" x="0%" y="0%" width="100%" height="100%"
+          result="turbulence"/>
+    
+        <feColorMatrix
+          type="matrix"
+          values="1 0 0 0 0
+                  0 1 0 0 0
+                  0 0 1 0 0
+                  0 0 0 -70 10"
+          x="0%" y="0%" width="100%" height="100%"
+          in="turbulence"
+          result="colormatrix"/>
+    
+        <feFlood
+          flood-color="black" flood-opacity="1" x="0%" y="0%" width="100%" height="100%"
+          result="flood"/>
+    
+        <feComposite
+          operator="in"
+          x="0%" y="0%" width="100%" height="100%"
+          in="flood" in2="colormatrix"
+          result="composite5"/>
+      </filter>
+    
+      <rect
+        x="0" y="0" width="100%" height="100%"
+        fill="white"
+        filter="url(#filter-net)"/>
+    </svg>
+    
+  </section>
+
+  <section class="slide slide--dark slide--net-and-lights">
+    <svg class="svg-fulscreen">
+      <filter
+        id="filter-net-and-lights"
+        x="-20%" y="-20%" width="140%" height="140%" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="linearRGB">
+        <feTurbulence
+          type="turbulence" baseFrequency="0.012 0.005" numOctaves="1" seed="1" stitchTiles="noStitch"
+          result="turbulence"/>
+    
+        <feOffset
+          dx="76" dy="15" x="0%" y="0%" width="100%" height="100%"
+          in="turbulence"
+          result="offset"/>
+    
+        <feColorMatrix
+          type="matrix"
+          values="0 0 0 0 0
+                  0 0 0 0 0
+                  0 0 0 0 0
+                  0 0 0 37 -4"
+          in="turbulence"
+          result="colormatrix"/>
+    
+        <feTurbulence
+          type="fractalNoise" baseFrequency="0.005 0.005" numOctaves="3" seed="2" stitchTiles="noStitch"
+          result="turbulence1"/>
+    
+        <feColorMatrix
+          type="matrix"
+          values="1 0 0 0 0
+                  0 1 0 0 0
+                  0 0 1 0 0
+                  0 0 0 100 -10"
+          in="turbulence1"
+          result="colormatrix1"/>
+    
+        <feColorMatrix
+          type="saturate" values="5"
+          in="colormatrix1"
+          result="colormatrix2"/>
+    
+        <feComposite
+          operator="in"
+          in="colormatrix2" in2="colormatrix"
+          result="composite"/>
+    
+        <feComposite
+          operator="in"
+          in="composite" in2="SourceAlpha"
+          result="composite1"/>
+    
+        <feComponentTransfer
+          in="composite1"
+          result="componentTransfer">
+          <feFuncR
+            type="table" tableValues="1 0 -1"/>
+          <feFuncG
+            type="table" tableValues="1 0 1"/>
+          <feFuncB
+            type="table" tableValues="1 -1 1"/>
+          <feFuncA
+            type="identity"/>
+        </feComponentTransfer>
+      </filter>
+    
+      <rect
+        x="0" y="0" width="100%" height="100%"
+        fill="black"
+        filter="url(#filter-net-and-lights)"/>
+    </svg>
+    
+  </section>
+
+  <section class="slide slide--dark slide--pool-animated" data-animation="animated-pool">
+    <div class="demo demo--full demo--pool demo--filtered distortion-waves">
+      <svg class="svg-fulscreen">
+        <filter
+          id="filter-distortion-waves"
+          x="-20%" y="-20%" width="140%" height="140%" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="linearRGB">
+          <feTurbulence
+            type="fractalNoise" baseFrequency="0.01 0.03" numOctaves="2" seed="1" stitchTiles="stitch"
+            class="distortion-waves__turbulence"
+            result="turbulence"/>
+    
+          <feDisplacementMap
+            in="SourceGraphic" in2="turbulence"
+            scale="30"
+            xChannelSelector="R" yChannelSelector="A"
+            class="distortion-waves__map"
+            result="displacementMap"
+          />
+    
+          <feMerge result="merge">
+            <feMergeNode in="displacementMap"/>
+          </feMerge>
+        </filter>
+    
+        <!-- Duplicate image in background to prevent holes on edges </svg>.of filtered image -->
+        <image
+          xlink:href="./assets/img/pool.jpg"
+          x="0%" y="0%" width="100%" height="100%"
+          preserveAspectRatio="xMidYMin slice"
+        />
+        <image
+          xlink:href="./assets/img/pool.jpg"
+          x="0%" y="0%" width="100%" height="100%"
+          preserveAspectRatio="xMidYMin slice"
+          filter="url(#filter-distortion-waves)"
+        />
+      </svg>
+    
+      <div
+        class="demo-text distortion-waves__text">
+        Бульк!
+      </div>
+    </div>
+    
+    <script type="text/javascript">
+      (function() {
+        var requestAnimationFrame = window.requestAnimationFrame
+          || window.mozRequestAnimationFrame
+          || window.webkitRequestAnimationFrame
+          || window.msRequestAnimationFrame;
+    
+        const mapToAnimate = document.querySelector('.distortion-waves__map');
+        const turbToAnimate = document.querySelector('.distortion-waves__turbulence');
+        let isRunning = false;
+    
+        let direction = 'forward';
+        const minScale = 5;
+        const maxScale = 30;
+        let currentValScale = minScale;
+        const stepScale = 2;
+        const steps = (maxScale - minScale) / stepScale;
+        const stepsMiddle = Math.round(steps / 2);
+    
+        const minFreqX = 0.0025;
+        const maxFreqX = 0.01;
+        const minFreqY = 0.005;
+        const maxFreqY = 0.03;
+        let currentValFreqX = minFreqX;
+        let currentValFreqY = minFreqY;
+    
+        const stepFreqX = (maxFreqX - minFreqX) / steps;
+        const stepFreqY = (maxFreqY - minFreqY) / steps;
+    
+        let currentStep = 1;
+    
+        function changeProp() {
+          if(!isRunning) {
+            return;
+          }
+    
+          let duration = 200;
+          let koeff = currentStep / steps;
+    
+          if(direction === 'forward') {
+            currentValScale += stepScale + koeff;
+            currentValFreqX = currentStep * stepFreqX + minFreqX;
+            currentValFreqY = currentStep * stepFreqY + minFreqY;
+    
+            if(currentValScale >= maxScale) {
+              direction = 'backward';
+            }
+            currentStep++;
+          }
+          else {
+            currentValScale -= stepScale - koeff;
+            currentValFreqX = currentStep * stepFreqX + minFreqX;
+            currentValFreqY = currentStep * stepFreqY + minFreqY;
+    
+            if (currentValScale <= minScale) {
+              direction = 'forward';
+            }
+    
+            currentStep--;
+    
+            currentStep = Math.abs(currentStep);
+          }
+    
+          mapToAnimate.setAttribute('scale', currentValScale);
+          turbToAnimate.setAttribute('seed', turbToAnimate.seed.animVal + 1);
+          turbToAnimate.setAttribute('baseFrequency', `${currentValFreqX} ${currentValFreqY}`);
+    
+          setTimeout(() => {
+            requestAnimationFrame(changeProp);
+          }, duration);
+        }
+    
+        // ------------------------------
+    
+        window['animated-pool'] = {
+          play: () => {
+            if(!isRunning) {
+              isRunning = true;
+              requestAnimationFrame(changeProp);
+            }
+          },
+          pause: () => {
+            isRunning = false;
+          }
+        };
+      })(window);
+    </script>
+    
+  </section>
+
+  <section class="slide slide--dark">
+    <div class="demo demo--full demo--distortion-circles distortion-circles">
+      <svg class="svg-defs">
+        <filter
+          id="filter-distortion-circles"
+          x="-20%" y="-20%" width="140%" height="140%" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+          <feImage
+            xlink:href="./assets/img/waves.png" x="-100" y="-175" width="550" height="550"
+            class="distortion-circles__image"
+            result="waves-image"/>
+    
+          <feDisplacementMap
+            in="SourceGraphic" in2="waves-image"
+            scale="0"
+            xChannelSelector="R" yChannelSelector="B"
+            class="distortion-circles__map"
+            result="displacementMap"/>
+    
+          <feComposite
+            operator="in"
+            in2="waves-image"
+            result="composite"/>
+    
+          <feMerge result="merge">
+            <feMergeNode in="SourceGraphic"/>
+            <feMergeNode in="composite"/>
+          </feMerge>
+        </filter>
+      </svg>
+    
+      <button
+        class="distortion-circles__button"
+        style="filter: url(#filter-distortion-circles)">
+        Click me
+      </button>
+    </div>
+    
+    <script type="text/javascript">
+      (function() {
+        var requestAnimationFrame = window.requestAnimationFrame
+          || window.mozRequestAnimationFrame
+          || window.webkitRequestAnimationFrame
+          || window.msRequestAnimationFrame;
+    
+        const wavesImage = document.querySelector('.distortion-circles__image');
+        const wavesMap = document.querySelector('.distortion-circles__map');
+        const wavesTarget = document.querySelector('.distortion-circles__button');
+    
+        let isRunning = false;
+        const duration = 50;
+        const minSize = 100;
+        const maxSize = 1500;
+        const step = 25;
+        const steps = (maxSize - minSize) / step;
+    
+        const maxScale = 20;
+        const scaleStep = maxScale / steps;
+    
+        let event = null;
+    
+        wavesTarget.addEventListener('click', (ev) => {
+          if(!isRunning) {
+            isRunning = true;
+            requestAnimationFrame(changeProp);
+          }
+    
+          wavesImage.setAttribute('width', minSize);
+          wavesImage.setAttribute('height', minSize);
+          wavesMap.setAttribute('scale', maxScale);
+    
+          event = ev;
+        })
+    
+        function changeProp() {
+          if(!isRunning) {
+            return;
+          }
+    
+          const nextSizeValue = wavesImage.width.animVal.value + step;
+          const nextHalfValue = nextSizeValue / 2;
+          const nextScalevalue = wavesMap.scale.animVal - scaleStep;
+    
+          wavesImage.setAttribute('width', nextSizeValue);
+          wavesImage.setAttribute('height', nextSizeValue);
+    
+          wavesImage.setAttribute('x', event.layerX - nextHalfValue);
+          wavesImage.setAttribute('y', event.layerY - nextHalfValue);
+          wavesMap.setAttribute('scale', nextScalevalue);
+    
+          if(nextSizeValue > maxSize) {
+            isRunning = false;
+            return;
+          }
+    
+          setTimeout(() => {
+            requestAnimationFrame(changeProp);
+          }, duration);
+        }
+      })(window);
+    </script>
+    
+    <div class="slide__tips-wrapper">
+      <div class="slide__tip">Firefox, Chrome 73</div>
+      <div class="slide__tip">Идея фильтра: <a href="https://tympanus.net/Development/DistortedButtonEffects/">Distorted
+  Button Effects</a></div>
+  </div>
+  </section>
+
+  <section class="slide slide--dark slide--burning-text" data-animation="burning-text">
+    <svg class="svg-fulscreen burning-text">
+      <filter id="filter-burning-text"
+        x="-20%" y="-20%" width="140%" height="140%" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+        <feGaussianBlur
+          stdDeviation="0 10" in="SourceGraphic" edgeMode="none"
+          result="blur"/>
+    
+        <feTurbulence
+          type="turbulence" baseFrequency="0.06 0.015" numOctaves="2" seed="2" stitchTiles="stitch" x="0%" y="0%" width="100%" height="100%"
+          class="burning-text__turbulence"
+          result="turbulence1"/>
+    
+        <feColorMatrix
+          type="matrix"
+          values="1 0 0 0 0
+            0 1 0 0 0
+            0 0 1 0 0
+            0 0 0 5 -1"
+          x="0%" y="0%" width="100%" height="100%"
+          in="turbulence1"
+          result="colormatrix2"/>
+    
+        <feColorMatrix
+          type="matrix"
+          values="1 0 0 0 0
+            0 1 0 0 0
+            0 0 1 0 0
+            0 0 0 3 0"
+          x="0%" y="0%" width="100%" height="100%"
+          in="turbulence1"
+          result="colormatrix3"/>
+    
+        <feComposite
+          operator="in"
+          in="colormatrix2" in2="blur"
+          result="composite1"/>
+    
+        <feFlood
+          flood-color="#ff853a" flood-opacity="1"
+          result="flood"/>
+    
+        <feComposite
+          operator="in"
+          in="flood" in2="composite1"
+          result="composite2"/>
+    
+        <feOffset
+          dx="-5" dy="-15"
+          in="composite2"
+          result="offset1"/>
+    
+        <feMorphology
+          operator="dilate" radius="0 5"
+          in="offset1"
+          result="morphology"/>
+    
+        <feDisplacementMap
+          scale="20" xChannelSelector="G" yChannelSelector="B"
+          in="morphology" in2="turbulence1"
+          result="displacementMap1"/>
+    
+        <feComposite
+          operator="out"
+          in="displacementMap1" in2="colormatrix3"
+          result="composite3"/>
+    
+        <feFlood
+          flood-color="#ff8422" flood-opacity="1"
+          result="flood2"/>
+    
+        <feComposite
+          operator="in"
+          in="flood2" in2="composite3"
+          result="composite4"/>
+    
+        <feMerge result="merge3">
+          <feMergeNode in="displacementMap1"/>
+          <feMergeNode in="SourceGraphic"/>
+          <feMergeNode in="composite4"/>
+        </feMerge>
+      </filter>
+    
+      <use
+        xlink:href="#symb-big-example-text"
+        filter="url(#filter-burning-text)"/>
+    </svg>
+    
+    <script type="text/javascript">
+      (function() {
+        var requestAnimationFrame = window.requestAnimationFrame
+          || window.mozRequestAnimationFrame
+          || window.webkitRequestAnimationFrame
+          || window.msRequestAnimationFrame;
+    
+        const primitiveToAnimate = document.querySelector('.burning-text__turbulence');
+        let isRunning = false;
+    
+        function changeProp() {
+          if(!isRunning) {
+            return;
+          }
+    
+          const newValue = primitiveToAnimate.seed.baseVal + 2;
+          primitiveToAnimate.setAttribute('seed', newValue);
+    
+          setTimeout(() => {
+            requestAnimationFrame(changeProp);
+          }, 130);
+        }
+    
+        // ------------------------------
+    
+        window['burning-text'] = {
+          play: () => {
+            if(!isRunning) {
+              isRunning = true;
+              requestAnimationFrame(changeProp);
+            }
+          },
+          pause: () => {
+            isRunning = false;
+          }
+        };
+      })(window);
+    </script>
+    
+  </section>
+
+  <section class="slide slide--dark">
+    <svg class="svg-fulscreen">
+      <filter
+        id="filter-drips"
+        x="-20%" y="-20%" width="140%" height="140%" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+        <feGaussianBlur
+          stdDeviation="0 10" edgeMode="none"
+          in="SourceGraphic"
+          result="blur"/>
+    
+        <feTurbulence
+          type="turbulence" baseFrequency="0.075 0.005" numOctaves="1" seed="2" stitchTiles="stitch"
+          result="turbulence"/>
+    
+        <feComposite
+           operator="in"
+          in="turbulence" in2="blur"
+          result="composite"/>
+    
+        <feColorMatrix
+          type="matrix"
+          values="1 0 0 0 0
+                  0 1 0 0 0
+                  0 0 1 0 0
+                  0 0 0 100 -10"
+          in="composite"
+          result="colormatrix"/>
+    
+        <feMorphology
+          operator="dilate" radius="0 20"
+          in="colormatrix"
+          result="morphology"/>
+    
+        <feOffset
+          dx="0" dy="35"
+          in="morphology"
+          result="offset"/>
+    
+        <feComposite
+          operator="xor"
+          in="offset" in2="SourceGraphic"
+          result="composite1"/>
+    
+        <feFlood
+          flood-color="greenyellow" flood-opacity="1"
+          result="flood"/>
+    
+        <feComposite
+          operator="in"
+          in="flood" in2="composite1"
+          result="composite2"/>
+      </filter>
+    
+      <use
+        xlink:href="#symb-big-example-text"
+        filter="url(#filter-drips)"/>
+    </svg>
+    
+  </section>
+
+  <section class="slide slide--dark">
+    <svg class="svg-fulscreen brain">
+      <filter
+        id="filter-brain"
+        x="-20%" y="-20%" width="140%" height="140%" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse">
+        <feGaussianBlur
+          stdDeviation="5 5" edgeMode="none"
+          in="SourceGraphic"
+          result="blur"/>
+    
+        <feTurbulence
+          type="turbulence" baseFrequency="0.03 0.03" numOctaves="2" seed="2" stitchTiles="stitch"
+          result="turbulence"/>
+    
+        <feComposite
+          operator="in"
+          in="turbulence" in2="blur"
+          result="composite"/>
+    
+        <feColorMatrix
+          type="matrix"
+          values="1 0 0 0 0
+                  0 1 0 0 0
+                  0 0 1 0 0
+                  0 0 0 40 -5"
+          in="composite"
+          result="colormatrix"/>
+    
+        <feSpecularLighting
+          surfaceScale="60" specularConstant="2" specularExponent="35" kernelUnitLength="10 10" lighting-color="#fff"
+          in="turbulence"
+          result="specularLighting">
+          <feDistantLight
+            azimuth="68" elevation="240"/>
+        </feSpecularLighting>
+    
+        <feFlood
+          flood-color="hsl(350,100%,73%)" flood-opacity="1"
+          result="flood"/>
+    
+        <feComposite
+          operator="in"
+          in="flood" in2="colormatrix"
+          result="composite2"/>
+    
+        <feComposite
+          operator="in"
+          in="specularLighting" in2="colormatrix"
+          result="composite1"/>
+    
+        <feMerge result="merge1">
+          <feMergeNode in="composite2"/>
+          <feMergeNode in="composite1"/>
+        </feMerge>
+      </filter>
+    
+      <use
+        class="brain__text"
+        xlink:href="#symb-big-example-text"
+        filter="url(#filter-brain)"/>
+    </svg>
+    
+  </section>
+
+  <section class="slide slide--dark">
+    <div class="columns columns--full-page gradient-map-images">
+      <figure class="column">
+        <img
+          src="./assets/img/berries.jpeg"
+          class="demo--filtered next"
+          style="filter: url('#filter-sepia-G-color')">
+
+      </figure>
+      <figure class="column">
+        <img
+          src="./assets/img/berries.jpeg"
+          class="demo--filtered next"
+          style="filter: url('#filter-yellow-blue-acid-B-overlay')">
+      </figure>
+      <figure class="column">
+        <img
+          src="./assets/img/berries.jpeg"
+          class="demo--filtered next"
+          style="filter: url('#filter-sea')">
+      </figure>
+    </div>
+
+    <div class="slide__tip next">
+      Идея фильтра: <a href="https://css-tricks.com/using-svg-to-create-a-duotone-image-effect/">Using SVG to Create a Duotone Effect on Images</a>
+    </div>
+  </section>
+
+  <section class="slide slide--dark">
+    <video
+      class="cover video demo--filtered"
+      style="filter: url('#spring-grass-lighten')"
+      src="./assets/animation/jellyfish.mp4" loop="" muted="" playsinline="">
+    </video>
+
+    <div class="slide__tip">
+      Источник видео: <a href="https://pixabay.com/en/videos/jellyfish-jellyfishes-glide-water-4294/">pixabay.com</a>
+    </div>
+  </section>
+
+  <section class="slide slide--dark">
+    <video
+      class="cover video demo--filtered"
+      style="filter: url('#x-rays-normal')"
+      src="./assets/animation/jellyfish.mp4" loop="" muted="" playsinline="">
+    </video>
+  </section>
+
+  <section class="slide slide--dark">
+    <video
+      class="cover video demo--filtered"
+      style="filter: url('#golden-x-rays-difference')"
+      src="./assets/animation/jellyfish.mp4" loop="" muted="" playsinline="">
+    </video>
+  </section>
+
+  <section class="slide slide--dark">
+    <video
+      class="cover video demo--filtered"
+      style="filter: url('#filter-glass-lighthouse')"
+      src="./assets/animation/jellyfish.mp4" loop="" muted="" playsinline="">
+    </video>
+    <div class="slide__tip">Firefox, Chrome 73</div>
+  </section>
+
+  <section class="slide slide--dark slide--section-title">
+    <h2>Плюсы, минусы, подводные камни</h2>
+  </section>
+
+  <section class="slide">
+    <h3>Минусы</h3>
+
+    <ul>
+      <li class="next">для поддержки в IE/Edge контент нужно завернуть в SVG</li>
+      <li class="next">отдельные баги в разных браузерах</li>
+      <li class="next">тормозные анимации для крупных элементов</li>
+      <li class="next">сложность</li>
+    </ul>
+  </section>
+
+  <section class="slide slide--code-from-spec">
+<pre class="next"><code class="language-js">Nx (x,y) = - surfaceScale * FACTORx *
+  (Kx(0,0)*I(x-dx,y-dy) + Kx(1,0)*I(x,y-dy) + Kx(2,0)*I(x+dx,y-dy) +
+  Kx(0,1)*I(x-dx,y)    + Kx(1,1)*I(x,y)    + Kx(2,1)*I(x+dx,y)    +
+  Kx(0,2)*I(x-dx,y+dy) + Kx(1,2)*I(x,y+dy) + Kx(2,2)*I(x+dx,y+dy))
+Ny (x,y) = - surfaceScale * FACTORy *
+  (Ky(0,0)*I(x-dx,y-dy) + Ky(1,0)*I(x,y-dy) + Ky(2,0)*I(x+dx,y-dy) +
+  Ky(0,1)*I(x-dx,y)    + Ky(1,1)*I(x,y)    + Ky(2,1)*I(x+dx,y)    +
+  Ky(0,2)*I(x-dx,y+dy) + Ky(1,2)*I(x,y+dy) + Ky(2,2)*I(x+dx,y+dy))
+Nz (x,y) = 1.0
+
+N = (Nx, Ny, Nz) / Norm((Nx,Ny,Nz))</code></pre>
+  </section>
+
+  <section class="slide slide--dark">
+    <video class="cover video" src="./assets/animation/sad-panda.mp4" loop="" muted="" playsinline="">
+    </video>
+  </section>
+
+  <section class="slide slide--code-from-spec">
+<pre><code class="language-js">&lt;feFuncR type="table"
+  tableValues="1 0"/></code></pre>
+
+<pre class="next"><code class="language-js">&lt;feFuncR type="linear"
+  slope="1"
+  intercept="0"/></code></pre>
+
+<pre class="next"><code class="language-js">&lt;feFuncR type="gamma"
+  amplitude="1"
+  exponent="1"
+  offset="0"/></code></pre>
+  </section>
+
+  <section class="slide">
+    <h3>Плюсы</h3>
+
+    <ul>
+      <li class="next">широкие возможности</li>
+      <li class="next">хорошая поддержка браузерами</li>
+      <li class="next">интерактивность</li>
+      <li class="next">доступность контента, к которому применен фильтр</li>
+    </ul>
+  </section>
+
+  <section class="slide slide--dark slide--section-title">
+    <h2>Инструменты</h2>
+  </section>
+
+  <section class="slide slide--tiny-padding">
+    <a href="https://yoksel.github.io/svg-filters/">SVG Filters</a> — редактор с готовыми фильтрами и документацией
+    <img src="./assets/img/services/svg-filters.png" class="screen">
+  </section>
+
+  <section class="slide slide--tiny-padding">
+    <a href="http://filtered.sourceforge.net/">filtered</a> — десктопное приложение для редактирования фильтров
+    <img src="./assets/img/services/filtered.png" class="screen">
+  </section>
+
+  <section class="slide slide--tiny-padding">
+    <a href="https://kazzkiq.github.io/svg-color-filter/">SVG Color Filter Playground</a> — эксперименты с feColorMatrix
+    <img src="./assets/img/services/feColorMatrix-playground.png" class="screen">
+  </section>
+
+  <section class="slide slide--tiny-padding">
+    <a href="http://andresgalante.com/RGBAtoFeColorMatrix/">RGBA to feColorMatrix</a> — создание фильтра на основе оттенка
+    <img src="./assets/img/services/RGBA-to-feColorMatrix.png" class="screen">
+  </section>
+
+  <section class="slide slide--tiny-padding">
+    <a href="https://yoksel.github.io/svg-gradient-map/">SVG Gradient Map Filter</a> — конструктор Gradient Map фильтров
+    <img src="./assets/img/services/svg-gradient-map.jpg" class="screen">
+  </section>
+
+  <section class="slide slide--dark" data-animation="heart">
+    <svg class="svg-fulscreen heart" viewBox="0 0 800 600">
+      <filter
+        id="filter-gooey"
+        x="-20%" y="-20%" width="140%" height="140%" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+        <feGaussianBlur
+          stdDeviation="10"
+          x="0%" y="0%" width="100%" height="100%"
+          edgeMode="none"
+          in="SourceGraphic"
+          result="blur"/>
+    
+        <feColorMatrix
+          type="matrix"
+          values="1 0 0 0 0
+                  0 1 0 0 0
+                  0 0 1 0 0
+                  0 0 0 19 -10"
+          x="0%" y="0%" width="100%" height="100%"
+          in="blur"
+          result="colormatrix"/>
+      </filter>
+    
+      <filter
+        id="filter-heart-blur"
+        x="-20%" y="-20%" width="140%" height="140%" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+    
+        <feGaussianBlur
+          stdDeviation="1" x="0%" y="0%" width="100%" height="100%" edgeMode="none"
+          result="blur"/>
+    
+        <feTurbulence
+          type="fractalNoise" baseFrequency="0.05" numOctaves="1" seed="1" stitchTiles="stitch"
+          result="turbulence"/>
+    
+        <feDisplacementMap
+          scale="50"
+          xChannelSelector="R" yChannelSelector="A"
+          class="distortion-waves__map"
+          in="blur" in2="turbulence"
+          result="displacementMap"/>
+      </filter>
+    
+      <mask id="mask"
+        maskUnits="objectBoundingBox">
+         <g filter="url(#filter-gooey)" fill="white">
+          <circle r="50" cx="50%" cy="50%" class="heart__mask-circle"/>
+          <circle r="50" cx="50%" cy="50%" class="heart__mask-circle"/>
+          <circle r="50" cx="50%" cy="50%" class="heart__mask-circle"/>
+          <circle r="50" cx="50%" cy="50%" class="heart__mask-circle"/>
+          <circle r="50" cx="50%" cy="50%" class="heart__mask-circle"/>
+          <circle r="50" cx="50%" cy="50%" class="heart__mask-circle"/>
+          <circle r="50" cx="50%" cy="50%" class="heart__mask-circle"/>
+          <circle r="50" cx="50%" cy="50%" class="heart__mask-circle"/>
+          <circle r="50" cx="50%" cy="50%" class="heart__mask-circle"/>
+          <circle r="50" cx="50%" cy="50%" class="heart__mask-circle"/>
+          <circle r="50" cx="50%" cy="50%" class="heart__mask-circle"/>
+          <circle r="50" cx="50%" cy="50%" class="heart__mask-circle"/>
+          <circle r="50" cx="50%" cy="50%" class="heart__mask-circle"/>
+          <circle r="50" cx="50%" cy="50%" class="heart__mask-circle"/>
+          <circle r="50" cx="50%" cy="50%" class="heart__mask-circle"/>
+          <circle r="50" cx="50%" cy="50%" class="heart__mask-circle"/>
+          <circle r="50" cx="50%" cy="50%" class="heart__mask-circle"/>
+          <circle r="50" cx="50%" cy="50%" class="heart__mask-circle"/>
+          <circle r="50" cx="50%" cy="50%" class="heart__mask-circle"/>
+          <circle r="50" cx="50%" cy="50%" class="heart__mask-circle"/>
+          <circle r="50" cx="50%" cy="50%" class="heart__mask-circle"/>
+          <circle r="50" cx="50%" cy="50%" class="heart__mask-circle"/>
+          <circle r="50" cx="50%" cy="50%" class="heart__mask-circle"/>
+          <circle r="50" cx="50%" cy="50%" class="heart__mask-circle"/>
+          <circle r="50" cx="50%" cy="50%" class="heart__mask-circle"/>
+          <circle r="50" cx="50%" cy="50%" class="heart__mask-circle"/>
+          <circle r="50" cx="50%" cy="50%" class="heart__mask-circle"/>
+          <circle r="50" cx="50%" cy="50%" class="heart__mask-circle"/>
+          <circle r="50" cx="50%" cy="50%" class="heart__mask-circle"/>
+          <circle r="50" cx="50%" cy="50%" class="heart__mask-circle"/>
+          <circle r="50" cx="50%" cy="50%" class="heart__mask-circle"/>
+          <circle r="50" cx="50%" cy="50%" class="heart__mask-circle"/>
+          <circle r="50" cx="50%" cy="50%" class="heart__mask-circle"/>
+          <circle r="50" cx="50%" cy="50%" class="heart__mask-circle"/>
+          <circle r="50" cx="50%" cy="50%" class="heart__mask-circle"/>
+          <circle r="50" cx="50%" cy="50%" class="heart__mask-circle"/>
+          <circle r="50" cx="50%" cy="50%" class="heart__mask-circle"/>
+          <circle r="50" cx="50%" cy="50%" class="heart__mask-circle"/>
+    
+          <svg viewBox="0 0 400 600" preserveAspectRatio="xMidYMid meet">
+            <svg viewBox="0 0 400 329" preserveAspectRatio="xMidYMid meet">
+              <path d="M199.707062,328.924193 C306.1279,286.264571 371.305914,223.788236 395.241104,141.495189 C411.10542,86.9511117 389.083175,0.0955637558 302.216473,9.38591108e-05 C244.305338,-0.0635527387 210.135535,32.2422428 199.707062,96.9174805 C192.538642,32.3058894 159.023393,0.031917158 99.1613163,0.0955637558 C9.36820111,0.191033652 -11.317258,86.0580148 5.18615059,141.495189 C29.2163218,222.215775 94.0566258,284.692109 199.707062,328.924193 Z"></path>
+            </svg>
+          </svg>
+        </g>
+      </mask>
+    
+      <g
+        mask="url(#mask)"
+        filter="url(#filter-heart-blur)"
+        fill="none"
+        stroke-width="500"
+        stroke-dasharray="52 260"
+        class="heart__fill-circles-group">
+        <circle r="250" cx="50%" cy="50%"
+          stroke="crimson"
+          class="heart__fill-circle"/>
+        <circle r="250" cx="50%" cy="50%"
+          stroke="gold"
+          stroke-dashoffset="52"
+          class="heart__fill-circle"/>
+        <circle r="250" cx="50%" cy="50%"
+          stroke="lightseagreen"
+          stroke-dashoffset="104"
+          class="heart__fill-circle"/>
+        <circle r="250" cx="50%" cy="50%"
+          stroke="yellowgreen"
+          stroke-dashoffset="156"
+          class="heart__fill-circle"/>
+        <circle r="250" cx="50%" cy="50%"
+          stroke="teal"
+          stroke-dashoffset="208"
+          class="heart__fill-circle"/>
+        <circle r="250" cx="50%" cy="50%"
+          stroke="orange"
+          stroke-dashoffset="260"
+          class="heart__fill-circle"/>
+        <circle r="600" cx="50%" cy="50%"
+          stroke-width="0"
+          fill="transparent"/>
+      </g>
+    </svg>
+    
+    <script type="text/javascript">
+      (function() {
+        var requestAnimationFrame = window.requestAnimationFrame
+          || window.mozRequestAnimationFrame
+          || window.webkitRequestAnimationFrame
+          || window.msRequestAnimationFrame;
+    
+        const circlesGroup = document.querySelector('.heart__fill-circles-group');
+        const circlesElems = document.querySelectorAll('.heart__mask-circle');
+        const circles = [];
+        let isRunning = false;
+        const groupAnimatedClass = 'heart__fill-circles-group--animated';
+    
+        const pathLength = 350;
+        const maxSteps = 80;
+        const maxR = 50;
+        const rStep = maxR / maxSteps;
+    
+        const Circle = function({elem, direction, delay}) {
+          this.elem = elem;
+          this.direction = direction;
+          this.delay = delay;
+    
+          this.resetValues();
+        };
+    
+        Circle.prototype.resetValues = function() {
+          const angleDeg = Math.round(Math.random() * 360);
+          const angleRad = angleDeg * Math.PI/180;
+    
+          this.x = pathLength * Math.sin(angleRad); // c * sin(B)
+          this.y = pathLength * Math.cos(angleRad); // c * cos(B)
+          this.xStep = this.x / maxSteps;
+          this.yStep = this.y / maxSteps;
+          this.currentStep = maxSteps / 4.5;
+        };
+    
+        Circle.prototype.changeProp = function() {
+          if(!isRunning) {
+            return;
+          }
+    
+          let x = this.xStep * this.currentStep;
+          let y = this.yStep * this.currentStep;
+    
+          if(this.direction === 1) {
+            // right top
+            y *= -1;
+          }
+          else if(this.direction === 2) {
+            // right bottom
+            // make nothing
+          }
+          else if(this.direction === 3) {
+            // left bottom
+            x *= -1;
+          }
+          else if(this.direction === 4) {
+            // left top
+            x *= -1;
+            y *= -1;
+          }
+    
+          this.currentStep++;
+    
+          this.elem.setAttribute('transform', `translate(${x}, ${y})`);
+          this.elem.setAttribute('r', (Math.abs(maxSteps - this.currentStep)) * rStep);
+    
+          if(this.currentStep >= maxSteps) {
+            this.resetValues();
+          }
+    
+          requestAnimationFrame(() => {
+            this.changeProp();
+          });
+        };
+    
+        function setInitial() {
+          circles.forEach(circle => {
+            circle.elem.setAttribute('transform', `translate(0, 0)`);
+            circle.elem.setAttribute('r', maxR);
+          })
+        };
+    
+        const runAnimation = () => {
+          circles.forEach((circle, i) => {
+            setTimeout(() => {
+              circle.resetValues();
+              circle.changeProp();
+            }, circle.delay);
+          })
+        };
+    
+        const prepareCircles = () => {
+          circlesElems.forEach((elem, i) => {
+            const direction = Math.floor(Math.random() * 4) + 1;
+            const circle = new Circle({
+              elem,
+              direction,
+              delay: i * 100
+            });
+    
+            circles.push(circle);
+          });
+        }
+    
+        // ------------------------------
+    
+        prepareCircles();
+    
+        window['heart'] = {
+          play: () => {
+            if(!isRunning) {
+              requestAnimationFrame(runAnimation);
+              isRunning = true;
+              circlesGroup.classList.add(groupAnimatedClass)
+            }
+          },
+          pause: () => {
+            setInitial();
+            isRunning = false;
+            circlesGroup.classList.remove(groupAnimatedClass)
+          }
+        };
+      })(window);
+    </script>
+    
+  </section>
+
+  <section class="slide slide--dark slide--section-title">
+    <h2>Ссылки</h2>
+  </section>
+
+  <section class="slide slide--links">
+    <h3>Спецификация</h3>
+
+    <a href="https://www.w3.org/TR/filter-effects-1/">Filter Effects Module Level 1</a>
+  </section>
+
+  <section class="slide slide--links slide--tiny-font">
+    <h3>Статьи</h3>
+    <ul>
+      <li>
+        <a href="https://www.smashingmagazine.com/2015/05/why-the-svg-filter-is-awesome/">The Art Of SVG Filters And Why It Is Awesome</a> — Dirk Weber
+      </li>
+      <li>
+        <a href="https://tympanus.net/codrops/2019/01/15/svg-filters-101/">SVG Filters 101</a> — серия от Sara Soueidan
+      </li>
+      <li>
+        <a href="https://tympanus.net/codrops/2016/05/11/distorted-button-effects-with-svg-filters/">Distorted Button Effects with SVG Filters</a> — Adrien Denat
+      </li>
+      <li>
+        <a href="https://css-tricks.com/look-svg-light-source-filters/">A Look at SVG Light Source Filters</a> — Joni Trythall
+      </li>
+      <li>
+        <a href="https://alistapart.com/article/finessing-fecolormatrix">Finessing `feColorMatrix`</a> — Una Kravets
+      </li>
+      <li>
+        <a href="https://css-tricks.com/using-svg-to-create-a-duotone-image-effect/">Using SVG to Create a Duotone Effect on Images</a> — Lentie Ward
+      </li>
+      <li>
+        <a href="https://vanseodesign.com/web-design/svg-filter-primitives-feconvolvematrix/">Add Bevel And Emboss Effects With The feConvolveMatrix Filter Primitive</a> — Steven Bradley
+      </li>
+      <li>
+        <a href="https://html5.by/blog/svg-filters/">SVG-фильтры. Основные понятия и типы. Применение к изображениям для создания графических эффектов.</a> — Дмитрий Дудин
+      </li>
+    </ul>
+  </section>
+
+  <section class="slide slide--links slide--tiny-font">
+    <h3>Демо</h3>
+    <ul>
+      <li>
+        <a href="https://codepen.io/collection/ArxmyO/">Sophisticated Filter Effects</a> — коллекция от Dirk Weber
+      </li>
+      <li>
+        <a href="https://codepen.io/collection/XoMLeR/">SVG Filters</a> — коллекция от Gabi
+      </li>
+      <li>
+        <a href="https://codepen.io/collection/DJWqEo/">SVG Filters Experiments</a> — коллекция моих демо
+      </li>
+      <li>
+        <a href="https://yoksel.github.io/svg-filters/#/presets/">SVG Filters: presets</a> — набор готовых фильтров в конструкторе
+      </li>
+    </ul>
+  </section>
+
+  <section class="slide slide--section-title slide--questions">
+    <h2>Вопросы?</h2>
+
+    <div class="slides-link next">
+      Слайды: <a href="http://yoksel.github.io/svg-filters-02-2018">yoksel.github.io/svg-filters-02-2018</a>
+    </div>
+  </section>
+
+  <div class="progress"></div>
+
+  <script src="shower/shower.min.js"></script>
+  <script src="assets/js/prism.js"></script>
+  <script src="assets/js/highlightLines.js"></script>
+  <script src="assets/js/autorun.js"></script>
+  <script src="assets/js/primitives-switcher.js"></script>
+</body>
+</html>

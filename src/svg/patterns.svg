@@ -1,0 +1,52 @@
+<svg class="svg-defs">
+  <symbol id="triangles">
+    <polygon fill="lightseagreen" points="115 0 230 230 0 230"/>
+    <polygon fill="gold" points="115.5 55 203 230 28 230"/>
+    <polygon fill="tomato" points="115.5 99 181 230 50 230"/>
+    <polygon fill="crimson" points="115 147 156 230 74 230"/>
+    <polygon fill="purple" points="115.5 188 136 230 95 230"/>
+  </symbol>
+
+  <pattern id="pattern-rhombs"
+   patternUnits="userSpaceOnUse"
+    width="101.5" height="200.5" viewBox="0 0 203 401">
+   <g transform="translate(-114 -232)">
+    <g transform="translate(0 200)">
+      <use xlink:href="#triangles"></use>
+      <g transform="matrix(1 0 0 -1 0 459)">
+        <use xlink:href="#triangles"></use>
+      </g>
+    </g>
+    <g transform="translate(202 200)">
+      <use xlink:href="#triangles"></use>
+      <g transform="matrix(1 0 0 -1 0 459)">
+        <use xlink:href="#triangles"></use>
+      </g>
+    </g>
+    <g transform="translate(101)">
+      <use xlink:href="#triangles"></use>
+      <g transform="matrix(1 0 0 -1 0 459)">
+        <use xlink:href="#triangles"></use>
+      </g>
+    </g>
+    <g transform="translate(303)">
+      <use xlink:href="#triangles"></use>
+      <g transform="matrix(1 0 0 -1 0 459)">
+        <use xlink:href="#triangles"></use>
+      </g>
+    </g>
+    <g transform="translate(101 403)">
+      <use xlink:href="#triangles"></use>
+      <g transform="matrix(1 0 0 -1 0 459)">
+        <use xlink:href="#triangles"></use>
+      </g>
+    </g>
+    <g transform="translate(303 403)">
+      <use xlink:href="#triangles"></use>
+      <g transform="matrix(1 0 0 -1 0 459)">
+        <use xlink:href="#triangles"></use>
+      </g>
+    </g>
+  </g>
+</pattern>
+</svg>

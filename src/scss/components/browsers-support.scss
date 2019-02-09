@@ -1,0 +1,101 @@
+table.browsers-support {
+  position: relative;
+  margin-left: 0;
+  width: 100%;
+
+  TH:first-child,
+  TD:first-child {
+    padding-left: 0;
+    padding-right: 55px;
+    text-align: right;
+  }
+
+  TH:last-child,
+  TD:last-child {
+    padding-left: 55px;
+    padding-right: 0;
+  }
+
+  TH, TD {
+    width: 50%;
+    // background: none !important;
+    font-size: 22px;
+  }
+
+  TH {
+    padding-bottom: .75em;
+  }
+
+  TD {
+    padding-top: .5em;
+    padding-bottom: 1em;
+    // display: flex;
+    // align-items: flex-start;
+    line-height: 1.4;
+  }
+}
+
+.browsers-support__tr {
+  position: relative;
+  display: flex;
+
+  &:last-child TD {
+    padding-bottom: 0;
+  }
+}
+
+$minHue: 265;
+$maxHue: 320;
+$steps: 7;
+$stepHue: ($maxHue - $minHue) / $steps;
+
+$minLght: 40;
+$maxLght: 75;
+$stepLght: ($maxLght - $minLght) / $steps;
+
+@for $i from 1 through $steps {
+  .browsers-support__tr--has-year:nth-child(#{$steps}n + #{$i}) {
+
+    TD:first-child {
+      background-image: radial-gradient(circle at right, hsl($maxHue - $stepHue * $i, 100%, $maxLght - $stepLght * $i), transparent);
+      background-position: 100% 0 !important;
+    }
+    TD:last-child {
+      background-image: radial-gradient(circle at left, hsl($maxHue - $stepHue * $i, 100%, $maxLght - $stepLght * $i), transparent);
+      background-position: 0 0 !important;
+    }
+
+    &::after {
+      color: hsl($maxHue - $stepHue * $i, 100%, $maxLght - $stepLght * $i);
+    }
+  }
+}
+
+.browsers-support__tr--has-year {
+
+  &::after {
+    content: attr(data-year);
+    position: absolute;
+    left: 50%;
+    top: 0;
+    transform: translate(-50%, -50%);
+    padding: 0 15px;
+    background: #FFF;
+    line-height: 1.4;
+    font-size: 1.5em;
+  }
+
+  TD {
+    background-size: 60% 3px !important;
+    background-repeat: no-repeat !important;
+  }
+
+  TD:empty {
+    background: none !important;
+  }
+
+
+  TD:first-child {
+    justify-content: flex-end;
+  }
+}

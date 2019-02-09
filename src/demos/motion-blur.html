@@ -1,0 +1,127 @@
+<div class="demo demo--full demo--motion-blur motion-blur">
+  <svg class="svg-defs">
+    <filter
+      id="filter-motion-blur"
+      x="-20%" y="-20%" width="140%" height="140%"  color-interpolation-filters="sRGB">
+      <feOffset dx="30" dy="0"/>
+
+      <feGaussianBlur stdDeviation="50 0"/>
+    </filter>
+  </svg>
+
+  <ul class="gallery">
+    <li class="gallery__item">
+      <img
+        class="gallery__img"
+        src="./assets/img/gallery/yoksel-zok-420552-unsplash.jpg"
+      />
+    </li>
+    <li class="gallery__item">
+      <img
+        class="gallery__img"
+        src="./assets/img/gallery/yoksel-zok-420835-unsplash.jpg"
+      />
+    </li>
+    <li class="gallery__item">
+      <img
+        class="gallery__img"
+        src="./assets/img/gallery/yoksel-zok-447582-unsplash.jpg"
+      />
+    </li>
+    <li class="gallery__item">
+      <img
+        class="gallery__img"
+        src="./assets/img/gallery/yoksel-zok-426181-unsplash.jpg"
+      />
+    </li>
+    <li class="gallery__item">
+      <img
+        class="gallery__img"
+        src="./assets/img/gallery/yoksel-zok-1056711-unsplash.jpg"
+      />
+    </li>
+    <li class="gallery__item">
+      <img
+        class="gallery__img"
+        src="./assets/img/gallery/yoksel-zok-1058458-unsplash.jpg"
+      />
+    </li>
+  </ul>
+</div>
+
+<script type="text/javascript">
+  (function() {
+    var requestAnimationFrame = window.requestAnimationFrame
+      || window.mozRequestAnimationFrame
+      || window.webkitRequestAnimationFrame
+      || window.msRequestAnimationFrame;
+
+    const demo = document.querySelector('.motion-blur');
+    const slideWidth = demo.clientWidth;
+    const gallery = document.querySelector('.gallery');
+    const galleryItemsSrc = document.querySelectorAll('.gallery__item');
+    const galleryItems = [...galleryItemsSrc];
+    const firstItem = galleryItems[0].cloneNode(true);
+    let counter = 0;
+    let duration = 2000;
+    const transitionClass = 'gallery--moving';
+    let isRunning = false;
+
+    gallery.appendChild(firstItem);
+    galleryItems.push(firstItem);
+    const max = galleryItems.length;
+
+    galleryItems.forEach(item => {
+      item.style.width = `${slideWidth}px`;
+    });
+
+    function changeProp() {
+      if(!isRunning) {
+        return;
+      }
+
+      let currentDuration = duration;
+      let translateSize = 0;
+
+      if(counter < max) {
+        translateSize = - slideWidth * counter;
+
+        if(counter > 0) {
+          gallery.classList.add(transitionClass);
+        }
+        else {
+          currentDuration = 0;
+        }
+
+        counter++;
+      }
+      else {
+        counter = 0;
+        currentDuration = 0;
+      }
+
+      gallery.style.transform = `translateX(${translateSize}px)`;
+      setTimeout(() => {
+        requestAnimationFrame(changeProp);
+      }, currentDuration);
+    }
+
+    gallery.addEventListener('transitionend', function() {
+      gallery.classList.remove(transitionClass);
+    });
+
+    // ------------------------------
+
+    window['motion-blur'] = {
+      play: () => {
+        if(!isRunning) {
+          isRunning = true;
+          requestAnimationFrame(changeProp);
+        }
+      },
+      pause: () => {
+        isRunning = false;
+      }
+    };
+  })(window);
+</script>

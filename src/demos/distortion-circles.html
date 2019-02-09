@@ -1,0 +1,99 @@
+<div class="demo demo--full demo--distortion-circles distortion-circles">
+  <svg class="svg-defs">
+    <filter
+      id="filter-distortion-circles"
+      x="-20%" y="-20%" width="140%" height="140%" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feImage
+        xlink:href="./assets/img/waves.png" x="-100" y="-175" width="550" height="550"
+        class="distortion-circles__image"
+        result="waves-image"/>
+
+      <feDisplacementMap
+        in="SourceGraphic" in2="waves-image"
+        scale="0"
+        xChannelSelector="R" yChannelSelector="B"
+        class="distortion-circles__map"
+        result="displacementMap"/>
+
+      <feComposite
+        operator="in"
+        in2="waves-image"
+        result="composite"/>
+
+      <feMerge result="merge">
+        <feMergeNode in="SourceGraphic"/>
+        <feMergeNode in="composite"/>
+      </feMerge>
+    </filter>
+  </svg>
+
+  <button
+    class="distortion-circles__button"
+    style="filter: url(#filter-distortion-circles)">
+    Click me
+  </button>
+</div>
+
+<script type="text/javascript">
+  (function() {
+    var requestAnimationFrame = window.requestAnimationFrame
+      || window.mozRequestAnimationFrame
+      || window.webkitRequestAnimationFrame
+      || window.msRequestAnimationFrame;
+
+    const wavesImage = document.querySelector('.distortion-circles__image');
+    const wavesMap = document.querySelector('.distortion-circles__map');
+    const wavesTarget = document.querySelector('.distortion-circles__button');
+
+    let isRunning = false;
+    const duration = 50;
+    const minSize = 100;
+    const maxSize = 1500;
+    const step = 25;
+    const steps = (maxSize - minSize) / step;
+
+    const maxScale = 20;
+    const scaleStep = maxScale / steps;
+
+    let event = null;
+
+    wavesTarget.addEventListener('click', (ev) => {
+      if(!isRunning) {
+        isRunning = true;
+        requestAnimationFrame(changeProp);
+      }
+
+      wavesImage.setAttribute('width', minSize);
+      wavesImage.setAttribute('height', minSize);
+      wavesMap.setAttribute('scale', maxScale);
+
+      event = ev;
+    })
+
+    function changeProp() {
+      if(!isRunning) {
+        return;
+      }
+
+      const nextSizeValue = wavesImage.width.animVal.value + step;
+      const nextHalfValue = nextSizeValue / 2;
+      const nextScalevalue = wavesMap.scale.animVal - scaleStep;
+
+      wavesImage.setAttribute('width', nextSizeValue);
+      wavesImage.setAttribute('height', nextSizeValue);
+
+      wavesImage.setAttribute('x', event.layerX - nextHalfValue);
+      wavesImage.setAttribute('y', event.layerY - nextHalfValue);
+      wavesMap.setAttribute('scale', nextScalevalue);
+
+      if(nextSizeValue > maxSize) {
+        isRunning = false;
+        return;
+      }
+
+      setTimeout(() => {
+        requestAnimationFrame(changeProp);
+      }, duration);
+    }
+  })(window);
+</script>

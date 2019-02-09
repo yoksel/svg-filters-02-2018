@@ -1,0 +1,21 @@
+<figure class="demo">
+  <figcaption class="demo__caption">Сужение: <b>feMorphology</b> erode</figcaption>
+
+  <svg class="demo__svg">
+    <filter
+      id="filter-morphology-erode"
+      x="-20%" y="-20%" width="140%" height="140%" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feMorphology
+        operator="erode" radius="5 3"
+        in="SourceGraphic"
+        result="morphology"/>
+    </filter>
+
+    <use
+      xlink:href="#symb-example-img"
+      filter="url(#filter-morphology-erode)"/>
+    <use
+      xlink:href="#symb-example-text"
+      filter="url(#filter-morphology-erode)"/>
+  </svg>
+</figure>

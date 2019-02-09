@@ -1,0 +1,22 @@
+<figure class="demo">
+  <figcaption class="demo__caption">Добавление картинки: <b>feImage</b></figcaption>
+
+  <svg class="demo__svg">
+    <filter
+      id="filter-image"
+      x="0" y="0" width="140%" height="140%" filterUnits="objectBoundingBox" primitiveUnits="objectBoundingBox" color-interpolation-filters="linearRGB">
+      <feImage
+        xlink:href="./assets/img/berries.jpeg"
+        x="0%" y="0%" width="100%" height="1" preserveAspectRatio="xMidYMid slice" crossOrigin="anonymous"
+        result="image"/>
+    </filter>
+
+    <use
+      xlink:href="#symb-example-img"
+      filter="url(#filter-image)"/>
+    <use
+      xlink:href="#symb-example-text"
+      filter="url(#filter-image)"/>
+  </svg>
+</figure>
+

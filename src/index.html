@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <title>SVG-фильтры</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="shower/themes/ribbon/styles/styles.css">
+  <link rel="stylesheet" href="assets/css/styles.css">
+   <style>
+    .shower {
+      --slide-ratio: calc(16 / 9);
+    }
+  </style>
+</head>
+<body class="shower list">
+  <!--=include ../src/svg/filters.svg -->
+  <!--=include ../src/svg/patterns.svg -->
+  <!--=include ../src/svg/symbols.svg -->
+
+  <header class="caption">
+    <h1>SVG-фильтры</h1>
+    <p>Бухвалова Юлия, LiveJournal</p>
+  </header>
+
+  <section class="slide about-slide"><div>
+    <h3>Бухвалова Юлия, <span class="about-slide__company">LiveJournal</span></h3>
+
+    <div class="columns">
+      <ul class="about-slide__list next">
+        <li><a href="https://github.com/yoksel/common-words">Common Words</a></li>
+        <li><a href="http://yoksel.github.io/html-tree/">HTML Tree</a></li>
+        <li><a href="http://yoksel.github.io/url-encoder/">URL-encoder для SVG</a></li>
+      </ul>
+
+      <ul class="about-slide__list next">
+        <li><a href="http://css.yoksel.ru/">css.yoksel.ru</a></li>
+        <li><a href="https://twitter.com/yoksel">@yoksel</a></li>
+        <li><a href="http://codepen.io/yoksel">codepen.io/yoksel</a></li>
+      </ul>
+
+      <img src="./assets/img/me.jpeg" class="about-slide__photo">
+    </div>
+  </div></section>
+
+  <section class="slide"><div>
+    <h3>Статьи</h3>
+
+    <ul class="about-slide__list">
+      <li><a href="http://css.yoksel.ru/svg-shapes/">SVG-фигуры и трансформации</a></li>
+      <li><a href="http://css.yoksel.ru/svg-fill-and-stroke/">SVG: заливка и обводка</a></li>
+      <li><a href="http://css.yoksel.ru/svg-sizes/">Размеры в SVG</a></li>
+      <li><a href="http://css.yoksel.ru/svg-masks/">SVG-маски</a></li>
+      <li><a href="http://css.yoksel.ru/svg-gradients/">SVG-градиенты</a></li>
+      <li><a href="http://css.yoksel.ru/svg-patterns/">SVG-паттерны</a></li>
+      <li class="next disabled">SVG-фильтры</li>
+    </ul>
+  </div></section>
+
+  <section class="slide slide--dark slide--section-title slide--main-title" data-animation="title-animated">
+    <!--=include ../src/components/title.html -->
+  </section>
+
+  <section class="slide slide--dark slide--section-title">
+    <h2>Немного истории</h2>
+  </section>
+
+  <section class="slide slide--tiny-padding">
+
+    <h2 class="next">Internet Explorer</h2>
+
+<pre class="next"><code class="language-css">.img {
+  filter:
+    progid:DXImageTransform.Microsoft.dropshadow(OffX=5, OffY=5,
+           Color="gray", Positive="true");
+}</code></pre>
+
+    <ul>
+      <li class="next">Появились в 1997 в IE 4.0</li>
+      <li class="next">Максимальная поддержка в IE 5.5</li>
+      <li class="next">Выпилены в 2012 в IE 10.0</li>
+    </ul>
+  </section>
+
+  <section class="slide slide--tiny-padding">
+    <!--=include ../src/components/history.html -->
+  </section>
+
+  <section class="slide slide--caniuse slide--tiny-padding">
+    <figure class="next">
+      <figcaption>SVG-фильтры</figcaption>
+      <img src="./assets/img/support/svg-filters.png">
+    </figure>
+
+    <figure class="next">
+      <figcaption>CSS-фильтры</figcaption>
+      <img src="./assets/img/support/css-filters.png">
+    </figure>
+  </section>
+
+  <section class="slide slide--dark slide--section-title">
+    <h2>Общие принципы работы</h2>
+  </section>
+
+  <section class="slide">
+    <h2>CSS</h2>
+
+<pre><code class="language-css">.img {
+
+}</code></pre>
+
+    <img
+      src="./assets/img/berries.jpeg"
+      class="demo-image">
+  </section>
+
+  <section class="slide">
+    <h2>CSS</h2>
+
+<pre><code class="language-css">.img {
+  filter: blur(5px);
+}</code></pre>
+
+    <img
+      src="./assets/img/berries.jpeg"
+      class="demo-image"
+      style="filter: blur(5px);">
+  </section>
+
+  <section class="slide">
+    <h2>CSS</h2>
+
+<pre><code class="language-css">.img {
+  filter: blur(5px) grayscale(.5);
+}</code></pre>
+
+    <img
+      src="./assets/img/berries.jpeg"
+      class="demo-image"
+      style="filter: blur(5px) grayscale(.5);">
+  </section>
+
+  <section class="slide">
+    <h2>SVG</h2>
+
+<pre class="next"><code class="language-svg">&lt;svg>
+  &lt;filter id="<mark>my-fancy-filter</mark>">
+
+  &lt;/filter>
+&lt;/svg></code></pre>
+  </section>
+
+  <section class="slide">
+    <h2>SVG</h2>
+
+<pre><code class="language-svg">&lt;svg>
+  &lt;filter id="my-fancy-filter">
+    &lt;feGaussianBlur
+      stdDeviation="5"/>
+  &lt;/filter>
+&lt;/svg></code></pre>
+  </section>
+
+  <section class="slide">
+    <h2>SVG</h2>
+
+<pre><code class="language-svg">&lt;svg>
+  &lt;filter id="my-fancy-filter">
+    &lt;feGaussianBlur
+      stdDeviation="5"/>
+    &lt;feColorMatrix
+      type="saturate" values=".5"/>
+  &lt;/filter>
+&lt;/svg></code></pre>
+  </section>
+
+  <section class="slide">
+    <h2>SVG</h2>
+<pre><code class="language-css">.img {
+
+}</code></pre>
+
+    <img
+      src="./assets/img/berries.jpeg"
+      class="demo-image">
+  </section>
+
+  <section class="slide">
+    <h2>SVG</h2>
+<pre><code class="language-css">.img {
+  filter: url("<mark>#my-fancy-filter</mark>");
+}</code></pre>
+
+<pre class="next"><code class="language-svg">&lt;svg>
+  &lt;circle
+    filter="url(#my-fancy-filter)"/>
+&lt;/svg></code></pre>
+
+    <img
+      src="./assets/img/berries.jpeg"
+      class="demo-image"
+      style="filter: url('#filter-blur-grayscale')">
+  </section>
+
+  <section class="slide">
+    <div class="columns columns--full-page">
+      <figure class="column next">
+        <img
+          src="./assets/img/berries.jpeg"
+          class="_demo-image"
+          style="filter: blur(5px) grayscale(.5);">
+
+        <figcaption class="column__title">CSS</figcaption>
+      </figure>
+      <figure class="column next">
+        <img
+          src="./assets/img/berries.jpeg"
+          class="_demo-image"
+          style="filter: url('#filter-blur-grayscale')">
+
+        <figcaption class="column__title">SVG</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="slide slide--dark slide--section-title">
+    <h2>Что умеют <nobr>SVG-фильтры?</nobr></h2>
+  </section>
+
+  <section class="slide">
+    <!--=include ../src/primitives/src.html -->
+  </section>
+
+  <section class="slide slide--section-title">
+    <h3>Добавление картинки или&nbsp;цвета</h3>
+  </section>
+
+  <section class="slide">
+    <!--=include ../src/primitives/flood.html -->
+  </section>
+
+  <section class="slide">
+    <!--=include ../src/primitives/image.html -->
+  </section>
+
+  <section class="slide">
+    <!--=include ../src/primitives/tile.html -->
+  </section>
+
+  <section class="slide">
+    <!--=include ../src/primitives/turbulence-noise.html -->
+  </section>
+
+  <section class="slide">
+    <!--=include ../src/primitives/turbulence.html -->
+  </section>
+
+  <section class="slide">
+    <!--=include ../src/primitives/turbulence-huge.html -->
+  </section>
+
+  <section class="slide">
+    <!--=include ../src/primitives/turbulence-stipes.html -->
+  </section>
+
+  <section class="slide slide--section-title">
+    <h3>Размытие и искажение</h3>
+  </section>
+
+  <section class="slide">
+    <!--=include ../src/primitives/blur.html -->
+  </section>
+
+  <section class="slide">
+    <!--=include ../src/primitives/blur-horizontal.html -->
+  </section>
+
+  <section class="slide">
+    <!--=include ../src/primitives/morphology-erode.html -->
+  </section>
+
+  <section class="slide">
+    <!--=include ../src/primitives/morphology-dilate.html -->
+  </section>
+
+  <section class="slide">
+    <!--=include ../src/primitives/offset.html -->
+  </section>
+
+  <section class="slide">
+    <!--=include ../src/primitives/displacementMap.html -->
+  </section>
+
+  <section class="slide">
+    <!--=include ../src/primitives/drop-shadow.html -->
+  </section>
+
+  <section class="slide slide--section-title">
+    <h3>Управление цветом</h3>
+  </section>
+
+  <section class="slide">
+    <!--=include ../src/primitives/blend.html -->
+  </section>
+
+  <section class="slide">
+    <!--=include ../src/primitives/blend-screen.html -->
+  </section>
+
+  <section class="slide">
+    <!--=include ../src/primitives/colormatrix-hueRotate.html -->
+  </section>
+
+  <section class="slide">
+    <!--=include ../src/primitives/colormatrix-lightness.html -->
+  </section>
+
+  <section class="slide">
+    <!--=include ../src/primitives/colormatrix-luminanceToAlpha.html -->
+  </section>
+
+  <section class="slide">
+    <!--=include ../src/primitives/componentTransfer.html -->
+  </section>
+
+  <section class="slide">
+    <!--=include ../src/primitives/convolveMatrix.html -->
+  </section>
+
+  <section class="slide slide--section-title">
+    <h3>Источники света</h3>
+  </section>
+
+  <section class="slide">
+    <!--=include ../src/primitives/specular-distantLight.html -->
+  </section>
+
+  <section class="slide">
+    <!--=include ../src/primitives/diffuseLighting-spotLight.html -->
+  </section>
+
+  <section class="slide slide--section-title">
+    <h3>Объединение слоёв</h3>
+  </section>
+
+  <section class="slide">
+    <!--=include ../src/primitives/merge.html -->
+  </section>
+
+  <section class="slide">
+    <!--=include ../src/primitives/composite.html -->
+  </section>
+
+  <section class="slide slide--dark slide--section-title">
+    <h3>Управление<br/>источниками</h3>
+  </section>
+
+  <section class="slide slide--section-title">
+    <h3>Атрибут <code>in</code></h3>
+  </section>
+
+  <section class="slide">
+<pre class="narrow-pre"><code class="language-svg">&lt;svg>
+  &lt;filter id="my-fancy-filter">
+    &lt;feGaussianBlur
+      stdDeviation="5"/>
+  &lt;/filter>
+&lt;/svg></code></pre>
+
+    <img
+      src="./assets/img/berries.jpeg"
+      class="demo-image"
+      style="filter: url('#filter-blur')">
+  </section>
+
+  <section class="slide">
+<pre class="narrow-pre"><code class="language-svg">&lt;svg>
+  &lt;filter id="my-fancy-filter">
+    &lt;feGaussianBlur
+      stdDeviation="5"/>
+    &lt;feColorMatrix
+      type="saturate" values=".5"/>
+  &lt;/filter>
+&lt;/svg></code></pre>
+
+    <img
+      src="./assets/img/berries.jpeg"
+      class="demo-image"
+      style="filter: url('#filter-blur-grayscale')">
+  </section>
+
+  <section class="slide">
+<pre class="narrow-pre" data-highlight-lines="5"><code class="language-svg">&lt;svg>
+  &lt;filter id="my-fancy-filter">
+    &lt;feGaussianBlur
+      stdDeviation="5"/>
+    &lt;feColorMatrix in="SourceGraphic"
+      type="saturate" values=".5"/>
+  &lt;/filter>
+&lt;/svg></code></pre>
+
+    <img
+      src="./assets/img/berries.jpeg"
+      class="demo-image"
+      style="filter: url('#filter-grayscale-no-blur')">
+  </section>
+
+  <section class="slide slide--section-title">
+    <h3>Атрибут <code>result</code></h3>
+  </section>
+
+  <section class="slide">
+    <pre class="narrow-pre"><code class="language-svg">&lt;filter id="wind">
+  &lt;feGaussianBlur stdDeviation="30"/>
+  &lt;feOffset dx="-30"/>
+&lt;/filter></code></pre>
+
+    <div class="demo-text demo-text--wind"
+      contenteditable spellcheck="false"
+      style="filter: url(#wind--no-source)">Wind</div>
+  </section>
+
+  <section class="slide">
+<pre class="narrow-pre" data-highlight-lines="3"><code class="language-svg">&lt;filter id="wind">
+  &lt;feGaussianBlur stdDeviation="30"/>
+  &lt;feOffset dx="-30" result="offset"/>
+&lt;/filter></code></pre>
+
+    <div class="demo-text demo-text--wind"
+      contenteditable spellcheck="false"
+      style="filter: url(#wind--no-source)">Wind</div>
+  </section>
+
+  <section class="slide">
+<pre class="narrow-pre" data-highlight-lines="4,7"><code class="language-svg">&lt;filter id="wind">
+  &lt;feGaussianBlur stdDeviation="30"/>
+  &lt;feOffset dx="-30" result="offset"/>
+  &lt;feMerge>
+
+
+  &lt;/feMerge>
+&lt;/filter></code></pre>
+
+    <div class="demo-text demo-text--wind"
+      contenteditable spellcheck="false"
+      style="filter: url(#wind--no-source)">Wind</div>
+  </section>
+
+  <section class="slide">
+<pre class="narrow-pre" data-highlight-lines="5"><code class="language-svg">&lt;filter id="wind">
+  &lt;feGaussianBlur stdDeviation="30"/>
+  &lt;feOffset dx="-30" result="offset"/>
+  &lt;feMerge>
+    &lt;feMergeNode in="offset"/>
+
+  &lt;/feMerge>
+&lt;/filter></code></pre>
+
+    <div class="demo-text demo-text--wind"
+      contenteditable spellcheck="false"
+      style="filter: url(#wind--no-source)">Wind</div>
+  </section>
+
+  <section class="slide">
+<pre class="narrow-pre" data-highlight-lines="6"><code class="language-svg">&lt;filter id="wind">
+  &lt;feGaussianBlur stdDeviation="30"/>
+  &lt;feOffset dx="-30" result="offset"/>
+  &lt;feMerge>
+    &lt;feMergeNode in="offset"/>
+    &lt;feMergeNode in="SourceGraphic"/>
+  &lt;/feMerge>
+&lt;/filter></code></pre>
+    <div class="demo-text demo-text--wind"
+      contenteditable spellcheck="false"
+      style="filter: url(#wind)">Wind</div>
+  </section>
+
+  <section class="slide slide--dark slide--section-title">
+    <h2>Сочетание примитивов</h2>
+  </section>
+
+  <section class="slide slide--dark">
+    <!--=include ../src/demos/broken.html -->
+  </section>
+
+  <section class="slide slide--dark slide--section-title">
+    <h2>Анимация</h2>
+  </section>
+
+  <section class="slide slide--dark">
+    <!--=include ../src/demos/fire-static.html -->
+  </section>
+
+  <section class="slide">
+<pre class="next"><code class="language-js">const primitive = document.querySelector('#turbulence');</code></pre>
+
+<pre class="next" data-highlight-lines="2"><code class="language-js">function changeProp() {
+  primitive.setAttribute('seed', primitive.seed.baseVal + 1);
+
+  setTimeout(() => {
+    requestAnimationFrame(changeProp);
+  }, 75);
+}</code></pre>
+
+<pre class="next"><code class="language-js">requestAnimationFrame(changeProp);</code></pre>
+  </section>
+
+  <section class="slide slide--dark slide--fire-animated" data-animation="fire-animated">
+    <!--=include ../src/demos/fire-animated.html -->
+  </section>
+
+  <section class="slide slide--dark slide--section-title">
+    <h2>Практическое применение</h2>
+  </section>
+
+  <section class="slide slide--dark" data-animation="motion-blur">
+    <!--=include ../src/demos/motion-blur.html -->
+  </section>
+
+  <section class="slide slide--dark">
+    <!--=include ../src/demos/partial-blur.html -->
+  </section>
+
+  <section class="slide slide--dark slide--pixelated" data-animation="pixelated-gallery">
+    <!--=include ../src/demos/pixelated-gallery.html -->
+
+    <div class="slide__tip">
+      Источник идеи: <a href="https://codepen.io/eeeps/pen/dqepQm">variable pixelation — Eric Portis</a>
+    </div>
+  </section>
+
+  <section class="slide slide--dark">
+    <!--=include ../src/demos/paper.html -->
+
+    <div class="slide__tip">
+      Источник идеи: <a href="https://vimeo.com/283654933">Sara Soueidan — The Crash Course</a>
+    </div>
+  </section>
+
+  <section class="slide slide--dark">
+    <!--=include ../src/demos/paper-watercolor.html -->
+  </section>
+
+  <section class="slide slide--dark">
+    <!--=include ../src/demos/paper-photo.html -->
+
+    <div class="slide__tip slide__tip--paper-photo">
+      Фото: <a href="https://unsplash.com/photos/twukN12EN7c">Simon Matzinger on Unsplash</a>
+    </div>
+  </section>
+
+  <section class="slide">
+    <!--=include ../src/demos/liquid.html -->
+  </section>
+
+  <section class="slide">
+    <!--=include ../src/demos/net.html -->
+  </section>
+
+  <section class="slide slide--dark slide--net-and-lights">
+    <!--=include ../src/demos/net-and-lights.html -->
+  </section>
+
+  <section class="slide slide--dark slide--pool-animated" data-animation="animated-pool">
+    <!--=include ../src/demos/distortion-waves.html -->
+  </section>
+
+  <section class="slide slide--dark">
+    <!--=include ../src/demos/distortion-circles.html -->
+    <div class="slide__tips-wrapper">
+      <div class="slide__tip">Firefox, Chrome 73</div>
+      <div class="slide__tip">Идея фильтра: <a href="https://tympanus.net/Development/DistortedButtonEffects/">Distorted
+  Button Effects</a></div>
+  </div>
+  </section>
+
+  <section class="slide slide--dark slide--burning-text" data-animation="burning-text">
+    <!--=include ../src/demos/burning-text.html -->
+  </section>
+
+  <section class="slide slide--dark">
+    <!--=include ../src/demos/drips.html -->
+  </section>
+
+  <section class="slide slide--dark">
+    <!--=include ../src/demos/brain.html -->
+  </section>
+
+  <section class="slide slide--dark">
+    <div class="columns columns--full-page gradient-map-images">
+      <figure class="column">
+        <img
+          src="./assets/img/berries.jpeg"
+          class="demo--filtered next"
+          style="filter: url('#filter-sepia-G-color')">
+
+      </figure>
+      <figure class="column">
+        <img
+          src="./assets/img/berries.jpeg"
+          class="demo--filtered next"
+          style="filter: url('#filter-yellow-blue-acid-B-overlay')">
+      </figure>
+      <figure class="column">
+        <img
+          src="./assets/img/berries.jpeg"
+          class="demo--filtered next"
+          style="filter: url('#filter-sea')">
+      </figure>
+    </div>
+
+    <div class="slide__tip next">
+      Идея фильтра: <a href="https://css-tricks.com/using-svg-to-create-a-duotone-image-effect/">Using SVG to Create a Duotone Effect on Images</a>
+    </div>
+  </section>
+
+  <section class="slide slide--dark">
+    <video
+      class="cover video demo--filtered"
+      style="filter: url('#spring-grass-lighten')"
+      src="./assets/animation/jellyfish.mp4" loop="" muted="" playsinline="">
+    </video>
+
+    <div class="slide__tip">
+      Источник видео: <a href="https://pixabay.com/en/videos/jellyfish-jellyfishes-glide-water-4294/">pixabay.com</a>
+    </div>
+  </section>
+
+  <section class="slide slide--dark">
+    <video
+      class="cover video demo--filtered"
+      style="filter: url('#x-rays-normal')"
+      src="./assets/animation/jellyfish.mp4" loop="" muted="" playsinline="">
+    </video>
+  </section>
+
+  <section class="slide slide--dark">
+    <video
+      class="cover video demo--filtered"
+      style="filter: url('#golden-x-rays-difference')"
+      src="./assets/animation/jellyfish.mp4" loop="" muted="" playsinline="">
+    </video>
+  </section>
+
+  <section class="slide slide--dark">
+    <video
+      class="cover video demo--filtered"
+      style="filter: url('#filter-glass-lighthouse')"
+      src="./assets/animation/jellyfish.mp4" loop="" muted="" playsinline="">
+    </video>
+    <div class="slide__tip">Firefox, Chrome 73</div>
+  </section>
+
+  <section class="slide slide--dark slide--section-title">
+    <h2>Плюсы, минусы, подводные камни</h2>
+  </section>
+
+  <section class="slide">
+    <h3>Минусы</h3>
+
+    <ul>
+      <li class="next">для поддержки в IE/Edge контент нужно завернуть в SVG</li>
+      <li class="next">отдельные баги в разных браузерах</li>
+      <li class="next">тормозные анимации для крупных элементов</li>
+      <li class="next">сложность</li>
+    </ul>
+  </section>
+
+  <section class="slide slide--code-from-spec">
+<pre class="next"><code class="language-js">Nx (x,y) = - surfaceScale * FACTORx *
+  (Kx(0,0)*I(x-dx,y-dy) + Kx(1,0)*I(x,y-dy) + Kx(2,0)*I(x+dx,y-dy) +
+  Kx(0,1)*I(x-dx,y)    + Kx(1,1)*I(x,y)    + Kx(2,1)*I(x+dx,y)    +
+  Kx(0,2)*I(x-dx,y+dy) + Kx(1,2)*I(x,y+dy) + Kx(2,2)*I(x+dx,y+dy))
+Ny (x,y) = - surfaceScale * FACTORy *
+  (Ky(0,0)*I(x-dx,y-dy) + Ky(1,0)*I(x,y-dy) + Ky(2,0)*I(x+dx,y-dy) +
+  Ky(0,1)*I(x-dx,y)    + Ky(1,1)*I(x,y)    + Ky(2,1)*I(x+dx,y)    +
+  Ky(0,2)*I(x-dx,y+dy) + Ky(1,2)*I(x,y+dy) + Ky(2,2)*I(x+dx,y+dy))
+Nz (x,y) = 1.0
+
+N = (Nx, Ny, Nz) / Norm((Nx,Ny,Nz))</code></pre>
+  </section>
+
+  <section class="slide slide--dark">
+    <video class="cover video" src="./assets/animation/sad-panda.mp4" loop="" muted="" playsinline="">
+    </video>
+  </section>
+
+  <section class="slide slide--code-from-spec">
+<pre><code class="language-js">&lt;feFuncR type="table"
+  tableValues="1 0"/></code></pre>
+
+<pre class="next"><code class="language-js">&lt;feFuncR type="linear"
+  slope="1"
+  intercept="0"/></code></pre>
+
+<pre class="next"><code class="language-js">&lt;feFuncR type="gamma"
+  amplitude="1"
+  exponent="1"
+  offset="0"/></code></pre>
+  </section>
+
+  <section class="slide">
+    <h3>Плюсы</h3>
+
+    <ul>
+      <li class="next">широкие возможности</li>
+      <li class="next">хорошая поддержка браузерами</li>
+      <li class="next">интерактивность</li>
+      <li class="next">доступность контента, к которому применен фильтр</li>
+    </ul>
+  </section>
+
+  <section class="slide slide--dark slide--section-title">
+    <h2>Инструменты</h2>
+  </section>
+
+  <section class="slide slide--tiny-padding">
+    <a href="https://yoksel.github.io/svg-filters/">SVG Filters</a> — редактор с готовыми фильтрами и документацией
+    <img src="./assets/img/services/svg-filters.png" class="screen">
+  </section>
+
+  <section class="slide slide--tiny-padding">
+    <a href="http://filtered.sourceforge.net/">filtered</a> — десктопное приложение для редактирования фильтров
+    <img src="./assets/img/services/filtered.png" class="screen">
+  </section>
+
+  <section class="slide slide--tiny-padding">
+    <a href="https://kazzkiq.github.io/svg-color-filter/">SVG Color Filter Playground</a> — эксперименты с feColorMatrix
+    <img src="./assets/img/services/feColorMatrix-playground.png" class="screen">
+  </section>
+
+  <section class="slide slide--tiny-padding">
+    <a href="http://andresgalante.com/RGBAtoFeColorMatrix/">RGBA to feColorMatrix</a> — создание фильтра на основе оттенка
+    <img src="./assets/img/services/RGBA-to-feColorMatrix.png" class="screen">
+  </section>
+
+  <section class="slide slide--tiny-padding">
+    <a href="https://yoksel.github.io/svg-gradient-map/">SVG Gradient Map Filter</a> — конструктор Gradient Map фильтров
+    <img src="./assets/img/services/svg-gradient-map.jpg" class="screen">
+  </section>
+
+  <section class="slide slide--dark" data-animation="heart">
+    <!--=include ../src/demos/fin.html -->
+  </section>
+
+  <section class="slide slide--dark slide--section-title">
+    <h2>Ссылки</h2>
+  </section>
+
+  <section class="slide slide--links">
+    <h3>Спецификация</h3>
+
+    <a href="https://www.w3.org/TR/filter-effects-1/">Filter Effects Module Level 1</a>
+  </section>
+
+  <section class="slide slide--links slide--tiny-font">
+    <h3>Статьи</h3>
+    <ul>
+      <li>
+        <a href="https://www.smashingmagazine.com/2015/05/why-the-svg-filter-is-awesome/">The Art Of SVG Filters And Why It Is Awesome</a> — Dirk Weber
+      </li>
+      <li>
+        <a href="https://tympanus.net/codrops/2019/01/15/svg-filters-101/">SVG Filters 101</a> — серия от Sara Soueidan
+      </li>
+      <li>
+        <a href="https://tympanus.net/codrops/2016/05/11/distorted-button-effects-with-svg-filters/">Distorted Button Effects with SVG Filters</a> — Adrien Denat
+      </li>
+      <li>
+        <a href="https://css-tricks.com/look-svg-light-source-filters/">A Look at SVG Light Source Filters</a> — Joni Trythall
+      </li>
+      <li>
+        <a href="https://alistapart.com/article/finessing-fecolormatrix">Finessing `feColorMatrix`</a> — Una Kravets
+      </li>
+      <li>
+        <a href="https://css-tricks.com/using-svg-to-create-a-duotone-image-effect/">Using SVG to Create a Duotone Effect on Images</a> — Lentie Ward
+      </li>
+      <li>
+        <a href="https://vanseodesign.com/web-design/svg-filter-primitives-feconvolvematrix/">Add Bevel And Emboss Effects With The feConvolveMatrix Filter Primitive</a> — Steven Bradley
+      </li>
+      <li>
+        <a href="https://html5.by/blog/svg-filters/">SVG-фильтры. Основные понятия и типы. Применение к изображениям для создания графических эффектов.</a> — Дмитрий Дудин
+      </li>
+    </ul>
+  </section>
+
+  <section class="slide slide--links slide--tiny-font">
+    <h3>Демо</h3>
+    <ul>
+      <li>
+        <a href="https://codepen.io/collection/ArxmyO/">Sophisticated Filter Effects</a> — коллекция от Dirk Weber
+      </li>
+      <li>
+        <a href="https://codepen.io/collection/XoMLeR/">SVG Filters</a> — коллекция от Gabi
+      </li>
+      <li>
+        <a href="https://codepen.io/collection/DJWqEo/">SVG Filters Experiments</a> — коллекция моих демо
+      </li>
+      <li>
+        <a href="https://yoksel.github.io/svg-filters/#/presets/">SVG Filters: presets</a> — набор готовых фильтров в конструкторе
+      </li>
+    </ul>
+  </section>
+
+  <section class="slide slide--section-title slide--questions">
+    <h2>Вопросы?</h2>
+
+    <div class="slides-link next">
+      Слайды: <a href="http://yoksel.github.io/svg-filters-02-2018">yoksel.github.io/svg-filters-02-2018</a>
+    </div>
+  </section>
+
+  <div class="progress"></div>
+
+  <script src="shower/shower.min.js"></script>
+  <script src="assets/js/prism.js"></script>
+  <script src="assets/js/highlightLines.js"></script>
+  <script src="assets/js/autorun.js"></script>
+  <script src="assets/js/primitives-switcher.js"></script>
+</body>
+</html>

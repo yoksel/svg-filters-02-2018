@@ -1,0 +1,71 @@
+<svg class="svg-fulscreen">
+  <filter
+    id="filter-liquid"
+    x="-20%" y="-20%" width="140%" height="140%" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="linearRGB">
+    <feTurbulence
+      type="turbulence" baseFrequency="0.02 0.02" numOctaves="1" seed="4" stitchTiles="stitch" x="0%" y="0%" width="100%" height="100%"
+      result="turbulence"/>
+
+    <feColorMatrix
+      type="matrix"
+      values="1 0 0 0 0
+              0 1 0 0 0
+              0 0 1 0 0
+              0 0 0 40 -7"
+      x="0%" y="0%" width="100%" height="100%" in="turbulence"
+      result="colormatrix"/>
+
+    <feFlood
+      flood-color="black" flood-opacity="1" x="0%" y="0%" width="100%" height="100%"
+      result="flood"/>
+
+    <feComposite
+      operator="in" x="0%" y="0%" width="100%" height="100%"
+      in="flood" in2="colormatrix"
+      result="composite5"/>
+
+    <feGaussianBlur
+      stdDeviation="7 9"
+      edgeMode="none"
+      in="composite5"
+      result="blur"/>
+
+    <feComposite
+      operator="in"
+      in="blur" in2="SourceAlpha"
+      result="composite"/>
+
+    <feSpecularLighting
+      surfaceScale="20" specularConstant="3" specularExponent="40" lighting-color="#ffffff" in="composite"
+      x="0%" y="0%" width="100%" height="100%"
+      result="specularLighting">
+      <feDistantLight
+        azimuth="45" elevation="150"/>
+    </feSpecularLighting>
+
+    <feComposite
+      operator="in"
+      in="specularLighting" in2="composite5"
+      result="composite1"/>
+
+    <feComposite
+      operator="in"
+      in="composite1" in2="SourceGraphic"
+      result="composite2"/>
+
+    <feComposite
+      operator="in"
+      in="composite5" in2="SourceGraphic"
+      result="composite4"/>
+
+    <feMerge result="merge">
+      <feMergeNode in="composite4"/>
+      <feMergeNode in="composite2"/>
+    </feMerge>
+  </filter>
+
+  <rect
+    x="0" y="0" width="100%" height="100%"
+    fill="white"
+    filter="url(#filter-liquid)"/>
+</svg>

@@ -1,0 +1,133 @@
+<svg class="svg-fulscreen pixelated">
+  <filter id="filter-pixels" x="-20%" y="-20%" width="140%" height="140%" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+    <feFlood
+      flood-color="green" flood-opacity="1" x="0" y="0" width="1" height="1"
+      result="flood"/>
+
+    <feComposite
+      operator="in" x="0" y="0" width="6" height="6"
+      class="pixelated__composite"
+      in="SourceAlpha" in2="flood"
+      result="composite"/>
+
+    <feTile
+      x="0" y="0" width="1300" height="800"
+      in="composite"
+      result="tile1"/>
+
+    <feComposite
+      in="SourceGraphic" in2="tile1"
+      operator="in"
+      result="composite1"/>
+
+    <feMorphology
+      operator="dilate" radius="2"
+      class="pixelated__morphology"
+      in="composite1"
+      result="morphology"/>
+
+    <feColorMatrix
+      class="pixelated__colormatrix"
+      type="saturate" values="0" x="0%" y="0%" width="100%" height="100%"
+      in="morphology"
+      result="colormatrix"/>
+  </filter>
+
+  <image
+    class="pixelated__image"
+    x="0" y="0" width="100%" height="100%" preserveAspectRatio="xMidYMid slice"
+    xlink:href="./assets/img/gallery/yoksel-zok-420552-unsplash.jpg"
+    filter="url(#filter-pixels)"></image>
+</svg>
+
+<script type="text/javascript">
+  (function() {
+    var requestAnimationFrame = window.requestAnimationFrame
+      || window.mozRequestAnimationFrame
+      || window.webkitRequestAnimationFrame
+      || window.msRequestAnimationFrame;
+
+    const images = [
+      './assets/img/gallery/yoksel-zok-420552-unsplash.jpg',
+      './assets/img/gallery/yoksel-zok-420835-unsplash.jpg',
+      './assets/img/gallery/yoksel-zok-447582-unsplash.jpg',
+      './assets/img/gallery/yoksel-zok-426181-unsplash.jpg',
+      './assets/img/gallery/yoksel-zok-1056711-unsplash.jpg',
+      './assets/img/gallery/yoksel-zok-1058458-unsplash.jpg',
+    ];
+
+    const composite = document.querySelector('.pixelated__composite');
+    const morphology = document.querySelector('.pixelated__morphology');
+    const image = document.querySelector('.pixelated__image');
+    const colormatrix = document.querySelector('.pixelated__colormatrix');
+
+    const min = 5;
+    const max = 20;
+    let counter = min;
+    const step = 4;
+    let direction = 'forward';
+    let imagesCounter = 0;
+    const pausa = 2; // seconds
+    let isRunning = false;
+
+    function changeProp() {
+      if(!isRunning) {
+        return;
+      }
+
+      if (counter <= min) {
+        image.setAttribute('filter', 'url(#filter-pixels)');
+      }
+
+      if (direction === 'forward') {
+        counter += step;
+
+        if (counter >= max) {
+          direction = 'backward';
+          image.setAttribute('xlink:href', images[imagesCounter]);
+          imagesCounter++;
+
+          if(imagesCounter === images.length) {
+            imagesCounter = 0;
+          }
+        }
+      }
+      else {
+        counter -= step;
+
+        if (counter <= min) {
+          direction = 'forward';
+        }
+      }
+      composite.setAttribute('width', counter);
+      composite.setAttribute('height', counter);
+      morphology.setAttribute('radius', Math.ceil(counter / 1.95));
+      colormatrix.setAttribute('values', 1 - counter / max);
+
+      let time = 150;
+
+      if (counter <= min) {
+        time = pausa * 1000;
+        image.setAttribute('filter', 'none');
+      }
+
+      setTimeout(() => {
+        requestAnimationFrame(changeProp);
+      }, time);
+    }
+
+    // ------------------------------
+
+    window['pixelated-gallery'] = {
+      play: () => {
+        if(!isRunning) {
+          isRunning = true;
+          requestAnimationFrame(changeProp);
+        }
+      },
+      pause: () => {
+        isRunning = false;
+      }
+    };
+  })(window);
+</script>

@@ -1,0 +1,33 @@
+<figure class="demo">
+  <figcaption class="demo__caption">Источники света: <b>feSpecularLighting</b></figcaption>
+
+  <svg class="demo__svg">
+    <filter
+      id="filter-specular-distantLight"
+      x="-20%" y="-20%" width="140%" height="140%" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="linearRGB">
+      <feGaussianBlur
+        stdDeviation="5 5" edgeMode="none"
+        in="SourceGraphic"
+        result="blur"/>
+
+      <feSpecularLighting
+        surfaceScale="6" specularConstant="1.6" specularExponent="40" lighting-color="#eff9ed"
+        in="blur"
+        result="specularLighting">
+        <feDistantLight azimuth="115" elevation="128"/>
+      </feSpecularLighting>
+
+      <feComposite
+        operator="atop"
+        in="specularLighting" in2="SourceGraphic"
+        result="composite"/>
+    </filter>
+
+    <use
+      xlink:href="#symb-example-img"
+      filter="url(#filter-specular-distantLight)"/>
+    <use
+      xlink:href="#symb-example-text"
+      filter="url(#filter-specular-distantLight)"/>
+  </svg>
+</figure>

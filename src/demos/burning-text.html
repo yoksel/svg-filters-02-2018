@@ -1,0 +1,125 @@
+<svg class="svg-fulscreen burning-text">
+  <filter id="filter-burning-text"
+    x="-20%" y="-20%" width="140%" height="140%" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+    <feGaussianBlur
+      stdDeviation="0 10" in="SourceGraphic" edgeMode="none"
+      result="blur"/>
+
+    <feTurbulence
+      type="turbulence" baseFrequency="0.06 0.015" numOctaves="2" seed="2" stitchTiles="stitch" x="0%" y="0%" width="100%" height="100%"
+      class="burning-text__turbulence"
+      result="turbulence1"/>
+
+    <feColorMatrix
+      type="matrix"
+      values="1 0 0 0 0
+        0 1 0 0 0
+        0 0 1 0 0
+        0 0 0 5 -1"
+      x="0%" y="0%" width="100%" height="100%"
+      in="turbulence1"
+      result="colormatrix2"/>
+
+    <feColorMatrix
+      type="matrix"
+      values="1 0 0 0 0
+        0 1 0 0 0
+        0 0 1 0 0
+        0 0 0 3 0"
+      x="0%" y="0%" width="100%" height="100%"
+      in="turbulence1"
+      result="colormatrix3"/>
+
+    <feComposite
+      operator="in"
+      in="colormatrix2" in2="blur"
+      result="composite1"/>
+
+    <feFlood
+      flood-color="#ff853a" flood-opacity="1"
+      result="flood"/>
+
+    <feComposite
+      operator="in"
+      in="flood" in2="composite1"
+      result="composite2"/>
+
+    <feOffset
+      dx="-5" dy="-15"
+      in="composite2"
+      result="offset1"/>
+
+    <feMorphology
+      operator="dilate" radius="0 5"
+      in="offset1"
+      result="morphology"/>
+
+    <feDisplacementMap
+      scale="20" xChannelSelector="G" yChannelSelector="B"
+      in="morphology" in2="turbulence1"
+      result="displacementMap1"/>
+
+    <feComposite
+      operator="out"
+      in="displacementMap1" in2="colormatrix3"
+      result="composite3"/>
+
+    <feFlood
+      flood-color="#ff8422" flood-opacity="1"
+      result="flood2"/>
+
+    <feComposite
+      operator="in"
+      in="flood2" in2="composite3"
+      result="composite4"/>
+
+    <feMerge result="merge3">
+      <feMergeNode in="displacementMap1"/>
+      <feMergeNode in="SourceGraphic"/>
+      <feMergeNode in="composite4"/>
+    </feMerge>
+  </filter>
+
+  <use
+    xlink:href="#symb-big-example-text"
+    filter="url(#filter-burning-text)"/>
+</svg>
+
+<script type="text/javascript">
+  (function() {
+    var requestAnimationFrame = window.requestAnimationFrame
+      || window.mozRequestAnimationFrame
+      || window.webkitRequestAnimationFrame
+      || window.msRequestAnimationFrame;
+
+    const primitiveToAnimate = document.querySelector('.burning-text__turbulence');
+    let isRunning = false;
+
+    function changeProp() {
+      if(!isRunning) {
+        return;
+      }
+
+      const newValue = primitiveToAnimate.seed.baseVal + 2;
+      primitiveToAnimate.setAttribute('seed', newValue);
+
+      setTimeout(() => {
+        requestAnimationFrame(changeProp);
+      }, 130);
+    }
+
+    // ------------------------------
+
+    window['burning-text'] = {
+      play: () => {
+        if(!isRunning) {
+          isRunning = true;
+          requestAnimationFrame(changeProp);
+        }
+      },
+      pause: () => {
+        isRunning = false;
+      }
+    };
+  })(window);
+</script>
