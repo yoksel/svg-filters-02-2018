@@ -21,7 +21,7 @@
     <symbol id="symb-example-img">
       <title>Example image: yellow leaf on green needles</title>
       <image
-        xlink:href="../assets/img/needles.jpeg"
+        xlink:href="./assets/img/needles.jpeg"
         width="90%" height="50%"
         x="5%" y="5%"
         preserveAspectRatio="xMidYMid slice"
