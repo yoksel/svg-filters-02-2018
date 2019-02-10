@@ -251,7 +251,7 @@
   transform-origin: 400px 300px;
 
   .heart__fill-circles-group--animated & {
-    animation: stroke-color 17s infinite  alternate;
+    animation: rotate 17s infinite alternate;
   }
 
   &:nth-child(6n + 1) {
@@ -271,40 +271,7 @@
   }
 }
 
-@keyframes stroke-color {
-  0% {
-    stroke: crimson;
-  }
-  16.6% {
-    stroke: orange;
-  }
-  33.2% {
-    stroke: gold;
-  }
-  49.8% {
-    stroke: greenyellow;
-  }
-  66.4% {
-    stroke: lightseagreen;
-  }
-  83% {
-    stroke: teal;
-  }
-  100% {
-    stroke: crimson;
-  }
-}
-
-
-.heart__fill-circles-group {
-  transform-origin: 400px 300px;
-
-  &--animated {
-    animation: rotate 10s infinite alternate;
-  }
-}
-
-@keyframes stroke-color {
+@keyframes rotate {
   0% {
     transform: rotate(0);
   }
