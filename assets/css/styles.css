@@ -526,8 +526,8 @@ H2.main-title {
   -webkit-transform-origin: 400px 300px;
           transform-origin: 400px 300px; }
   .heart__fill-circles-group--animated .heart__fill-circle {
-    -webkit-animation: stroke-color 17s infinite  alternate;
-            animation: stroke-color 17s infinite  alternate; }
+    -webkit-animation: rotate 17s infinite alternate;
+            animation: rotate 17s infinite alternate; }
   .heart__fill-circle:nth-child(6n + 1) {
     -webkit-animation-delay: -2s;
             animation-delay: -2s; }
@@ -544,46 +544,18 @@ H2.main-title {
     -webkit-animation-delay: -1.5s;
             animation-delay: -1.5s; }
 
-@-webkit-keyframes stroke-color {
+@-webkit-keyframes rotate {
   0% {
-    stroke: crimson; }
-  16.6% {
-    stroke: orange; }
-  33.2% {
-    stroke: gold; }
-  49.8% {
-    stroke: greenyellow; }
-  66.4% {
-    stroke: lightseagreen; }
-  83% {
-    stroke: teal; }
+    -webkit-transform: rotate(0);
+            transform: rotate(0); }
+  50% {
+    -webkit-transform: rotate(180deg);
+            transform: rotate(180deg); }
   100% {
-    stroke: crimson; } }
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg); } }
 
-@keyframes stroke-color {
-  0% {
-    stroke: crimson; }
-  16.6% {
-    stroke: orange; }
-  33.2% {
-    stroke: gold; }
-  49.8% {
-    stroke: greenyellow; }
-  66.4% {
-    stroke: lightseagreen; }
-  83% {
-    stroke: teal; }
-  100% {
-    stroke: crimson; } }
-
-.heart__fill-circles-group {
-  -webkit-transform-origin: 400px 300px;
-          transform-origin: 400px 300px; }
-  .heart__fill-circles-group--animated {
-    -webkit-animation: rotate 10s infinite alternate;
-            animation: rotate 10s infinite alternate; }
-
-@keyframes stroke-color {
+@keyframes rotate {
   0% {
     -webkit-transform: rotate(0);
             transform: rotate(0); }
